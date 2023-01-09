@@ -3,9 +3,7 @@ import * as S from "../../styles/boardsWrite";
 export default function BoardWriteUI() {
   return (
     <S.AllBox>
-      <div>
-        <h1>게시물 등록</h1>
-      </div>
+      <h1>게시물 등록</h1>
       <S.WritePw>
         <S.WritePwArr>
           <span>작성자</span>

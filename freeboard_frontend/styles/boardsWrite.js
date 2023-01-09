@@ -9,12 +9,13 @@ export const AllBox = styled.div`
 export const WritePwArr = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: 25px;
   gap: 5px;
 `;
 export const WritePwInput = styled.input`
   width: 485px;
   height: 52px;
-  margin-bottom: 25px;
+
   border: 1px solid #bdbdbd;
   color: #bdbdbd;
 `;
@@ -34,17 +35,18 @@ export const ContentArea = styled.textarea`
   width: 996px;
   height: 480px;
   color: #bdbdbd;
-  margin-bottom: 25px;
+
   border: 1px solid #bdbdbd;
 `;
 export const AddressArr = styled.div`
+  padding-top: 25px;
   display: flex;
   flex-direction: column;
 `;
 export const AddressSearch = styled.div`
   display: flex;
   gap: 15px;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
 `;
 export const Address0 = styled.input`
   width: 77px;
@@ -81,7 +83,6 @@ export const UploadDiv = styled.div`
 export const UploadAndSetting = styled.div`
   display: flex;
   flex-direction: column;
-
   padding-right: 730px;
 `;
 export const Submit = styled.button`
@@ -91,13 +92,13 @@ export const Submit = styled.button`
   border: none;
 `;
 export const Lincked = styled.div`
-  margin-top: 25px;
+  padding-top: 25px;
 `;
 export const Choice = styled.div`
-  margin-top: 25px;
+  padding-top: 25px;
 `;
 export const ChoiceMain = styled.div`
   display: flex;
   gap: 15px;
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 `;
