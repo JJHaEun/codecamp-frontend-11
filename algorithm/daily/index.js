@@ -2,11 +2,32 @@
 // 주어진 변수 fruits에 "사과", "바나나", "파인애플"을 담아주세요.
 const fruits = ["사과", "바나나", "파인애플"];
 
+// 또다른 풀이
+const fruits = [];
+fruits.push("사과");
+fruits.push("바나나");
+fruits.push("파인애플");
+
+// ** 좋지 않은 풀이 ==> 인덱스로 데이터 삽입시, 해당 데이터를 변경할 수 있음.
+const fruits = [];
+fruits[0] = "사과";
+fruits[1] = "바나나";
+fruits[2] = "파인애플";
+
+// ========================================
+
 // 004. 배열의 기능
 // 주어진 fruits 배열에서 마지막 요소를 꺼내 newFruits에 넣어주세요.
 const fruits = ["사과", "바나나", "파인애플"];
 const newFruits = [];
 newFruits.push(fruits[fruits.length - 1]);
+
+// 또다른 풀이
+const fruits = ["사과", "바나나", "파인애플"];
+const newFruits = [];
+newFruits.push(fruits[2]); // 마지막 요소인 파인애플을 꺼내옴.(하드코딩)
+
+// ========================================
 
 // 005. 배열의 기능
 // 학생들의 이름이 담긴 students 배열이 있습니다.
@@ -15,6 +36,7 @@ newFruits.push(fruits[fruits.length - 1]);
 let students = ["철수", "영희", "훈이", "짱구", "유리"];
 
 const students1 = students.slice(0, 3);
+// ========================================
 
 // 006. 배열의 기능
 // 주어진 fruits 배열의 모든 요소에 "맛있는" 이라는 문자열을 추가하세요.
@@ -22,11 +44,21 @@ let fruits = ["사과", "바나나"];
 
 fruits = fruits.map((el) => "맛있는 " + el);
 
+// ========================================
+
 // 008. 객체의 선언과 할당
 // 주어진 student 객체에
 // 'name'이라는 키를 만들고, "철수"를 할당하세요.
 const student = {};
 student.name = "철수";
+// 대괄호 방법
+const student = {};
+student["name"] = "철수";
+// 대괄호의 경우 변수가 들어올 수 잇다.
+const name = "name3";
+student[name] = "철수"; // 이렇게되면 name이라는 변수에 들어있는 name3이 키명이 되어 객체에 추가됨
+
+// ========================================
 
 // 009. 객체의 키&값 추가
 // student와 school 두 개의 객체가 있습니다.
@@ -43,6 +75,34 @@ const school = {
 
 student.school = { ...school };
 
+// 다른 풀이
+const student = {
+  name: "철수",
+  age: 8,
+};
+
+const school = {
+  name: "다람쥐초등학교",
+  teacher: "다람이",
+};
+student.school = {};
+student.school.name = school.name;
+student.school.teacher = school.teacher;
+
+// 각각 따로 넣어주지 않고 통채로 넣어주는 방법
+const student = {
+  name: "철수",
+  age: 8,
+};
+
+const school = {
+  name: "다람쥐초등학교",
+  teacher: "다람이",
+};
+student.school = school;
+
+// ========================================
+
 // 010. 객체의 키&값 삭제
 // 주어진  student는 "철수"에 대한 정보를 모아둔 객체입니다.
 // 그런데 철수와 관련이 없는 drink라는 키가 있네요.
@@ -53,6 +113,8 @@ let student = {
 };
 
 delete student.drink;
+
+// ========================================
 
 // 018. 조건문 연습
 // input1, input2에는 boolean 타입인 true, false가 입력됩니다.
