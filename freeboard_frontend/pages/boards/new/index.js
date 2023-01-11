@@ -5,25 +5,52 @@ export default function BoardWriteUI() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [contents, setContents] = useState("");
 
-  const [errMessage, setErrMessage] = useState("");
+  const [writerErr, setWriterErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+  const [titleErr, setTitleErr] = useState("");
+  const [contentsErr, setContentsErr] = useState("");
 
   const onChangeWriter = (event) => {
     setWriter(event.target.value);
+    if (writer !== "") {
+      setWriterErr("");
+    }
   };
   const onChangePassword = (event) => {
     setPassword(event.target.value);
+    if (password !== "") {
+      setPasswordErr("");
+    }
   };
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
+    if (title !== "") {
+      setTitleErr("");
+    }
   };
   const onChangeContent = (event) => {
-    setContent(event.target.value);
+    setContents(event.target.value);
+    if (contents !== "") {
+      setContentsErr("");
+    }
   };
   const onClickSubmit = () => {
-    if (!writer || !password || !title || !content) {
-      setErrMessage("필수입력사항입니다");
+    if (!writer) {
+      setWriterErr("작성자를 입력해주세요.");
+    }
+    if (!password) {
+      setPasswordErr("비밀번호를 입력해주세요.");
+    }
+    if (!title) {
+      setTitleErr("제목을 입력해주세요.");
+    }
+    if (!contents) {
+      setContentsErr("내용을 입력해주세요.");
+    }
+    if (writer && password && title && contents) {
+      alert("게시물이 등록되었습니다");
     }
   };
 
@@ -33,7 +60,7 @@ export default function BoardWriteUI() {
       <S.WritePw>
         <S.WritePwArr>
           <span>작성자</span>
-          <S.ErrMassages>{errMessage}</S.ErrMassages>
+          <S.ErrMassages>{writerErr}</S.ErrMassages>
           <S.WritePwInput
             type="text"
             placeholder="이름을 적어주세요"
@@ -42,7 +69,7 @@ export default function BoardWriteUI() {
         </S.WritePwArr>
         <S.WritePwArr>
           <span>비밀번호</span>
-          <S.ErrMassages>{errMessage}</S.ErrMassages>
+          <S.ErrMassages>{passwordErr}</S.ErrMassages>
           <S.WritePwInput
             type="text"
             placeholder="비밀번호를 입력해주세요"
@@ -50,10 +77,10 @@ export default function BoardWriteUI() {
           />
         </S.WritePwArr>
       </S.WritePw>
-
       <div>
         <S.TitleArr>
-          <div>제목</div> <S.ErrMassages>{errMessage}</S.ErrMassages>
+          <div>제목</div>
+          <S.ErrMassages>{titleErr}</S.ErrMassages>
           <S.LongInput
             type="text"
             placeholder="제목을 입력해주세요"
@@ -63,7 +90,7 @@ export default function BoardWriteUI() {
       </div>
       <S.ContentsArr>
         <div>내용</div>
-        <S.ErrMassages>{errMessage}</S.ErrMassages>
+        <S.ErrMassages>{contentsErr}</S.ErrMassages>
         <S.ContentArea
           placeholder="내용을 입력해주세요"
           onChange={onChangeContent}
