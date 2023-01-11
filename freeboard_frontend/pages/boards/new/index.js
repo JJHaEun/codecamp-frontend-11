@@ -59,7 +59,7 @@ export default function BoardWriteUI() {
       <h1>게시물 등록</h1>
       <S.WritePw>
         <S.WritePwArr>
-          <span>작성자</span>
+          <S.Label>작성자</S.Label>
           <S.ErrMassages>{writerErr}</S.ErrMassages>
           <S.WritePwInput
             type="text"
@@ -68,7 +68,7 @@ export default function BoardWriteUI() {
           />
         </S.WritePwArr>
         <S.WritePwArr>
-          <span>비밀번호</span>
+          <S.Label>비밀번호</S.Label>
           <S.ErrMassages>{passwordErr}</S.ErrMassages>
           <S.WritePwInput
             type="text"
@@ -79,25 +79,25 @@ export default function BoardWriteUI() {
       </S.WritePw>
       <div>
         <S.TitleArr>
-          <div>제목</div>
+          <S.Label>제목</S.Label>
           <S.ErrMassages>{titleErr}</S.ErrMassages>
           <S.LongInput
             type="text"
-            placeholder="제목을 입력해주세요"
+            placeholder="제목을 작성해주세요"
             onChange={onChangeTitle}
           />
         </S.TitleArr>
       </div>
       <S.ContentsArr>
-        <div>내용</div>
+        <S.Label>내용</S.Label>
         <S.ErrMassages>{contentsErr}</S.ErrMassages>
         <S.ContentArea
-          placeholder="내용을 입력해주세요"
+          placeholder="내용을 작성해주세요"
           onChange={onChangeContent}
         ></S.ContentArea>
       </S.ContentsArr>
       <S.AddressArr>
-        <div>주소</div>
+        <S.Label>주소</S.Label>
         <S.AddressSearch>
           <S.Address0 type="text" placeholder="07250" />
           <S.SearchButton>우편번호 검색</S.SearchButton>
@@ -107,29 +107,44 @@ export default function BoardWriteUI() {
         <S.LongInputAddress type="text" />
       </S.AddressArr>
       <S.Lincked>
-        <div>유튜브</div>
+        <S.Label>유튜브</S.Label>
         <S.LongInput type="text" placeholder="링크를 복사해주세요." />
       </S.Lincked>
       <S.UploadAndSetting>
         <div>
-          <div>사진첨부</div>
+          <S.Label>사진첨부</S.Label>
           <S.UploadBox>
-            <S.UploadDiv>+</S.UploadDiv>
-            <S.UploadDiv>+</S.UploadDiv>
-            <S.UploadDiv>+</S.UploadDiv>
+            <S.UploadDiv>
+              <S.UploadBoxContent>
+                <div>+</div>
+                <div>Upload</div>
+              </S.UploadBoxContent>
+            </S.UploadDiv>
+            <S.UploadDiv>
+              <S.UploadBoxContent>
+                <div>+</div>
+                <div>Upload</div>
+              </S.UploadBoxContent>
+            </S.UploadDiv>
+            <S.UploadDiv>
+              <S.UploadBoxContent>
+                <div>+</div>
+                <div>Upload</div>
+              </S.UploadBoxContent>
+            </S.UploadDiv>
           </S.UploadBox>
         </div>
         <S.Choice>
-          <div>메인설정</div>
+          <S.Label>메인설정</S.Label>
           <S.ChoiceMain>
-            <div>
-              <input type="radio" checked />
-              <label>유튜브</label>
-            </div>
-            <div>
-              <input type="radio" />
-              <label>사진</label>
-            </div>
+            <S.ChoiceArr>
+              <S.Radio type="radio" checked name="choice" />
+              <S.Label2>유튜브</S.Label2>
+            </S.ChoiceArr>
+            <S.ChoiceArr>
+              <S.Radio type="radio" name="choice" />
+              <S.Label2>사진</S.Label2>
+            </S.ChoiceArr>
           </S.ChoiceMain>
         </S.Choice>
       </S.UploadAndSetting>

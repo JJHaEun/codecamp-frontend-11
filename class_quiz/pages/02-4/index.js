@@ -10,12 +10,21 @@ export default function SignupStatePage() {
 
   function onChangeEmail(event) {
     setEmail(event.target.value);
+    if (email) {
+      setEmailErr("");
+    }
   }
   function onChangePassword1(event) {
     setPassword1(event.target.value);
+    if (password1) {
+      setPasswordErr("");
+    }
   }
   function onChangePassword2(event) {
     setPassword2(event.target.value);
+    if (password2) {
+      setPasswordErr("");
+    }
   }
   function onClickSignup() {
     if (!email.includes("@")) {

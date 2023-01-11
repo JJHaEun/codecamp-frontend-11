@@ -132,14 +132,32 @@ function boolean(input1, input2) {
 // 입력되는 숫자가 짝수인지 홀수인지 구별하는 함수를 만들려고 합니다.
 // 입력된 값이 "짝수"이면 "Even", "홀수"이면 "Odd", 0이면 "Zero"라는 문구를 띄워주세요.
 function evenOdd(num) {
-  if (num % 2 !== 0) {
-    return "Odd";
-  } else if (num === 0) {
+  if (num === 0) {
+    // 예외처리먼저!!
     return "Zero";
+  }
+  if (num % 2) {
+    // 결과가 0일때 falsy한 값이니 else문으로 내려옴
+    return "Odd";
   } else {
     return "Even";
   }
 }
+// 다른풀이
+function evenOdd(num) {
+  if (num === 0) {
+    // 예외처리먼저!!
+    return "Zero";
+  } else if (!num % 2) {
+    // 결과가 0일때 falsy한 값이니 반대연산자로 truthy한 값으로 바꿈
+    return "Even";
+  } else if (num % 2) {
+    return "Odd";
+  }
+}
+
+//=====================================
+
 // 020. 온도
 // 입력되는 온도에 따라 문구를 띄워주는 온도계 함수를 만들려고 합니다.
 // 입력된 값에 따라 알맞은 문구를 띄워주세요
@@ -180,6 +198,27 @@ function days(month) {
 //31일 : 1,3,5,7,8,10,12
 //30일 : 4,6,9,11
 //28일 : 2
+
+// 다른 풀이
+const monthList = {
+  1: 31,
+  2: 28,
+  3: 31,
+  4: 30,
+  5: 31,
+  6: 30,
+  7: 31,
+  8: 31,
+  9: 30,
+  10: 31,
+  11: 30,
+  12: 31,
+};
+function days(month) {
+  return monthList[month];
+}
+//  키값으로 value를 뽑아오기
+// ============================
 
 // 023. 숫자 더하기
 // 입력되는 수에 따라 0부터 해당 수까지의 합을 구하려고 합니다.

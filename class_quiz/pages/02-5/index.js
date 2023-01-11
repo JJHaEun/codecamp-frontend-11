@@ -9,10 +9,16 @@ export default function ItsLoadUI() {
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
+    if (email) {
+      setEmailErr("");
+    }
   };
 
   const onChangePassword = (event) => {
     setPassword(event.target.value);
+    if (password) {
+      setPasswordErr("");
+    }
   };
   const onClickSignIn = () => {
     if (!email.includes("@")) {
@@ -29,20 +35,26 @@ export default function ItsLoadUI() {
         <S.Undderbar src="locationUnderbar.png" />
         <S.LogoTitle>잇츠로드</S.LogoTitle>
       </S.LocationLogo>
+
       <S.InPutLine
         type="text"
         placeholder="simplelife@gmail.com"
         onChange={onChangeEmail}
       />
       <S.CancelIcon src="/Cancel_icon.png" />
+
       <S.ErrMs>{emailErr}</S.ErrMs>
-      <S.InPutLine
-        type="password"
-        placeholder="8~16자의 영문, 숫자, 특수 문자"
-        onChange={onChangePassword}
-      />
-      <S.CancelIcon src="/Cancel_icon.png" />
-      <S.ErrMs>{passwordErr}</S.ErrMs>
+
+      <S.Inputs>
+        <S.InPutLine
+          type="password"
+          placeholder="●●●●●●●●"
+          onChange={onChangePassword}
+        />
+        <S.CancelIcon src="/Cancel_icon.png" />
+
+        <S.ErrMs>{passwordErr}</S.ErrMs>
+      </S.Inputs>
       <S.UndderSign>
         <S.LoginBt onClick={onClickSignIn}>로그인</S.LoginBt>
         <S.SearchTitle>

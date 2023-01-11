@@ -5,14 +5,24 @@ export const AllBox = styled.div`
   /* height: 1847px; */
 
   margin: 100px;
-  padding-top: 80px;
+  padding-top: 60px;
   padding-bottom: 100px;
-  padding-left: 102px;
-  padding-right: 102px;
+  padding-left: 101px;
+  padding-right: 103px;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 0px 10px gray;
+`;
+export const Label = styled.span`
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 16px;
+`;
+
+export const Label2 = styled.span`
+  font-weight: 500;
+  font-size: 16px;
 `;
 export const ErrMassages = styled.div`
   font-size: 10px;
@@ -21,55 +31,61 @@ export const ErrMassages = styled.div`
 export const WritePwArr = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 25px;
-  padding-top: 30px;
-  gap: 5px;
+  padding-bottom: 40px;
+  /* padding-top: 30px; */
+  /* gap: 5px; */
 `;
 export const WritePwInput = styled.input`
   width: 485px;
   height: 52px;
-
+  padding: 16px;
   border: 1px solid #bdbdbd;
   color: #bdbdbd;
+  font-size: 16px;
 `;
 export const WritePw = styled.div`
   display: flex;
-  gap: 25px;
+  gap: 24px;
+
+  padding-top: 80px;
 `;
 export const TitleArr = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  /* gap: 5px; */
+  padding-bottom: 40px;
 `;
 export const LongInput = styled.input`
   width: 996px;
   height: 52px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   border: 1px solid #bdbdbd;
-  color: #bdbdbd; ;
+  color: #bdbdbd;
+  padding: 16px;
+  font-size: 16px;
 `;
 export const ContentsArr = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  padding-bottom: 16px;
 `;
 export const ContentArea = styled.textarea`
   resize: none;
   width: 996px;
   height: 480px;
   color: #bdbdbd;
-  padding: 10px;
+  padding: 16px;
   border: 1px solid #bdbdbd;
+  font-size: 16px;
 `;
 export const AddressArr = styled.div`
-  padding-top: 25px;
   display: flex;
   flex-direction: column;
 `;
 export const AddressSearch = styled.div`
   display: flex;
-  gap: 15px;
-  padding-bottom: 15px;
+  gap: 16px;
+  padding-bottom: 16px;
   padding-top: 5px;
 `;
 export const Address0 = styled.input`
@@ -78,18 +94,26 @@ export const Address0 = styled.input`
   text-align: center;
   color: #bdbdbd;
   border: 1px solid #bdbdbd;
+  font-size: 16px;
 `;
 export const LongInputAddress = styled.input`
   width: 996px;
   height: 52px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   border: 1px solid #bdbdbd;
+  padding: 16px;
+  font-size: 16px;
 `;
 export const SearchButton = styled.button`
   color: #ffffff;
   background-color: black;
   width: 124px;
   height: 52px;
+  font-weight: 500;
+  font-size: 16px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const UploadBox = styled.div`
@@ -105,6 +129,15 @@ export const UploadDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
+export const UploadBoxContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: #4f4f4f;
+  font-size: 12px;
+  font-weight: 500;
+`;
 export const UploadAndSetting = styled.div`
   display: flex;
   flex-direction: column;
@@ -115,19 +148,53 @@ export const Submit = styled.button`
   width: 179px;
   height: 52px;
   border: none;
+  :hover {
+    cursor: pointer;
+  }
 `;
 export const Lincked = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding-top: 25px;
+  /* gap: 14.09px; */
+  padding-top: 37px;
+  padding-bottom: 40px;
 `;
 export const Choice = styled.div`
-  padding-top: 25px;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
 `;
 export const ChoiceMain = styled.div`
   display: flex;
-  gap: 15px;
-  padding-bottom: 100px;
+  gap: 22px;
+  padding-bottom: 80px;
   padding-top: 5px;
 `;
+export const ChoiceArr = styled.div`
+  display: flex;
+  gap: 10px;
+
+  align-items: center;
+  /* text-align: center; */
+  /* justify-content: center; */
+`;
+export const Radio = styled.input`
+  background-color: #ffff;
+  /* appearance: none; */
+  width: 20px;
+  height: 20px;
+  /* margin-left: 16px; */
+  border: 1px solid #ffd600;
+
+  border-radius: 100%;
+  :checked {
+    accent-color: #ffd600;
+  }
+`;
+// input[type='radio'] {
+//   background-color: $white-color;
+//   border: 2px solid $font-color-3;
+// }
+// input[type='radio']:checked {
+//   background-color: $font-color-2;
+// }

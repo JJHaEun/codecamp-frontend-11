@@ -14,10 +14,11 @@ export const LocationLogo = styled.div`
   align-items: center;
 `;
 export const Location = styled.img`
-  width: 66px;
-  height: 82px;
+  width: 100px;
+  height: 100px;
   position: absolute;
-  top: 165px;
+  top: 5.5%;
+  bottom: 13.92%;
 `;
 
 export const Undderbar = styled.img`
@@ -29,36 +30,42 @@ export const LogoTitle = styled.div`
   font-size: 60px;
   font-weight: 700;
   color: #ffffff;
-  padding-bottom: 144px;
+  padding-bottom: 78px;
   padding-top: 23px;
 `;
 
 export const KakaoIcon = styled.img`
-  width: 32px;
-  height: 29px;
+  /* position: absolute; */
+  width: 32.45px;
+  height: 29.97px;
 `;
 export const CancelIcon = styled.img`
   width: 20px;
   height: 20px;
   position: relative;
-  bottom: 40px;
-  left: 500px;
+  bottom: 33px;
+  left: 520px;
+  opacity: 0.5;
 `;
 export const InPutLine = styled.input`
+  padding: 0;
   width: 540px;
   border: none;
   border-bottom: 1px solid #7d7d7d;
   background-color: transparent;
   color: #ffffff;
   font-size: 24px;
-  padding-bottom: 10px;
+  padding-bottom: 7px;
+  outline: none;
+  margin-top: 66px;
 `;
-
+export const Inputs = styled.div`
+  margin-bottom: 20px;
+`;
 export const ErrMs = styled.div`
   color: #ff1b6d;
   font-size: 16px;
-  padding-top: 10px;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 `;
 
 export const UndderSign = styled.div`
@@ -76,6 +83,9 @@ export const LoginBt = styled.button`
   height: 76px;
   border: none;
   border-radius: 38px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 export const KakaoLogin = styled(LoginBt)`
   border: 2px solid #fae100;
@@ -84,7 +94,7 @@ export const KakaoLogin = styled(LoginBt)`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 29.55px;
 `;
 export const SearchTitle = styled.div`
   padding-top: 30px;
