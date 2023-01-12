@@ -27,6 +27,11 @@ export const Label2 = styled.span`
 export const ErrMassages = styled.div`
   font-size: 10px;
   color: red;
+  position: absolute;
+  top: 15.5%;
+`;
+export const ErrMassagesContents = styled(ErrMassages)`
+  top: 3.5%;
 `;
 export const WritePwArr = styled.div`
   display: flex;
@@ -34,14 +39,18 @@ export const WritePwArr = styled.div`
   padding-bottom: 40px;
   /* padding-top: 30px; */
   /* gap: 5px; */
+  position: relative;
 `;
 export const WritePwInput = styled.input`
   width: 485px;
   height: 52px;
   padding: 16px;
   border: 1px solid #bdbdbd;
-  color: #bdbdbd;
+  ::placeholder {
+    color: #bdbdbd;
+  }
   font-size: 16px;
+  outline: none;
 `;
 export const WritePw = styled.div`
   display: flex;
@@ -54,29 +63,39 @@ export const TitleArr = styled.div`
   flex-direction: column;
   /* gap: 5px; */
   padding-bottom: 40px;
+  position: relative;
 `;
 export const LongInput = styled.input`
   width: 996px;
   height: 52px;
   /* margin-bottom: 20px; */
   border: 1px solid #bdbdbd;
-  color: #bdbdbd;
+
   padding: 16px;
+  ::placeholder {
+    color: #bdbdbd;
+  }
   font-size: 16px;
+  outline: none;
 `;
 export const ContentsArr = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 16px;
+  position: relative;
 `;
 export const ContentArea = styled.textarea`
   resize: none;
   width: 996px;
   height: 480px;
-  color: #bdbdbd;
+
   padding: 16px;
   border: 1px solid #bdbdbd;
+  ::placeholder {
+    color: #bdbdbd;
+  }
   font-size: 16px;
+  outline: none;
 `;
 export const AddressArr = styled.div`
   display: flex;
@@ -94,7 +113,11 @@ export const Address0 = styled.input`
   text-align: center;
   color: #bdbdbd;
   border: 1px solid #bdbdbd;
+  ::placeholder {
+    color: #bdbdbd;
+  }
   font-size: 16px;
+  outline: none;
 `;
 export const LongInputAddress = styled.input`
   width: 996px;
@@ -102,7 +125,11 @@ export const LongInputAddress = styled.input`
   margin-bottom: 30px;
   border: 1px solid #bdbdbd;
   padding: 16px;
+  ::placeholder {
+    color: #bdbdbd;
+  }
   font-size: 16px;
+  outline: none;
 `;
 export const SearchButton = styled.button`
   color: #ffffff;
@@ -114,6 +141,7 @@ export const SearchButton = styled.button`
   :hover {
     cursor: pointer;
   }
+  border: none;
 `;
 
 export const UploadBox = styled.div`
@@ -137,6 +165,9 @@ export const UploadBoxContent = styled.div`
   color: #4f4f4f;
   font-size: 12px;
   font-weight: 500;
+  :hover {
+    cursor: pointer;
+  }
 `;
 export const UploadAndSetting = styled.div`
   display: flex;
@@ -145,6 +176,7 @@ export const UploadAndSetting = styled.div`
 `;
 export const Submit = styled.button`
   background-color: #ffd600;
+  padding: 0;
   width: 179px;
   height: 52px;
   border: none;
@@ -189,6 +221,9 @@ export const Radio = styled.input`
   border-radius: 100%;
   :checked {
     accent-color: #ffd600;
+  }
+  :hover {
+    cursor: pointer;
   }
 `;
 // input[type='radio'] {

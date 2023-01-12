@@ -1,7 +1,17 @@
 import { useState } from "react";
+import { useMutation, gql } from "@apollo/client";
 import * as S from "../../../styles/boardsWrite";
 
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+    }
+  }
+`;
+
 export default function BoardWriteUI() {
+  const [createBoard] = useMutation(CREATE_BOARD);
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -36,7 +46,7 @@ export default function BoardWriteUI() {
       setContentsErr("");
     }
   };
-  const onClickSubmit = () => {
+  const onClickSubmit = async () => {
     if (!writer) {
       setWriterErr("작성자를 입력해주세요.");
     }
@@ -50,6 +60,21 @@ export default function BoardWriteUI() {
       setContentsErr("내용을 입력해주세요.");
     }
     if (writer && password && title && contents) {
+      // try {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer,
+            password,
+            title,
+            contents,
+          },
+        },
+      });
+      console.log(result);
+      // } catch (error) {
+      //   console.log(error.message);
+      // }
       alert("게시물이 등록되었습니다");
     }
   };
@@ -90,7 +115,7 @@ export default function BoardWriteUI() {
       </div>
       <S.ContentsArr>
         <S.Label>내용</S.Label>
-        <S.ErrMassages>{contentsErr}</S.ErrMassages>
+        <S.ErrMassagesContents>{contentsErr}</S.ErrMassagesContents>
         <S.ContentArea
           placeholder="내용을 작성해주세요"
           onChange={onChangeContent}
@@ -99,7 +124,7 @@ export default function BoardWriteUI() {
       <S.AddressArr>
         <S.Label>주소</S.Label>
         <S.AddressSearch>
-          <S.Address0 type="text" placeholder="07250" />
+          <S.Address0 type="text" placeholder="07250" readOnly />
           <S.SearchButton>우편번호 검색</S.SearchButton>
         </S.AddressSearch>
 

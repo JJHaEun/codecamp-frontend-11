@@ -31,19 +31,22 @@ export default function ItsLoadUI() {
   return (
     <S.MainWrapper>
       <S.LocationLogo>
-        <S.Location src="/location_02.png" />
-        <S.Undderbar src="locationUnderbar.png" />
+        <S.OnlyLogo>
+          <S.Location src="/location_02.png" />
+          <S.Undderbar src="locationUnderbar.png" />
+        </S.OnlyLogo>
         <S.LogoTitle>잇츠로드</S.LogoTitle>
       </S.LocationLogo>
+      <S.Inputs1>
+        <S.InPutLine
+          type="text"
+          placeholder="simplelife@gmail.com"
+          onChange={onChangeEmail}
+        />
+        <S.CancelIcon src="/Cancel_icon.png" />
 
-      <S.InPutLine
-        type="text"
-        placeholder="simplelife@gmail.com"
-        onChange={onChangeEmail}
-      />
-      <S.CancelIcon src="/Cancel_icon.png" />
-
-      <S.ErrMs>{emailErr}</S.ErrMs>
+        <S.ErrMs>{emailErr}</S.ErrMs>
+      </S.Inputs1>
 
       <S.Inputs>
         <S.InPutLine
@@ -60,7 +63,7 @@ export default function ItsLoadUI() {
         <S.SearchTitle>
           <S.SearchName>이메일 찾기</S.SearchName>
           <S.PasswordSearch>비밀번호 찾기</S.PasswordSearch>
-          <S.SearchName>회원가입</S.SearchName>
+          <S.Signup>회원가입</S.Signup>
         </S.SearchTitle>
         <S.KakaoLogin>
           <S.KakaoIcon src="/kakaotalk-icon.png" /> 카카오톡으로 로그인

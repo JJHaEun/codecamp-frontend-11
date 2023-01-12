@@ -15,15 +15,23 @@ export const LocationLogo = styled.div`
 `;
 export const Location = styled.img`
   width: 100px;
-  height: 100px;
+  /* height: 100px; */
+  object-fit: cover;
+  /* position: absolute; */
   position: absolute;
-  top: 5.5%;
+  /* left: 17%;  */
+  /* right: 16.76%; */
+  /* top: 4%; */
   bottom: 13.92%;
 `;
 
 export const Undderbar = styled.img`
   width: 72px;
   height: 24;
+`;
+export const OnlyLogo = styled.div`
+  display: flex;
+  justify-content: center;
   position: relative;
 `;
 export const LogoTitle = styled.div`
@@ -48,7 +56,6 @@ export const CancelIcon = styled.img`
   opacity: 0.5;
 `;
 export const InPutLine = styled.input`
-  padding: 0;
   width: 540px;
   border: none;
   border-bottom: 1px solid #7d7d7d;
@@ -58,14 +65,28 @@ export const InPutLine = styled.input`
   padding-bottom: 7px;
   outline: none;
   margin-top: 66px;
+  ::placeholder {
+    color: #7d7d7d;
+  }
+`;
+export const Inputs1 = styled.div`
+  /* margin-bottom: 20px; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 export const Inputs = styled.div`
   margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 `;
-export const ErrMs = styled.div`
+export const ErrMs = styled.span`
   color: #ff1b6d;
   font-size: 16px;
   padding-bottom: 20px;
+  position: absolute;
+  top: 90%;
 `;
 
 export const UndderSign = styled.div`
@@ -106,11 +127,18 @@ export const SearchTitle = styled.div`
 `;
 export const SearchName = styled.span`
   padding: 0 33px;
+  :hover {
+    cursor: pointer;
+  }
 `;
-
+export const Signup = styled(SearchName)``;
 export const PasswordSearch = styled.span`
   padding-left: 33px;
   padding-right: 33px;
   border-left: 2px solid #9f9f9f;
   border-right: 2px solid #9f9f9f;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
