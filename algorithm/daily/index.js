@@ -403,8 +403,9 @@ bigNum("87135"); // 8
 
 function grade(score) {
   if (score > 100 || score < 0) {
-    return "잘못된 점수입니다";
-  } else if (score >= 90) {
+    return "잘못된 점수입니다"; // 예외처리
+  }
+  if (score >= 90) {
     return "A";
   } else if (score >= 80) {
     return "B";
@@ -420,7 +421,7 @@ function grade(score) {
 // ============================
 
 // 043. 마이페이지
-// 오른쪽 myShooping은 내가 구매한 목록을 보여주고 있습니다.
+// 오른쪽 myShopping은 내가 구매한 목록을 보여주고 있습니다.
 // 해당 목록에서 "의류"를 구매한 횟수와 총 금액을 나타내고,
 // "의류"를 구매한 횟수에 따라 등급을 나타내세요.
 
@@ -442,7 +443,7 @@ const myShopping = [
   { category: "의류", price: 7000 },
   { category: "장난감", price: 5000 },
   { category: "의류", price: 10000 },
-];
+]; // 배열안의 객체가 들어있는 데이터
 
 let count = 0;
 let priceAll = 0;
@@ -454,19 +455,20 @@ for (let i = 0; i < myShopping.length; i++) {
     priceAll += myShopping[i].price;
   }
   console.log(count);
-  if (count >= 5) {
-    grade = "Gold";
-  } else if (count >= 3) {
-    grade = "Silver";
-  } else {
-    grade = "Bronze";
-  }
+
   // console.log(count,priceAll)
 }
+if (count >= 5) {
+  grade = "Gold";
+} else if (count >= 3) {
+  grade = "Silver";
+} else {
+  grade = "Bronze";
+}
 console.log(
-  `의류를 구매한 횟수는 총 ${count}회 금액은 ${priceAll}이며 등급은 ${grade}입니다`
+  `의류를 구매한 횟수는 총 ${count}회 금액은 ${priceAll}원이며 등급은 ${grade}입니다` // 템플릿리터럴(리터럴탬플릿)방식. 기본값 -> 문자열로 받아옴
 );
-
+//console.log("의류를 구매한 횟수는 총 " + count + "회 금액은 " + amount + "뭔이며 등급은 " + grade +"입니다")
 // 의류를 구매한 횟수는 총 5회 금액은 57000원이며 등급은 Gold입니다.
 
 ///

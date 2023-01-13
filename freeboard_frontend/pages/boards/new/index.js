@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 import * as S from "../../../styles/boardsWrite";
 
 const CREATE_BOARD = gql`
@@ -12,6 +13,8 @@ const CREATE_BOARD = gql`
 
 export default function BoardWriteUI() {
   const [createBoard] = useMutation(CREATE_BOARD);
+  const router = useRouter();
+
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -60,22 +63,22 @@ export default function BoardWriteUI() {
       setContentsErr("내용을 입력해주세요.");
     }
     if (writer && password && title && contents) {
-      // try {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer,
-            password,
-            title,
-            contents,
+      try {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer,
+              password,
+              title,
+              contents,
+            },
           },
-        },
-      });
-      console.log(result);
-      // } catch (error) {
-      //   console.log(error.message);
-      // }
-      alert("게시물이 등록되었습니다");
+        });
+        console.log(result);
+        router.push(`/boards/${result.data.createBoard._id}`);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
 
@@ -163,11 +166,11 @@ export default function BoardWriteUI() {
           <S.Label>메인설정</S.Label>
           <S.ChoiceMain>
             <S.ChoiceArr>
-              <S.Radio type="radio" checked name="choice" />
+              <S.Radio type="radio" checked name="choice" value="youtube" />
               <S.Label2>유튜브</S.Label2>
             </S.ChoiceArr>
             <S.ChoiceArr>
-              <S.Radio type="radio" name="choice" />
+              <S.Radio type="radio" name="choice" value="photo" />
               <S.Label2>사진</S.Label2>
             </S.ChoiceArr>
           </S.ChoiceMain>
