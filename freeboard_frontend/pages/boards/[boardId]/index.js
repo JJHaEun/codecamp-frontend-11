@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import * as S from "../../../styles/boardsDetail";
+import { getDate } from "../../date";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -34,7 +35,9 @@ export default function BoardDetailPage() {
             <S.ProfileImg src="/profile_icon.png" />
             <S.NameDate>
               <S.WriterName>{data?.fetchBoard?.writer}</S.WriterName>
-              <S.CreateDate>Date : 2021.02.18</S.CreateDate>
+              <S.CreateDate>
+                Date : {getDate(data?.fetchBoard?.createdAt)}
+              </S.CreateDate>
             </S.NameDate>
           </S.Profile>
           <S.TopIcons>
@@ -42,31 +45,36 @@ export default function BoardDetailPage() {
             <S.TopIconLoc src="/location_icon.png" />
           </S.TopIcons>
         </S.Upper>
-        <div>
-          <h1>{data?.fetchBoard?.title}</h1>
-          <img src="/image_box.png" />
-          <div>{data?.fetchBoard?.contents}</div>
-        </div>
-        <div>
-          <div>
-            <img src="/video_box.png" />
-          </div>
-          <div>
-            <div>
-              <img src="/like_icon.png" />
-              <img src="/dislike_icon.png" />
-            </div>
-            <div>
-              <span>{data?.fetchBoard?.likeCount}</span>
-              <span>{data?.fetchBoard?.dislikeCount}</span>
-            </div>
-          </div>
-        </div>
+        <S.ContentsWrap>
+          <S.Title>{data?.fetchBoard?.title}</S.Title>
+          <S.MainWrap>
+            <S.ContentsPhoto>
+              <S.ContentsImg src="/image_box.png" />
+            </S.ContentsPhoto>
+            <S.MainContents>{data?.fetchBoard?.contents}</S.MainContents>
+          </S.MainWrap>
+        </S.ContentsWrap>
+        <S.Undder>
+          <S.VideoBox>{/* <img src="/video_box.png" /> */}</S.VideoBox>
+          <S.LikeDisLike>
+            <S.LikeDisLikeIcons>
+              <S.CountPickImg src="/like_icon.png" />
+              <S.CountPickImg src="/dislike_icon.png" />
+            </S.LikeDisLikeIcons>
+            <S.LikeDisLikeCount>
+              <S.CountLike>{data?.fetchBoard?.likeCount}</S.CountLike>
+              <S.CountDisLike>
+                {data?.fetchBoard?.dislikeCount}
+                {/* 1259 */}
+              </S.CountDisLike>
+            </S.LikeDisLikeCount>
+          </S.LikeDisLike>
+        </S.Undder>
       </S.DetailPage>
-      <div>
-        <button>목록으로</button>
-        <button>수정하기</button>
-      </div>
+      <S.ButtonGroup>
+        <S.MoveToList>목록으로</S.MoveToList>
+        <S.MoveEdit>수정하기</S.MoveEdit>
+      </S.ButtonGroup>
     </S.DetailPageMain>
   );
 }
