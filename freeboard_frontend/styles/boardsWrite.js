@@ -14,6 +14,11 @@ export const AllBox = styled.div`
   align-items: center;
   box-shadow: 0px 0px 10px gray;
 `;
+export const MainTitle = styled.h1`
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 53.28px;
+`;
 export const Label = styled.span`
   font-weight: 500;
   font-size: 16px;
@@ -147,7 +152,7 @@ export const SearchButton = styled.button`
 export const UploadBox = styled.div`
   display: flex;
   gap: 15px;
-  padding-top: 5px;
+  padding-top: 16px;
 `;
 export const UploadDiv = styled.div`
   display: flex;

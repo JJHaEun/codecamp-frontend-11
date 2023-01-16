@@ -84,7 +84,7 @@ export default function BoardWriteUI() {
 
   return (
     <S.AllBox>
-      <h1>게시물 등록</h1>
+      <S.MainTitle>게시물 등록</S.MainTitle>
       <S.WritePw>
         <S.WritePwArr>
           <S.Label>작성자</S.Label>
