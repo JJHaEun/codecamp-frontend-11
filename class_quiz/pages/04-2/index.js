@@ -84,7 +84,6 @@ export default function GraphqlAPIReq() {
         },
       },
     });
-    console.log(result);
   };
 
   return (

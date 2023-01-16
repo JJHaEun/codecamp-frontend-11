@@ -1,20 +1,10 @@
-import { gql, useMutation } from "@apollo/client";
+import { CREATE_PRODUCT } from "./BoardWrite.queries";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import BoardWriteUI from "./BoardWrite.presenter";
 
-const CREATE_PRODUCT = gql`
-  mutation createProduct(
-    $seller: String
-    $createProductInput: CreateProductInput!
-  ) {
-    createProduct(seller: $seller, createProductInput: $createProductInput) {
-      _id
-      message
-    }
-  }
-`;
-
-export default function BoardsPage() {
+export default function BoardWrite() {
   const [createProduct] = useMutation(CREATE_PRODUCT);
   const router = useRouter();
   const [seller, setSeller] = useState("");
@@ -39,10 +29,10 @@ export default function BoardsPage() {
     try {
       const result = await createProduct({
         variables: {
-          seller: seller,
+          seller,
           createProductInput: {
-            name: name,
-            detail: detail,
+            name,
+            detail,
             price: Number(price),
           },
         },
@@ -53,13 +43,14 @@ export default function BoardsPage() {
       alert(error.message);
     }
   };
+
   return (
-    <>
-      판매자: <input type="text" onChange={onChangeSeller} />
-      상품명: <input type="text" onChange={onChangeName} />
-      상품내용: <input type="text" onChange={onChangeDetail} />
-      상품가격: <input type="text" onChange={onChangePrice} />
-      <button onClick={onClickSubmit}>상품 등록</button>
-    </>
+    <BoardWriteUI
+      onChangeSeller={onChangeSeller}
+      onChangeName={onChangeName}
+      onChangeDetail={onChangeDetail}
+      onChangePrice={onChangePrice}
+      onClickSubmit={onClickSubmit}
+    />
   );
 }

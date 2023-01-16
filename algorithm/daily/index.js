@@ -515,3 +515,251 @@ while (count !== 5) {
 // 쓰는 순서 => 최초식, 증감식을 설정해준 후!
 
 ////
+
+// ==============================================
+// 문자열 s를 숫자로 변환한 결과를 반환하는 함수, solution을 완성하세요.
+// 제한 조건
+// s의 길이는 1 이상 5이하입니다.
+// s의 맨앞에는 부호(+, -)가 올 수 있습니다.
+// s는 부호와 숫자로만 이루어져있습니다.
+// s는 "0"으로 시작하지 않습니다.
+
+function solution(s) {
+  s = Number(s);
+  return s;
+  // 또는 return Number(s) // 직관적인 방법이기에 주로 사용
+}
+
+function solution(s) {
+  return +s; // 뒤의 문자열을 연산시킴 =>자동으로 숫자타입으로 변환
+  // 실무에서는 잘 사용 x(안정성떨어짐. 직관적이지 않음)
+}
+
+// ==============================================
+
+// 같은 숫자는 싫어
+// 배열 arr가 주어집니다. 배열 arr의 각 원소는 숫자 0부터 9까지로 이루어져 있습니다. 이때, 배열 arr에서 연속적으로 나타나는 숫자는 하나만 남기고 전부 제거하려고 합니다. 단, 제거된 후 남은 수들을 반환할 때는 배열 arr의 원소들의 순서를 유지해야 합니다. 예를 들면,
+// arr = [1, 1, 3, 3, 0, 1, 1] 이면 [1, 3, 0, 1] 을 return 합니다.
+// arr = [4, 4, 4, 3, 3] 이면 [4, 3] 을 return 합니다.
+// 배열 arr에서 연속적으로 나타나는 숫자는 제거하고 남은 수들을 return 하는 solution 함수를 완성해 주세요.
+function solution(arr) {
+  const answer = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== arr[i + 1]) {
+      answer.push(arr[i]);
+    }
+  }
+  console.log(answer);
+  return answer;
+}
+
+// 다른풀이
+function solution(arr) {
+  const answer = [];
+  let i = 0; // 인덱스값
+  for (let key of arr) {
+    // 속도느림
+    // console.log(key)// arr의 i값
+    if (key !== arr[i + 1]) {
+      // 현재요소와 그 다음요소가 같지않을때
+      answer.push(key); // answer에 넣는다.
+    }
+    i++;
+  }
+  return answer;
+}
+
+//for in문방법
+function solution(arr) {
+  //for in문 사용은 시간초과..
+  const answer = [];
+
+  for (let i in arr) {
+    // i가 인덱스이긴한데 문자타입임.
+    i = Number(i); // 숫자타입으로 바꾸기
+
+    if (arr[i] !== arr[i + 1]) {
+      // 현재요소와 그 다음요소가 같지않을때
+      answer.push(arr[i]); // answer에 넣는다.
+    }
+    i++;
+  }
+  return answer;
+}
+
+// ==============================================
+
+// 핸드폰 번호 가리기
+// 프로그래머스 모바일은 개인정보 보호를 위해 고지서를 보낼 때 고객들의 전화번호의 일부를 가립니다.
+// 전화번호가 문자열 phone_number로 주어졌을 때, 전화번호의 뒷 4자리를 제외한 나머지 숫자를 전부 *으로 가린 문자열을 리턴하는 함수, solution을 완성해주세요.
+// 제한 조건
+// phone_number는 길이 4 이상, 20이하인 문자열입니다.
+function solution(phone_number) {
+  let answer = "";
+  // 뒤의 4자리를 제외하고 다 가리기
+  answer = phone_number.slice(phone_number.length - 4);
+  console.log(answer);
+  const result = answer.padStart(phone_number.length, "*");
+  return result;
+}
+
+// 반복문 사용방법
+function solution(phone_number) {
+  let answer = "";
+  // // 뒤의 4자리를 제외하고 다 가리기
+  // answer = phone_number.slice(phone_number.length-4)
+  // console.log(answer)
+  // const result = answer.padStart(phone_number.length,"*")
+  // return result
+  for (let i = 0; i < phone_number.length; i++) {
+    if (i < phone_number.length - 4) {
+      answer += "*";
+    } else {
+      // 전화번호 뒷 네자리 부분
+      answer += phone_number[i];
+    }
+  }
+  return answer;
+}
+
+// substring이라는 메서드를 사용한 방식
+function solution(phone_number) {
+  let answer = "";
+  // 문자열에서 사용할 수 있는 함수인 메서드를 사용
+  answer = answer.padStart(phone_number.length - 4, "*"); //for문에서의 if문 부분임.
+  answer += phone_number.substring(phone_number.length - 4); // 내가 원하는 길이만큼 자름.// 소괄호 안에 아무것도 넣어주지 않는다면 복사해옴.
+  // 자르고싶은 인덱스의 뒤의값을 넣으면됨. 두번째인자로는 두번째부분 인덱스를 제외하고 그 앞에까지 잘라오는것.
+  // 첫번째 인자만 적은경우 해덩부분부터 맨끝까지
+
+  return answer;
+}
+
+// ==============================================
+
+// 짝수와 홀수
+// 문제 설명
+// 정수 num이 짝수일 경우 "Even"을 반환하고 홀수인 경우 "Odd"를 반환하는 함수, solution을 완성해주세요.
+// 제한 조건
+// num은 int 범위의 정수입니다.
+// 0은 짝수입니다.
+function solution(num) {
+  return num % 2 === 0 ? "Even" : "Odd";
+}
+
+// 다른 풀이
+
+function solution(num) {
+  if (num % 2 === 0) {
+    return "Even";
+  } else {
+    return "Odd";
+  }
+}
+
+// ==========================================
+// 평균 구하기
+// 문제 설명
+// 정수를 담고 있는 배열 arr의 평균값을 return하는 함수, solution을 완성해보세요.
+// 제한사항
+// arr은 길이 1 이상, 100 이하인 배열입니다.
+// arr의 원소는 -10,000 이상 10,000 이하인 정수입니다.
+
+function solution(arr) {
+  let answer = 0;
+  // console.log(arr.length)
+  let result = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    answer += arr[i];
+    result = answer / arr.length;
+  }
+  console.log(result);
+  return result;
+}
+
+// =================================================
+
+// 가운데 글자 가져오기
+
+// =======================================
+// 서울에서 김서방 찾기
+// 문제 설명
+// String형 배열 seoul의 element중 "Kim"의 위치 x를 찾아, "김서방은 x에 있다"는 String을 반환하는 함수, solution을 완성하세요. seoul에 "Kim"은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.
+// 제한 사항
+// seoul은 길이 1 이상, 1000 이하인 배열입니다.
+// seoul의 원소는 길이 1 이상, 20 이하인 문자열입니다.
+// "Kim"은 반드시 seoul 안에 포함되어 있습니다.
+
+function solution(seoul) {
+  let answer = "";
+  for (let i = 0; i < seoul.length; i++) {
+    if (seoul[i] === "Kim") {
+      answer = i;
+    }
+  }
+  return `김서방은 ${answer}에 있다`;
+}
+
+// 문자열 다루기 기본
+function solution(s) {
+  if ((s.length === 4 && !isNaN(s)) || (s.length === 6 && !isNaN(s))) {
+    return true;
+  } else {
+    return false;
+  }
+}
+// 테스트 11 미통과
+
+// ====================================
+
+// 약수의 합
+// 정수 n을 입력받아 n의 약수를 모두 더한 값을 리턴하는 함수, solution을 완성해주세요.
+function solution(n) {
+  let answer = 0;
+  for (let i = 0; i <= n; i++) {
+    if (n % i === 0) {
+      answer += i;
+    }
+  }
+  return answer;
+}
+
+// =====================================
+// 자릿수 더하기
+// 자연수 N이 주어지면, N의 각 자릿수의 합을 구해서 return 하는 solution 함수를 만들어 주세요.
+// 예를들어 N = 123이면 1 + 2 + 3 = 6을 return 하면 됩니다.
+// 제한사항
+// N의 범위 : 100,000,000 이하의 자연수
+
+function solution(n) {
+  let answer = 0;
+
+  n = String(n);
+
+  for (let i = 0; i < n.length; i++) {
+    answer += Number(n[i]);
+  }
+
+  return answer;
+}
+
+// ===========================================
+
+// x만큼의 간격이 있는 n개의 숫자
+// 문제 설명
+// 함수 solution은 정수 x와 자연수 n을 입력 받아, x부터 시작해 x씩 증가하는 숫자를 n개 지니는 리스트를 리턴해야 합니다. 다음 제한 조건을 보고, 조건을 만족하는 함수, solution을 완성해주세요.
+
+function solution(x, n) {
+  const answer = [];
+  // x 씩 증가하는 n개의숫자.
+  for (let i = 1; i <= n; i++) {
+    answer.push(i * x);
+  }
+  return answer;
+}
+
+// ===================================
+
+// 문자열 내림차순으로 정렬하기
+//문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수, solution을 완성해주세요.
+// s는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자보다 작은 것으로 간주합니다.

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { AllBox } from "./boardsWrite";
+import { AllBox } from "../write/BoardWrite.styles";
 
 export const DetailPageMain = styled.div`
   display: flex;
@@ -105,6 +105,9 @@ export const LikeDisLikeIcons = styled.div`
 export const CountPickImg = styled.img`
   width: 20px;
   height: 18px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 export const LikeDisLikeCount = styled(LikeDisLikeIcons)``;
 export const CountLike = styled.span`
@@ -137,3 +140,4 @@ export const MoveToList = styled.button`
   font-size: 16px;
 `;
 export const MoveEdit = styled(MoveToList)``;
+export const MoveDelete = styled(MoveToList)``;
