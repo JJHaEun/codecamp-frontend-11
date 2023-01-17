@@ -643,7 +643,8 @@ function solution(phone_number) {
 // num은 int 범위의 정수입니다.
 // 0은 짝수입니다.
 function solution(num) {
-  return num % 2 === 0 ? "Even" : "Odd";
+  return num % 2 === 0 ? "Even" : "Odd"; // 삼항연산자. 맞다면 앞에꺼 아니라면 뒤에꺼
+  // 실무에서는 이분법적인 부분을 할때 삼항연산자를 주로사용.
 }
 
 // 다른 풀이
@@ -656,6 +657,28 @@ function solution(num) {
   }
 }
 
+// 또 다른 풀이
+
+function solution(num) {
+  let answer = "";
+  if (num % 2 === 0) {
+    answer = "Even";
+  } else {
+    answer = "Odd";
+  }
+  return answer;
+}
+
+// truthy한 값, falsy한 값으로 나눔
+// falsy한 값 ==> 0
+function solution(num) {
+  if (num % 2) {
+    return "Odd";
+  } else {
+    return "Even";
+  }
+}
+
 // ==========================================
 // 평균 구하기
 // 문제 설명
@@ -663,6 +686,7 @@ function solution(num) {
 // 제한사항
 // arr은 길이 1 이상, 100 이하인 배열입니다.
 // arr의 원소는 -10,000 이상 10,000 이하인 정수입니다.
+// 원소? => 배열이 가지는 데이터 각각을 의미함
 
 function solution(arr) {
   let answer = 0;
@@ -673,13 +697,53 @@ function solution(arr) {
     answer += arr[i];
     result = answer / arr.length;
   }
-  console.log(result);
+  // console.log(result);
   return result;
+}
+
+// reduce라는 배열메서드 사용
+const arr = [1, 2, 3, 4];
+const answer = arr.reduce((acc, cur) => {
+  // acc는 누적값, cur은 현재값
+  //acc에 첫번째 값을 return해야 두번째 값으로 (두번째 반복문에서) 그 값이 들어가게됨.
+  return acc + cur;
+}, 0); // reduce에는 중괄호 뒤에 초기값을 넣을 수 있음. 초기값을 넣으면 초기값으로 시작해 해당 인덱스를 참조함.
+
+// reduce를 사용한 풀이
+function solution(arr) {
+  return (
+    arr.reduce((acc, cur) => {
+      return acc + cur;
+    }, 0) / arr.length
+  ); // 여기까지의 결과가 총 합산한 결과임. 여기에서 arr.length를 나누어줌.
 }
 
 // =================================================
 
 // 가운데 글자 가져오기
+// 단어 s의 가운데 글자를 반환하는 함수, solution을 만들어 보세요. 단어의 길이가 짝수라면 가운데 두글자를 반환하면 됩니다.
+
+function solution(s) {
+  const center = Math.floor(s.length / 2); // 내림처리해 소수점 제거
+  let answer = "";
+
+  console.log(s.length / 2);
+
+  answer = s[center];
+  if (s.length % 2 === 0) {
+    answer = s[center - 1] + answer;
+  }
+
+  return answer;
+}
+
+// 문자열 자르기 => substring 사용
+function solution(s) {
+  const center = Math.floor(s.length / 2); // 내림처리해 소수점 제거
+  return s.length % 2
+    ? s[center] // 문자열의 길이가 홀수인경우(0은 flasse니까..)
+    : s.substring(center - 1, center + 1); // 첫번째인자에 들어가는 것부터, 두번째 인자의 전까지 잘라줌(slice도 두번째 인자부분에 +1 해야 원하는 부분까지 잘려 나옴)
+}
 
 // =======================================
 // 서울에서 김서방 찾기
