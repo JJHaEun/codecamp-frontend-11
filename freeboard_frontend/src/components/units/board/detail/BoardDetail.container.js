@@ -51,6 +51,10 @@ export default function BoardDetail() {
     router.push(`/boards`);
     alert("삭제 완료");
   };
+  const onClickMoveToEdit = () => {
+    console.log(router);
+    router.push(`/boards/${router.query.boardId}/edit`);
+  };
   return (
     <BoardDetailUI
       data={data}
@@ -58,6 +62,7 @@ export default function BoardDetail() {
       onClickDisLike={onClickDisLike}
       onClickMoveToList={onClickMoveToList}
       onClickDelete={onClickDelete}
+      onClickMoveToEdit={onClickMoveToEdit}
     />
   );
 }

@@ -1,4 +1,4 @@
-import { getDate } from "../../../../commons/date";
+import { getDate } from "../../../../commons/libraries/date";
 import * as S from "./BoardDetail.styles";
 
 export default function BoardDetailUI(props) {
@@ -56,7 +56,7 @@ export default function BoardDetailUI(props) {
       </S.DetailPage>
       <S.ButtonGroup>
         <S.MoveToList onClick={props.onClickMoveToList}>목록으로</S.MoveToList>
-        <S.MoveEdit>수정하기</S.MoveEdit>
+        <S.MoveEdit onClick={props.onClickMoveToEdit}>수정하기</S.MoveEdit>
         <S.MoveDelete onClick={props.onClickDelete}>삭제하기</S.MoveDelete>
       </S.ButtonGroup>
     </S.DetailPageMain>

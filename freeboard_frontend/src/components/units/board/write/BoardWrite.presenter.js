@@ -3,7 +3,7 @@ import * as S from "./BoardWrite.styles";
 export default function BoardWriteUI(props) {
   return (
     <S.AllBox>
-      <S.MainTitle>게시물 등록</S.MainTitle>
+      <S.MainTitle>게시물 {props.isEdit ? "수정" : "등록"}</S.MainTitle>
       <S.WritePw>
         <S.WritePwArr>
           <S.Label>작성자</S.Label>
@@ -97,8 +97,11 @@ export default function BoardWriteUI(props) {
           </S.ChoiceMain>
         </S.Choice>
       </S.UploadAndSetting>
-      <S.Submit onClick={props.onClickSubmit} isActive={props.isActive}>
-        등록하기
+      <S.Submit
+        onClick={props.idEdit ? props.onClickEdit : props.onClickSubmit}
+        isActive={props.isActive}
+      >
+        {props.isEdit ? "수정" : "등록"}하기
       </S.Submit>
     </S.AllBox>
   );

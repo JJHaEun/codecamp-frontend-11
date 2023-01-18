@@ -12,6 +12,12 @@ export const FETCH_BOARD = gql`
       dislikeCount
       images
       createdAt
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;

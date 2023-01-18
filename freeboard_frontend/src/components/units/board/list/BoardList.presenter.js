@@ -1,4 +1,4 @@
-import { getDate } from "../../../../commons/date";
+import { getDate } from "../../../../commons/libraries/date";
 import * as S from "./BoardList.styles";
 
 export default function BoardListUI(props) {
@@ -6,24 +6,27 @@ export default function BoardListUI(props) {
     <S.BoardListMain>
       <S.ButtonWrap>
         <S.Table>
-          <thead>
-            <tr>
-              <td>B#N</td>
-              <td>제목</td>
-              <td>작성자</td>
-              <td>날짜</td>
-            </tr>
-          </thead>
-          <tbody>
-            {props.data?.fetchBoards.map((el) => (
-              <tr key={el._id} id={el._id} onClick={props.onClickDetailPage}>
-                <td>{el._id.substring(el._id.length - 4, el._id.length)}</td>
-                <td>{el.writer}</td>
-                <td>{el.title}</td>
-                <td>{getDate(el.createdAt)}</td>
-              </tr>
-            ))}
-          </tbody>
+          <S.TableTopLine>
+            <S.BoardNumberTitle>B#N</S.BoardNumberTitle>
+            <S.BoardMainTitle>제목</S.BoardMainTitle>
+            <S.BoardWriterTitle>작성자</S.BoardWriterTitle>
+            <S.BoardDateTitle>날짜</S.BoardDateTitle>
+          </S.TableTopLine>
+
+          {props.data?.fetchBoards.map((el) => (
+            <S.TableBody
+              key={el._id}
+              id={el._id}
+              onClick={props.onClickDetailPage}
+            >
+              <S.BoardNumber>
+                {el._id.substring(el._id.length - 4, el._id.length)}
+              </S.BoardNumber>
+              <S.BoardTitle>{el.title}</S.BoardTitle>
+              <S.BoardWriter>{el.writer}</S.BoardWriter>
+              <S.TableDate>{getDate(el.createdAt)}</S.TableDate>
+            </S.TableBody>
+          ))}
         </S.Table>
         <button onClick={props.onClickCreateBoard}>글쓰기</button>
       </S.ButtonWrap>

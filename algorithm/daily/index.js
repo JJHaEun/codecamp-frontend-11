@@ -755,13 +755,46 @@ function solution(s) {
 // "Kim"은 반드시 seoul 안에 포함되어 있습니다.
 
 function solution(seoul) {
-  let answer = "";
+  // let answer = "";// 둘다 가능한듯 보임... 같은 답나옴
+  let answer = 0;
   for (let i = 0; i < seoul.length; i++) {
     if (seoul[i] === "Kim") {
       answer = i;
     }
   }
   return `김서방은 ${answer}에 있다`;
+}
+
+// break사용시
+function solution(seoul) {
+  // let answer = "";// 둘다 가능한듯 보임... 같은 답나옴
+  let answer = 0;
+  for (let i = 0; i < seoul.length; i++) {
+    if (seoul[i] === "Kim") {
+      answer = i;
+      break; //찾자마자 반복문 중단시킴.
+    }
+  }
+  return `김서방은 ${answer}에 있다`;
+}
+
+// 함수안에서 바로 return을 사용하면 break가 됨과 동시에 함수가 중단된다
+function solution(seoul) {
+  // let answer = "";// 둘다 가능한듯 보임... 같은 답나옴
+
+  for (let i = 0; i < seoul.length; i++) {
+    if (seoul[i] === "Kim") {
+      return `김서방은 ${i}에 있다`;
+    }
+  }
+}
+
+// 메서드 사용법=>indexOf
+// indexOf를 사용하면 해당값이 있는 인덱스를 return 해줌.
+
+function solution(seoul) {
+  const x = seoul.indexOf("Kim");
+  return `김서방은 ${x}에 있다.`;
 }
 
 // 문자열 다루기 기본
@@ -772,11 +805,53 @@ function solution(s) {
     return false;
   }
 }
+
 // 테스트 11 미통과
 
+// isNaN(문자일경우 숫자가 아니니 true로 반환(자동으로 숫자타입으로 형변환))과 유사한 메서드
+Number.isNaN(); // =>자동으로 숫자타입으로 변환하지 않고 NaN이 맞는지를 체크함.따라서 직접 형변환을 해주어야함.(엄격한 NaN)
+
+function solution(s) {
+  if (s.length !== 4 && s.length !== 6) {
+    // 길이가 1~ 8글자가 들어올 수 있는데 문제에서는 길이가 4 또는 6일때이니, 4 또는 6일때가 아닌경우에는 false를 리턴함.
+    return false;
+  }
+  for (let i = 0; i < s.length; i++) {
+    if (Number.isNaN(Number(s[i])) === true) {
+      return false; // 문자열 전체중에 하나라도 숫자가 아닌 문자가 포함되어 있는 경우.
+    }
+  }
+  return true;
+}
+// for문을 다 통과한다몀(전체가 다 숫자라면)
+// console.log(Number.isNaN(Number(s)))
+// NaN값이면 true가 , 아니라면 false가 뜸.
+//     if(Number.isNaN(Number.isNaN(Number(s)))){
+//         return false;
+//     }else{
+//         return true
+//     }
+//     //"10e1" => 여기서 알파벳 e가 지수를 만드는 기호..? 따라서 얘를 Number로 바꾸어 isNaN을 하면 숫자이기에 false가 뜸.따라서 한번에 비교하지 않고, 따로따로..
+//}
+
+// 배열메서드 사용. 문자열을 우선 배열로만들기(문자열.split("")) 그리고 filter를 사용하기..?????
+function solution(s) {
+  if (s.length !== 4 && s.length !== 6) {
+    // 길이가 1~ 8글자가 들어올 수 있는데 문제에서는 길이가 4 또는 6일때이니, 4 또는 6일때가 아닌경우에는 false를 리턴함.
+    return false;
+  }
+  const answer = s.split("").filter((el) => {
+    // filter의 인자로는 이렇게 함수가 들어감!!
+    // filter는 return뒤에 들어오는 조건이 true인 경우만 남김(새 배열을 만들어 넣어줌)
+    return Number.isNaN(Number(el));
+    //filter로 골랐을때 아무것도 고를 수 없다면 빈 배열을 가져옴.
+  });
+  return answer.length === 0;
+}
 // ====================================
 
 // 약수의 합
+// 약수 => 해당 숫자를 나누었을때 나누어떨어지는 수
 // 정수 n을 입력받아 n의 약수를 모두 더한 값을 리턴하는 함수, solution을 완성해주세요.
 function solution(n) {
   let answer = 0;
@@ -785,6 +860,37 @@ function solution(n) {
       answer += i;
     }
   }
+  return answer;
+}
+
+//
+function solution(n) {
+  let answer = n; // 자기자신은 어차피 약수이니 미리 넣어주고,
+  for (let i = 0; i <= n / 2; i++) {
+    // 자기자신을 제외하고 가장큰 약수는 자기자신에 나누기 2한것. 따라서 자기자신은 미리 넣었으니 n / 2 까지만 반복하면됨...
+    // 자기자신을 2로 나눈값을 구하면 쉽게 약수를 구할 수 있음
+    if (n % i === 0) {
+      answer += i;
+    }
+  }
+  return answer;
+}
+
+// 메서드 활용 => reduce
+// reduce는 배열메서드이다. 현재 숫자니까 new Array로 배열을 만들어 진행해보다.
+new Array(10); // 10개가 들어가는 빈 배열이 생성됨.
+//따라서 길이를 구하면 길이는 찍히나 forEach는 작동되지 않음. --> 배열이 비어있기에..
+function solution(n) {
+  const answer = new Array(n).fill(1).reduce((acc, cur, i) => {
+    // console.log(acc,cur,i,cur+i)
+    const num = cur + i; // 1부터 n의 값까지 ..나옴.
+    return acc + (n % num === 0)
+      ? num // 약수인경우
+      : 0; // 약수가 아닌경우
+  }, 0);
+  // 1로 채워진 n의 길이의 배열이 만들어짐.
+  // 메서드.메서드....=> 이런형태를 메서드 체인이라고 함.
+  // reduce가 배열의 길이만큼 돌고있음.
   return answer;
 }
 
@@ -823,6 +929,15 @@ function solution(x, n) {
 }
 
 // ===================================
+//자연수 뒤집어 배열로 만들기
+// 자연수 n을 뒤집어 각 자리 숫자를 원소로 가지는 배열 형태로 리턴해주세요. 예를들어 n이 12345이면 [5,4,3,2,1]을 리턴합니다.
+// 제한 조건
+// n은 10,000,000,000이하인 자연수입니다.
+
+function solution(n) {
+  const answer = String(n).split("").reverse();
+  return answer.map((el) => Number(el));
+}
 
 // 문자열 내림차순으로 정렬하기
 //문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수, solution을 완성해주세요.
