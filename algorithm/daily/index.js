@@ -913,6 +913,34 @@ function solution(n) {
   return answer;
 }
 
+// 메서드 사용. 배열에서만 사용하는 forEach사용
+function solution(n) {
+  let answer = 0;
+
+  String(n)
+    .split("")
+    .forEach((el) => {
+      answer += Number(el);
+    }); //forEach에 담긴것은 undefined. 즉, forEach는 리턴갑싱 없는 단순한 반복문. 따라서 forEach는 변수에 따로 담아주지 않기.
+  return answer;
+}
+
+// 다른메서드 사용. => reduce
+
+function solution(n) {
+  const answer = String(n)
+    .split("")
+    .reduce((acc, cur) => {
+      // 얘는 리턴값이 있기에 변수에 담아줄 수 있다.
+      // console.log(acc,cur) // 현재값, 누적값
+      return acc + Number(cur);
+    }, 0); // 초기값을 0으로하면 acc는 0을 cur은 해당 인덱스 값이나옴.
+  // .forEach((el) => {
+  //  answer += Number(el)
+  // });
+  return answer;
+}
+
 // ===========================================
 
 // x만큼의 간격이 있는 n개의 숫자
@@ -927,7 +955,24 @@ function solution(x, n) {
   }
   return answer;
 }
+// 메서드를 사용하기. 배열메서드인 map을 사용해보기.
+// 로직이 완성된 결과물을 새로운 배열로 받아온다.
+function solution(x, n) {
+  const answer = new Array(n).fill(1).map((el, i) => {
+    const num = el + i;
+    return num * x;
+  });
+  return answer;
+}
 
+// forEach는 리턴값이 없고, map은 리턴값이 잇음. map에서는 return을 사용!
+function solution(x, n) {
+  const answer = [];
+  new Array(n).fill(1).forEach((el, i) => {
+    answer.push((el + i) * x);
+  });
+  return answer;
+}
 // ===================================
 //자연수 뒤집어 배열로 만들기
 // 자연수 n을 뒤집어 각 자리 숫자를 원소로 가지는 배열 형태로 리턴해주세요. 예를들어 n이 12345이면 [5,4,3,2,1]을 리턴합니다.
@@ -935,10 +980,144 @@ function solution(x, n) {
 // n은 10,000,000,000이하인 자연수입니다.
 
 function solution(n) {
-  const answer = String(n).split("").reverse();
-  return answer.map((el) => Number(el));
+  // n = n.toString() 얘도 숫자를 문자로 바꾸어줌. 단, 앞에 숫자데이터.toString()이렇게 작성
+  const answer = String(n)
+    .split("")
+    .reverse()
+    .map((el) => {
+      return Number(el);
+    }); // String의 경우는 소괄호 안에 해당 숫자데이터 넣음.
+  return answer;
 }
 
+function solution(n) {
+  const answer = [];
+  n = n.toString(); // 문자열로 변경..
+  for (let i = n.length - 1; i >= 0; i--) {
+    answer.push(Number(n[i])); // 다시 숫자로 변경
+  }
+  return answer;
+}
+
+// =======================================
+// 두 개 뽑아서 더하기
+// 정수 배열 numbers가 주어집니다. numbers에서 서로 다른 인덱스에 있는 두 개의 수를 뽑아 더해서 만들 수 있는 모든 수를 배열에 오름차순으로 담아 return 하도록 solution 함수를 완성해주세요.
+function solution(numbers) {
+  const answer = [];
+  // console.log(numbers)
+  // 각 배열의 요소를 하나씩 더해서 각각의 배열에 담음. ...
+  // new set으로 중복값 제거
+
+  // !! 먼저 기준이 되는 첫번째 인덱스를 구한다.
+  for (let i = 0; i < numbers.length; i++) {
+    console.log(i, numbers[i]);
+    for (let l = i + 1; l < numbers.length; l++) {
+      // 합산될 두번째 인덱스값을 구함.
+      const sum = numbers[i] + numbers[l];
+
+      // 배열에 합산될 결과를 찾았을때 , 없는 경우에만 배열에 넣는다.
+      // (includes의 결과가 false일때만 넣어줌.)
+      if (answer.includes(sum) === false) {
+        answer.push(numbers[i] + numbers[l]);
+      }
+
+      // 큰 순서대로 나열.
+      // array.sort()
+    }
+  }
+  return answer.sort((a, b) => a - b); // 음수값이 나온다면 해당 B의 값을 뒤로(해당 a의 값을 앞으로 보내줌.) // 오름차순.
+  // 내림차순 (큰 숫자가 앞으로)의 경우 => b -a
+  // console.log(numbers.length,answer)
+}
+
+// 다른풀이
+function solution(numbers) {
+  const answer = new Set();
+  // console.log(numbers)
+  // 각 배열의 요소를 하나씩 더해서 각각의 배열에 담음. ...
+  // new set으로 중복값은 애초에 못넣게 하기
+
+  // !! 먼저 기준이 되는 첫번째 인덱스를 구한다.
+  for (let i = 0; i < numbers.length; i++) {
+    console.log(i, numbers[i]);
+    for (let l = i + 1; l < numbers.length; l++) {
+      // 합산될 두번째 인덱스값을 구함.
+      const sum = numbers[i] + numbers[l];
+      answer.add(sum);
+
+      // new Set() ==> 배열 역할을 해주는 객체. 중복체크.
+      // 배열에서 중복되는 데이터를 자동으로 제거해주는 메서드.
+
+      // 배열도 객체의 일종이다... 배열이 실제로 배열이 맞는지 검증하기 위해서는 Array.isArray()를 사용하면 됨.( 소괄호 안에 넣음 )
+      // 배열로 바꿀때 => Array.from() 배열이 아닌것을 배열로 변경한다.
+
+      // 큰 순서대로 나열.
+      // array.sort()
+    }
+  }
+  return Array.from(answer).sort((a, b) => a - b);
+}
+
+// 또 다른...forEach 사용한방법
+function solution(numbers) {
+  const answer = new Set();
+
+  // 1. 첫번째 인덱스 값을 가져오는 forEach.
+  numbers.forEach((el, i) => {
+    // 2. 두번째 인덱스 값을 가져오기 위한 forEach.
+    numbers.slice(i + 1).forEach((el2) => {
+      const sum = el + el2;
+      if (answer.includes(sum) === false) {
+        // includes를 사용해 내부에서 다시 반복이 일어나 set을 시용했을때보다 시간이 조금 더 걸림.
+        answer.push(sum);
+      }
+    }); // 첫 인덱스의 다음인덱스부터 끝까지 잘라옴.
+  });
+  return Array.from(answer).sort((a, b) => a - b);
+}
+
+// set을 사용해 forEach 사용한방법
+function solution(numbers) {
+  const answer = new Set();
+
+  // 1. 첫번째 인덱스 값을 가져오는 forEach.
+  numbers.forEach((el, i) => {
+    // 2. 두번째 인덱스 값을 가져오기 위한 forEach.
+    numbers.slice(i + 1).forEach((el2) => {
+      const sum = el + el2;
+      answer.add(sum);
+    }); // 첫 인덱스의 다음인덱스부터 끝까지 잘라옴.
+  });
+  return Array.from(answer).sort((a, b) => a - b);
+}
+// ========================================
+
+// ========================================
+//문자열 내 p와 y의 개수
+
+function solution(s) {
+  let answer = true;
+  let countP = 0;
+  let countY = 0;
+
+  s = s.toLowerCase();
+  console.log(s);
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "p") {
+      countP++;
+    } else if (s[i] === "y") {
+      countY++;
+    }
+  }
+  if (countY === countP) {
+    return answer;
+  } else {
+    return false;
+  }
+}
+// ============================================
 // 문자열 내림차순으로 정렬하기
-//문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수, solution을 완성해주세요.
+// 문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수, solution을 완성해주세요.
 // s는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자보다 작은 것으로 간주합니다.
+
+// ==========================================
