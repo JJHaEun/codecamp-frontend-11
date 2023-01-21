@@ -115,7 +115,7 @@ export const BoardWriter = styled.div`
 export const CreateBoardBt = styled.button`
   width: 100px;
   height: 30px;
-  border: 1px solid coral;
+  border: 2px solid salmon;
   margin-top: 20px;
   background-color: #ffffff;
   border-radius: 6px;

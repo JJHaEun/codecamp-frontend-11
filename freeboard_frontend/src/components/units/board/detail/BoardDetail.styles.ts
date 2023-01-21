@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { CreateBoardBt } from "../list/BoardList.styles";
 import { AllBox } from "../write/BoardWrite.styles";
 
 export const DetailPageMain = styled.div`
@@ -125,18 +126,16 @@ export const ButtonGroup = styled.div`
   justify-content: center;
   padding: 80px 0;
   gap: 24px;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid lightcoral;
   margin-bottom: 80px;
 `;
-export const MoveToList = styled.button`
+export const MoveToList = styled(CreateBoardBt)`
   width: 179px;
   height: 52px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
-  border: 1px solid #bdbdbd;
   font-weight: 500;
   font-size: 16px;
   :hover {

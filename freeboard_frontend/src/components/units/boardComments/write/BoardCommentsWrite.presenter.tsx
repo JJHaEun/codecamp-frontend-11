@@ -1,28 +1,48 @@
+import * as S from "./BoardCommentsWrite.styles";
+import { Rate } from "antd";
+
 export default function BoardCommentsUI(props) {
   return (
-    <div>
-      <span>댓글</span>
+    <S.CommentMain>
       <div>
-        <input
-          type="text"
-          placeholder="작성자"
-          onChange={props.onChangeCommentWriter}
-        />
-        <input
-          type="password"
-          placeholder="비밀번호"
-          onChange={props.onChangeCommentPassword}
-        />
+        {!props.isEdit && (
+          <S.CommentTitleMain>
+            <S.CommentImg src="/comments_icon.png" />
+            <S.CommentTitle>댓글</S.CommentTitle>
+          </S.CommentTitleMain>
+        )}
+        <S.InputsGroup>
+          <S.InputWrites
+            type="text"
+            placeholder="작성자"
+            onChange={props.onChangeCommentWriter}
+          />
+          <S.InputWrites
+            type="password"
+            placeholder="비밀번호"
+            onChange={props.onChangeCommentPassword}
+          />
+        </S.InputsGroup>
+        <S.StarRating>
+          <S.Star allowHalf onChange={props.onChangeRating} />
+        </S.StarRating>
+        <S.CommentMainGroup>
+          <S.CommentBox
+            maxLength={100}
+            placeholder="댓글을 작성해주세요"
+            onChange={props.onChangeCommentContents}
+          />
+          <S.CreateCommentBt
+            onClick={
+              props.Edit
+                ? props.onClickEditComment
+                : props.onClickCreateBoardComment
+            }
+          >
+            댓글{props.isEdit ? "수정" : "등록"}
+          </S.CreateCommentBt>
+        </S.CommentMainGroup>
       </div>
-      <div>별점들어가는 곳.</div>
-      <div>
-        <textarea
-          maxLength={100}
-          placeholder="댓글을 작성해주세요"
-          onChange={props.onChangeCommentContents}
-        />
-        <button onClick={props.onClickCreateBoardComment}>댓글작성</button>
-      </div>
-    </div>
+    </S.CommentMain>
   );
 }
