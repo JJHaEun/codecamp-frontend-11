@@ -20,7 +20,7 @@ export const CommentImg = styled.img`
 export const CommentTitle = styled.span`
   padding-top: 8px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
 `;
 export const InputWrites = styled.input`
   height: 40px;
@@ -31,10 +31,12 @@ export const InputWrites = styled.input`
   ::placeholder {
     color: #b7afac;
   }
+  padding-left: 10px;
 `;
 export const InputsGroup = styled.div`
   display: flex;
   gap: 8px;
+  margin-top: 10px;
 `;
 export const StarRating = styled.div`
   margin: 8px 0;
@@ -47,6 +49,8 @@ export const CommentMainGroup = styled.div`
   flex-direction: column;
   align-items: flex-end;
   margin-bottom: 80px;
+  border-bottom: 1px solid lightcoral;
+  padding-bottom: 30px;
 `;
 export const CommentBox = styled.textarea`
   width: 1198px;

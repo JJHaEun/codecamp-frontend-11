@@ -5,10 +5,7 @@ import {
   IQueryFetchBoardCommentsArgs,
 } from "../../../../commons/types/generated/types";
 import BoardCommentsListUI from "./BoardCommentsList.presenter";
-import {
-  DELETE_BOARD_COMMENT,
-  FETCH_BOARD_COMMENTS,
-} from "./BoardCommentsList.queries";
+import { FETCH_BOARD_COMMENTS } from "./BoardCommentsList.queries";
 
 export default function BoardCommentsList() {
   const router = useRouter();
@@ -19,7 +16,6 @@ export default function BoardCommentsList() {
   >(FETCH_BOARD_COMMENTS, {
     variables: { boardId: String(router.query.boardId) },
   });
-  console.log(data?.fetchBoardComments);
 
   return (
     <>

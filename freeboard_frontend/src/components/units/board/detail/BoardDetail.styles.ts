@@ -24,7 +24,7 @@ export const Upper = styled.div`
   display: flex;
   gap: 718px;
   width: 996px;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid lightcoral;
 
   padding-bottom: 20px;
 `;

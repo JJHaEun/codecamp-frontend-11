@@ -123,18 +123,16 @@ export default function BoardWrite(props: IBoardWrite) {
         return router.push(`/boards`);
       }
     }
-    const myUpdate: ImyUpdate = {};
-    if (title) myUpdate.title = title;
-    if (contents) myUpdate.contents = contents;
-    if (youtubeUrl) myUpdate.youtubeUrl = youtubeUrl;
+    const updateBoardInput: ImyUpdate = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
     try {
       const result = await updateBoard({
         variables: {
           password,
           boardId: router.query.boardId,
-          updateBoardInput: {
-            ...myUpdate,
-          },
+          updateBoardInput,
         },
       });
 

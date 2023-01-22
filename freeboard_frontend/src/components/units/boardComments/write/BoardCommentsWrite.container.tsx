@@ -15,6 +15,7 @@ import {
   CREATE_BOARD_COMMENT,
   UPDATE_BOARD_COMMENT,
 } from "./BoardCommentsWrite.queries";
+import { IMyupdateComment } from "./BoardCommentsWrite.types";
 
 export default function BoardComments(props) {
   const router = useRouter();
@@ -61,7 +62,7 @@ export default function BoardComments(props) {
   ) => {
     if (writer && password && contents) {
       try {
-        const result = await createBoardComment({
+        await createBoardComment({
           variables: {
             boardId: String(router.query.boardId),
             createBoardCommentInput: {
@@ -83,28 +84,39 @@ export default function BoardComments(props) {
       }
     }
   };
-
-  const onClickEditComment = () => {
-    props.setIsEdit(true);
+  // console.log(contents.length);
+  const updateBoardCommentInput: IMyupdateComment = {};
+  if (contents) updateBoardCommentInput.contents = contents;
+  if (rating) updateBoardCommentInput.rating = rating;
+  const onClickEditComment = async () => {
+    if (!password) {
+      Modal.info({ content: "비밀번호를 입력해주세요" });
+      return;
+    }
+    if (!contents && !rating) {
+      Modal.info({ content: "수정사항이 없습니다" });
+      return;
+    }
     try {
-      updateBoardComment({
+      await updateBoardComment({
         variables: {
           password,
-          boardCommentId: props.el_id,
-          updateBoardCommentInput: {
-            contents,
-            rating,
-          },
+          boardCommentId: props.el._id,
+          updateBoardCommentInput,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.boardId },
+          },
+        ],
       });
+      props.setIsEdit?.(false);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
-  const onClickCancelEdit = () => {
-    // 수정시에 취소버튼도 만들어 취소버튼을 누르면 다시 새로고침되게
-    //  router.push(`/boards/${result.data.}`)
-  };
+
   return (
     <>
       <BoardCommentsUI
@@ -120,6 +132,8 @@ export default function BoardComments(props) {
         data={data}
         onClickEditComment={onClickEditComment}
         isEdit={props.isEdit}
+        el={props.el}
+        // onClickCancelEdit={onClickCancelEdit}
       />
     </>
   );

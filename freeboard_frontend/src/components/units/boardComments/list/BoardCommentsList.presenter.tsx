@@ -6,9 +6,9 @@ export default function BoardCommentsListUI(props: IPropsBoardCommentsListUI) {
     <S.CommentsListMain>
       <S.CommentsList>
         {props.data?.fetchBoardComments.map((el) => (
-          <div key={el._id}>
+          <S.MainCommentList key={el._id}>
             <BoardCommentsListItems el={el} />
-          </div>
+          </S.MainCommentList>
         ))}
       </S.CommentsList>
     </S.CommentsListMain>

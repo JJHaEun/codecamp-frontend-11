@@ -1,5 +1,4 @@
 import * as S from "./BoardCommentsList.styles";
-import * as St from "../write/BoardCommentsWrite.styles";
 import { getDate } from "../../../../commons/libraries/date";
 import { useMutation } from "@apollo/client";
 import {
@@ -7,7 +6,6 @@ import {
   FETCH_BOARD_COMMENTS,
 } from "./BoardCommentsList.queries";
 import { ChangeEvent, useState } from "react";
-import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { IPropsBoardCommentsListItems } from "./BoardCommentsList.types";
 import BoardComments from "../write/BoardCommentsWrite.container";
@@ -44,18 +42,16 @@ export default function BoardCommentsListItems(
   };
   const onClickHideModal = () => {
     setIsOpen(false);
-    router.push(`/boards/${router.query.boardId}`);
     return;
   };
   const onClickEdit = () => {
     setIsEdit(true);
   };
-  const onClickEditComment = () => {};
   return (
     <>
       {isOpen && (
-        <Modal
-          title="Modal"
+        <S.DeleteCommentModal
+          title="댓글 삭제"
           visible={true}
           onOk={onClickDeleteComment}
           onCancel={onClickHideModal}
@@ -64,23 +60,23 @@ export default function BoardCommentsListItems(
         >
           <p>비밀번호를 입력하세요</p>
           <input type="password" onChange={onChangeDeleteCommentsPassword} />
-        </Modal>
+        </S.DeleteCommentModal>
       )}
 
       <div>
         <S.CommentsListWriter>{props.el.writer}</S.CommentsListWriter>
         <S.CommentsDateAndBt>
-          <span>{getDate(props.el.createdAt)}</span>
-          <div>
+          <S.CreatedAt>{getDate(props.el.createdAt)}</S.CreatedAt>
+          <S.DeletOrEditBt>
             <S.DeleteImg src="/delete_icon.png" onClick={onClickCheckDelete} />
             <S.EditImg onClick={onClickEdit} />
-          </div>
+          </S.DeletOrEditBt>
         </S.CommentsDateAndBt>
       </div>
-      <St.Star allowHalf disabled value={props.el.rating} />
-      <div>{props.el.contents}</div>
+      <S.DefaultStar allowHalf disabled value={props.el.rating} />
+      <S.CommentContens>{props.el.contents}</S.CommentContens>
       {isEdit && (
-        <BoardComments el={props.el} isEdit={isEdit} setIsEdit={setIsEdit} />
+        <BoardComments el={props.el} isEdit={true} setIsEdit={setIsEdit} />
       )}
     </>
   );
