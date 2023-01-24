@@ -8,6 +8,11 @@ export interface ImyUpdate {
   title?: string;
   contents?: string;
   youtubeUrl?: string;
+  boardAddress?: {
+    zipcode?: string;
+    address?: string;
+    addressDetail?: string;
+  };
 }
 export interface IBoardWriteUI {
   writerErr: string;

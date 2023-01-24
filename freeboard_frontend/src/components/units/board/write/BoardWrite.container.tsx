@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { IBoardWrite, ImyUpdate } from "./BoardWrite.types";
+import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWrite) {
   const [createBoard] = useMutation(CREATE_BOARD);
@@ -15,6 +16,10 @@ export default function BoardWrite(props: IBoardWrite) {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+
   const [isActive, setIsActive] = useState(false);
 
   const [writerErr, setWriterErr] = useState("");
@@ -77,6 +82,10 @@ export default function BoardWrite(props: IBoardWrite) {
   const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
   };
+
+  const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddress(event.target.value);
+  };
   const onClickSubmit = async () => {
     if (!writer) {
       setWriterErr("작성자를 입력해주세요.");
@@ -100,11 +109,20 @@ export default function BoardWrite(props: IBoardWrite) {
               title,
               contents,
               youtubeUrl,
+              boardAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
             },
           },
         });
-
-        router.push(`/boards/${result.data.createBoard._id}`);
+        Modal.success({
+          content: "게시물이 등록되었습니다",
+          afterClose() {
+            router.push(`/boards/${result.data.createBoard._id}`);
+          },
+        });
       } catch (error: any) {
         alert(error.message);
       }
@@ -127,6 +145,13 @@ export default function BoardWrite(props: IBoardWrite) {
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
     if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
     try {
       const result = await updateBoard({
         variables: {

@@ -1,6 +1,14 @@
+import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 import * as S from "./BoardCommentsWrite.styles";
 import { IPropsBoardCommentsUI } from "./BoardCommentsWrite.types";
 
+// const customIcons: Record<number, React.ReactNode> = { // 별점 얼굴모양
+//   1: <FrownOutlined />,
+//   2: <FrownOutlined />,
+//   3: <MehOutlined />,
+//   4: <SmileOutlined />,
+//   5: <SmileOutlined />,
+// };
 export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
   return (
     <S.CommentMain>
@@ -28,6 +36,7 @@ export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
         <S.StarRating>
           <S.Star
             allowHalf
+            // character={({ index }: { index: number }) => customIcons[index + 1]}
             onChange={props.onChangeRating}
             defaultValue={props.el?.rating ? props.el.rating : 0}
           />
@@ -57,9 +66,6 @@ export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
           >
             댓글{props.isEdit ? "수정" : "등록"}
           </S.CreateCommentBt>
-          {/* {props.isEdit && (
-            <button onClick={props.onClickCancelEdit}>취소</button> */}
-          {/* )} */}
         </S.CommentMainGroup>
       </div>
     </S.CommentMain>

@@ -13,7 +13,7 @@ export const AllBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 10px gray;
+  box-shadow: 0px 0px 5px tomato;
 `;
 export const MainTitle = styled.h1`
   font-size: 36px;

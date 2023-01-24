@@ -1,3 +1,5 @@
+import { Tooltip } from "antd";
+import ReactPlayer from "react-player";
 import { getDate } from "../../../../commons/libraries/date";
 import * as S from "./BoardDetail.styles";
 import { IPropsBoardDetailUI } from "./BoardDetail.types";
@@ -14,36 +16,75 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI) {
             <S.NameDate>
               <S.WriterName>{props.data?.fetchBoard?.writer}</S.WriterName>
               <S.CreateDate>
-                Date : {getDate(props.data?.fetchBoard?.createdAt)}
+                Date: {getDate(props.data?.fetchBoard?.createdAt)}
               </S.CreateDate>
             </S.NameDate>
           </S.Profile>
           <S.TopIcons>
-            <S.TopIconLink src="/link_icon.png" />
-            <S.TopIconLoc src="/location_icon.png" />
+            {props.data?.fetchBoard.youtubeUrl && (
+              <Tooltip
+                title={`${props.data?.fetchBoard.youtubeUrl}`}
+                color={"tomato"}
+              >
+                <S.TopIconLink src="/link_icon.png" />
+              </Tooltip>
+            )}
+            {props.data?.fetchBoard.boardAddress?.address && (
+              <Tooltip
+                title={`${props.data?.fetchBoard.boardAddress.address}`}
+                color={"tomato"}
+              >
+                <S.TopIconLoc src="/location_icon.png" />
+              </Tooltip>
+            )}
           </S.TopIcons>
         </S.Upper>
         <S.ContentsWrap>
           <S.Title>{props.data?.fetchBoard?.title}</S.Title>
           <S.MainWrap>
+            <S.MainContents>{props.data?.fetchBoard?.contents}</S.MainContents>
+
             <S.ContentsPhoto>
               <S.ContentsImg src="/image_box.png" />
             </S.ContentsPhoto>
-            <S.MainContents>{props.data?.fetchBoard?.contents}</S.MainContents>
+            {/* <S.MainContents>{props.data?.fetchBoard?.contents}</S.MainContents> */}
           </S.MainWrap>
         </S.ContentsWrap>
         <S.Undder>
-          <S.VideoBox>{/* <img src="/video_box.png" /> */}</S.VideoBox>
+          {props.data?.fetchBoard.youtubeUrl && (
+            <S.VideoBox>
+              <ReactPlayer
+                className="react-player"
+                url={`${props.data?.fetchBoard.youtubeUrl}`}
+                playing={false}
+                muted={true}
+                controls={true}
+                light={false}
+                pip={true}
+              />
+            </S.VideoBox>
+          )}
           <S.LikeDisLike>
             <S.LikeDisLikeIcons>
-              <S.CountPickImg
-                src="/like_icon.png"
-                onClick={props.onClickLike}
-              />
-              <S.CountPickImg
-                src="/dislike_icon.png"
-                onClick={props.onClickDisLike}
-              />
+              <Tooltip
+                title={`${props.data?.fetchBoard.likeCount}`}
+                color={"tomato"}
+                placement="topRight"
+              >
+                <S.CountPickImg
+                  src="/like_icon.png"
+                  onClick={props.onClickLike}
+                />
+              </Tooltip>
+              <Tooltip
+                title={`${props.data?.fetchBoard.dislikeCount}`}
+                color={"grey"}
+              >
+                <S.CountPickImg
+                  src="/dislike_icon.png"
+                  onClick={props.onClickDisLike}
+                />
+              </Tooltip>
             </S.LikeDisLikeIcons>
             <S.LikeDisLikeCount>
               <S.CountLike>{props.data?.fetchBoard?.likeCount}</S.CountLike>

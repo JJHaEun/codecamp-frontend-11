@@ -68,8 +68,12 @@ export default function BoardCommentsListItems(
         <S.CommentsDateAndBt>
           <S.CreatedAt>{getDate(props.el.createdAt)}</S.CreatedAt>
           <S.DeletOrEditBt>
-            <S.DeleteImg src="/delete_icon.png" onClick={onClickCheckDelete} />
-            <S.EditImg onClick={onClickEdit} />
+            <S.DeleteImg
+              src="/delete_icon.png"
+              onClick={onClickCheckDelete}
+              id={props.el._id}
+            />
+            <S.EditImg onClick={onClickEdit} id={props.el._id} />
           </S.DeletOrEditBt>
         </S.CommentsDateAndBt>
       </div>

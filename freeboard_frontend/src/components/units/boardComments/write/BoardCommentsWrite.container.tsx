@@ -95,6 +95,7 @@ export default function BoardComments(props) {
     }
     if (!contents && !rating) {
       Modal.info({ content: "수정사항이 없습니다" });
+      router.push(`/boards/${router.query.boardId}`);
       return;
     }
     try {

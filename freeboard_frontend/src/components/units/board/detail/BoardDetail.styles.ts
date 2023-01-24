@@ -69,23 +69,26 @@ export const MainWrap = styled.div`
 export const ContentsPhoto = styled.div`
   width: 996px;
   /* height: 480px; //후에auto로할것 */
+  margin-top: 40px;
+  margin-bottom: 110px;
 `;
 export const ContentsImg = styled.img`
   width: 996px;
   height: 480px;
 `;
 export const MainContents = styled.div`
-  padding-top: 40px;
+  /* padding-top: 40px; */
   font-weight: 400;
   font-size: 16px;
-  padding-bottom: 120px;
+  /* padding-bottom: 120px; */
 `;
 export const VideoBox = styled.div`
   width: 486px;
   height: 240px;
-  background-image: url("/video_box.png");
-  background-size: cover;
+  /* background-image: url("/video_box.png"); */
+  display: flex;
   filter: drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.2));
+  margin-bottom: 40px;
 `;
 export const Undder = styled.div`
   display: flex;
