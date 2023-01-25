@@ -13,8 +13,8 @@ export default function BoardWriteUI(props: IBoardWriteUI) {
             type="text"
             placeholder="이름을 적어주세요"
             onChange={props.onChangeWriter}
-            defaultValue={props.data?.fetchBoard.writer}
-            readOnly={props.data?.fetchBoard.writer}
+            defaultValue={props.data?.fetchBoard.writer ?? ""}
+            readOnly={!!props.data?.fetchBoard.writer}
           />
         </S.WritePwArr>
         <S.WritePwArr>
@@ -67,7 +67,7 @@ export default function BoardWriteUI(props: IBoardWriteUI) {
           type="text"
           placeholder="링크를 복사해주세요."
           onChange={props.onChangeYoutube}
-          defaultValue={props.data?.fetchBoard.youtubeUrl}
+          defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""}
         />
       </S.Lincked>
       <S.UploadAndSetting>

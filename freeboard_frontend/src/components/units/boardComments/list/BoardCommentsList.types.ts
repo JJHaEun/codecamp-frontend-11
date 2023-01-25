@@ -9,11 +9,11 @@ export interface IPropsBoardCommentsListUI {
   setIsEdit: Dispatch<SetStateAction<boolean>>;
   isEdit: boolean;
   isOpen: boolean;
-  onClickCheckDelete: () => void;
+  onClickCheckDelete: (event: MouseEvent<HTMLImageElement>) => void;
   onChangeDeleteCommentsPassword: (
     event: ChangeEvent<HTMLInputElement>
   ) => void;
-  onClickDeleteComment: (event: any) => void;
+  onClickDeleteComment: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickHideModal: () => void;
   onClickEdit: () => void;
 }

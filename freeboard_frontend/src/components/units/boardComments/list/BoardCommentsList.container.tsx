@@ -14,23 +14,24 @@ import {
 export default function BoardCommentsList() {
   const router = useRouter();
   const [password, setPassword] = useState("");
-
+  const [boardCommentId, setBoardCommentId] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
 
-  const onClickCheckDelete = () => {
+  const onClickCheckDelete = (event: MouseEvent<HTMLImageElement>) => {
     setIsOpen(true);
+    setBoardCommentId(event?.currentTarget.id);
   };
   const onChangeDeleteCommentsPassword = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setPassword(event.target.value);
   };
-  const onClickDeleteComment = (event: any) => {
+  const onClickDeleteComment = () => {
     deleteBoardComment({
-      variables: { boardCommentId: event.currentTarget.id, password },
+      variables: { boardCommentId, password },
       refetchQueries: [
         {
           query: FETCH_BOARD_COMMENTS,

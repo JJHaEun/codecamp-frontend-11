@@ -1,8 +1,9 @@
 import { ChangeEvent, MouseEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWrite {
   isEdit: boolean;
-  data?: any;
+  data?: Pick<IQuery, "fetchBoard">;
 }
 export interface ImyUpdate {
   title?: string;
@@ -24,11 +25,11 @@ export interface IBoardWriteUI {
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContent: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClickEdit: (event: MouseEvent<HTMLButtonElement>) => void;
-  onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickEdit: () => void;
+  onClickSubmit: () => void;
   isActive: boolean;
   isEdit: boolean;
-  data: any;
+  data?: Pick<IQuery, "fetchBoard">;
 }
 export interface IProps {
   isActive: boolean;

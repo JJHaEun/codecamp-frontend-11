@@ -24,13 +24,15 @@ export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
             type="text"
             placeholder="작성자"
             onChange={props.onChangeCommentWriter}
-            defaultValue={props.el?.writer ? props.el.writer : ""}
-            // readOnly={props.el?.writer}
+            defaultValue={props.el?.writer ?? ""}
+            readOnly={!!props.el?.writer}
+            value={props.el?.writer || props.writer}
           />
           <S.InputWrites
             type="password"
             placeholder="비밀번호"
             onChange={props.onChangeCommentPassword}
+            // value={props.password}
           />
         </S.InputsGroup>
         <S.StarRating>
@@ -38,7 +40,8 @@ export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
             allowHalf
             // character={({ index }: { index: number }) => customIcons[index + 1]}
             onChange={props.onChangeRating}
-            defaultValue={props.el?.rating ? props.el.rating : 0}
+            defaultValue={props.el?.rating ?? 0}
+            // value={props.rating}
           />
         </S.StarRating>
         <S.CommentMainGroup>
@@ -46,7 +49,8 @@ export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
             maxLength={200}
             placeholder="댓글을 작성해주세요"
             onChange={props.onChangeCommentContents}
-            defaultValue={props.el?.contents ? props.el.contents : ""}
+            defaultValue={props.el?.contents ?? ""}
+            // value={props.contents}
           />
           {!props.isEdit && (
             <div>

@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
 import {
   IBoardComment,
   IQuery,
@@ -23,4 +23,10 @@ export interface IPropsBoardCommentsUI {
 export interface IMyupdateComment {
   contents?: string;
   rating?: number;
+}
+
+export interface IPropsBoardComments {
+  el: IBoardComment;
+  isEdit: boolean;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
 }

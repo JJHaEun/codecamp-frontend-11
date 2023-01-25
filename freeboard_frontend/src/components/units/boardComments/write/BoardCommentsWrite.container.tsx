@@ -15,9 +15,12 @@ import {
   CREATE_BOARD_COMMENT,
   UPDATE_BOARD_COMMENT,
 } from "./BoardCommentsWrite.queries";
-import { IMyupdateComment } from "./BoardCommentsWrite.types";
+import {
+  IMyupdateComment,
+  IPropsBoardComments,
+} from "./BoardCommentsWrite.types";
 
-export default function BoardComments(props) {
+export default function BoardComments(props: IPropsBoardComments) {
   const router = useRouter();
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -79,6 +82,10 @@ export default function BoardComments(props) {
             },
           ],
         });
+        setWriter("");
+        setRating(0);
+        setPassword("");
+        setContents("");
       } catch (error) {
         if (error instanceof Error) alert(error.message);
       }
@@ -134,7 +141,6 @@ export default function BoardComments(props) {
         onClickEditComment={onClickEditComment}
         isEdit={props.isEdit}
         el={props.el}
-        // onClickCancelEdit={onClickCancelEdit}
       />
     </>
   );

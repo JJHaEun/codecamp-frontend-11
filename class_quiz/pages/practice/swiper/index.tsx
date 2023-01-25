@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import SwiperCore, { Navigation, Pagination } from "swiper";
 // import Swiper and modules styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+SwiperCore.use([Navigation, Pagination]);
 
 export default function SwiperPracticePage() {
   // const swiper1 = new Swiper('.swiper1', {
@@ -131,7 +132,7 @@ export default function SwiperPracticePage() {
     }
   `;
   const swiper: any = {
-    modules: [Navigation, Pagination, Scrollbar, A11y],
+    modules: [Navigation, Pagination],
     onSwiper: (swiper: any) => console.log(swiper),
     onSlideChange: () => console.log("slide change"),
     className: "wrapper", //방향 셋팅 vertical 수직, horizontal 수평 설정이 없으면 수평
@@ -193,7 +194,14 @@ export default function SwiperPracticePage() {
         <h1>Swiperjs Slider</h1>
         <span>Hello</span>
       </Header>
-      <Wrapp {...swiper}>
+      <Wrapp
+        className="banner"
+        spaceBetween={5}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 1000 }}
+      >
         <div className="swiper-wrapper">
           <SwiperMainsBox className="swiper-slide">
             <SwiperMains src="/swiper_test_img.png" />

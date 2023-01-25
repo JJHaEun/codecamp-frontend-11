@@ -1,3 +1,5 @@
 {
-  "cSpell.words": ["sweetalert"]
+  "cSpell.words": ["sweetalert"],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
