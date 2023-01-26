@@ -1,6 +1,28 @@
 import styled from "@emotion/styled";
+import { Modal } from "antd";
 import { IProps } from "./BoardWrite.types";
 
+export const Addressmodal = styled(Modal)`
+  .ant-modal-content {
+    width: 400px;
+  }
+  .ant-modal-close-x {
+    display: none;
+  }
+  .ant-btn-primary {
+    display: none;
+  }
+  .ant-btn-default {
+    border-color: none;
+  }
+  .ant-btn {
+    border-color: coral;
+    :hover {
+      border-color: coral;
+      color: coral;
+    }
+  }
+`;
 export const AllBox = styled.div`
   width: 1200px;
   /* height: 1847px; */
@@ -121,6 +143,9 @@ export const Address0 = styled.input`
   border: 1px solid #bdbdbd;
   ::placeholder {
     color: #bdbdbd;
+  }
+  :read-only {
+    color: black;
   }
   font-size: 16px;
   outline: none;

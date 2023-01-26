@@ -5,12 +5,13 @@ export default function StarPage() {
   const [star, setStar] = useState(0);
   const onChangeStar = (star: number) => {
     setStar(star);
-    Modal.info({ content: `${star}점` });
+    // Modal.info({ content: `${star}점` });
   };
 
   return (
     <>
       <Rate onChange={onChangeStar} value={star} allowClear={true} />
+      <div>{star}점</div>
     </>
   );
 }

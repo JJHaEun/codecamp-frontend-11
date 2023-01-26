@@ -5,16 +5,8 @@ import { useState } from "react";
 export default function ModalAlertPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
   };
 
   const OkButton = styled(Modal)`
@@ -24,12 +16,12 @@ export default function ModalAlertPage() {
   `;
   return (
     <>
-      <button onClick={showModal}>모달열기</button>
+      <button onClick={toggleModal}>모달열기</button>
       <OkButton
         title="게시글 등록"
         open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={toggleModal}
+        onCancel={toggleModal}
       >
         <p>게시글이 등록되었습니다</p>
       </OkButton>

@@ -17,6 +17,17 @@ export interface IPropsBoardCommentsListUI {
   onClickHideModal: () => void;
   onClickEdit: () => void;
 }
-export interface IPropsBoardCommentsListItems {
+// export interface IPropsBoardCommentsListItems {}
+export interface IPropsBoardCommentsListItemsUI {
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  isEdit: boolean;
+  isOpen: boolean;
+  onClickCheckDelete: (event: MouseEvent<HTMLImageElement>) => void;
+  onChangeDeleteCommentsPassword: (
+    event: ChangeEvent<HTMLInputElement>
+  ) => void;
+  onClickDeleteComment: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickHideModal: () => void;
+  onClickEdit: () => void;
   el: IBoardComment;
 }

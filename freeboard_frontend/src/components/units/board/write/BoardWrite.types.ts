@@ -1,4 +1,10 @@
-import { ChangeEvent, MouseEvent } from "react";
+import {
+  ChangeEvent,
+  JSXElementConstructor,
+  MouseEvent,
+  ReactElement,
+} from "react";
+import { Address } from "react-daum-postcode";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWrite {
@@ -30,6 +36,14 @@ export interface IBoardWriteUI {
   isActive: boolean;
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
+  isOpen: boolean;
+  onChangeAddress: (data: Address) => void;
+  onChangeAddresssDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  ToggleModal: () => void;
+  zipcode: string;
+  address: string;
+  addressDetail: string;
+  contextHolder: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 export interface IProps {
   isActive: boolean;

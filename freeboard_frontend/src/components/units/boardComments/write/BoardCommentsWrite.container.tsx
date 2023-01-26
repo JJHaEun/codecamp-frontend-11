@@ -44,25 +44,29 @@ export default function BoardComments(props: IPropsBoardComments) {
     variables: { boardId: String(router.query.boardId) },
   });
 
-  const onChangeCommentWriter = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeCommentWriter = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
     setWriter(event.target.value);
     // 작성자는 로그인한 유저의 이름을 불러와 defaultValue와 redonly 적용 등..
   };
 
-  const onChangeCommentPassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeCommentPassword = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
     setPassword(event.target.value);
   };
 
-  const onChangeCommentContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeCommentContents = (
+    event: ChangeEvent<HTMLTextAreaElement>
+  ): void => {
     setContents(event.target.value);
   };
-  const onChangeRating = (rating: number) => {
+  const onChangeRating = (rating: number): void => {
     setRating(rating);
   };
 
-  const onClickCreateBoardComment = async (
-    event: MouseEvent<HTMLButtonElement>
-  ) => {
+  const onClickCreateBoardComment = async () => {
     if (writer && password && contents) {
       try {
         await createBoardComment({
@@ -87,7 +91,7 @@ export default function BoardComments(props: IPropsBoardComments) {
         setPassword("");
         setContents("");
       } catch (error) {
-        if (error instanceof Error) alert(error.message);
+        if (error instanceof Error) Modal.error({ content: error.message });
       }
     }
   };
@@ -119,7 +123,7 @@ export default function BoardComments(props: IPropsBoardComments) {
           },
         ],
       });
-      props.setIsEdit?.(false);
+      props.setIsEdit((prev) => !prev);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }

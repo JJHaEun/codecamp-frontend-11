@@ -48,8 +48,8 @@ export const CommentMainGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-bottom: 80px;
-  border-bottom: 1px solid lightcoral;
+  margin-bottom: 20px;
+  /* border-bottom: 1px solid lightcoral; */
   padding-bottom: 30px;
 `;
 export const CommentBox = styled.textarea`

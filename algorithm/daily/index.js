@@ -1096,10 +1096,30 @@ function solution(numbers) {
 // 길이가 같은 두 1차원 정수 배열 a, b가 매개변수로 주어집니다. a와 b의 내적을 return 하도록 solution 함수를 완성해주세요.
 // 이때, a와 b의 내적은 a[0]*b[0] + a[1]*b[1] + ... + a[n-1]*b[n-1] 입니다. (n은 a, b의 길이)
 // ?? -....**
+// function solution(a, b) {
+//   const answer = a.reduce((acc, cur, i) => {
+//     console.log(cur + a[i] * b[i] + acc);
+//   }, 0);
+// }
+
 function solution(a, b) {
-  const answer = a.reduce((acc, cur, i) => {
-    console.log(cur + a[i] * b[i] + acc);
+  let answer = 0;
+  // 각 요소에 접근a
+  for (let i = 0; i < a.length; i++) {
+    // 두개의 길이가 같은 배열.
+    answer += a[i] * b[i];
+  }
+  return answer;
+}
+
+// reduce사용
+function solution(a, b) {
+  const answer = a.reduce((cu, el, i) => {
+    // 누적값, 각요소, 인덱스
+    console.log(cu, el, b[i]);
+    return cu + el * b[i];
   }, 0);
+  return answer;
 }
 
 // =========================================
@@ -1117,14 +1137,60 @@ function solution(arr) {
   // Min에 숫자를 넣음.
   // 그 수랑 arr와 비교..
   // 엑//.....ㅓ잇
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < Min.length; j++) {
-      if (arr[i] > Min[j]) {
-        Min.push(Min[j]);
-      }
-    }
-  }
+//   for (let i = 0; i < arr.length; i++) {
+//     for (let j = 0; j < Min.length; j++) {
+//       if (arr[i] > Min[j]) {
+//         Min.push(Min[j]);
+//       }
+//     }
+//   }
+// }
+function solution(arr) {
+   
+  const answer =[]
+  // 배열에서 작은 수 찾기.
+  let min = arr[0]
+  // 작은값이 있다면 넣기.
+   for(let i = 1; i< arr.length ; i++){
+    if(arr[i] < min) min =arr[i] // 제일 작은수를 찾음
+   }
+   // 제일 작은수를 배열에 추가
+   for(let i = 0 ; i<arr.length;i++){
+       if(arr[i] !== min) answer.push(arr[i])
+   }
+   return answer.length !== 0? 
+   answer :[-1]
+   
 }
+
+// 메서드 사용.
+function solution(arr) {
+   
+  // Math.min(들어오는 인자중 가장 작은수를 찾는메서드)
+  const min =
+  Math.min(...arr)
+  console.log(min)
+  const answer = arr.filter((num)=>num !== min) // 제일 작은값 제거
+      return answer.length === 0 ? [-1] : answer
+  
+}
+
+// 또는 sort사용해 오름차순 정렬한다음 맨 앞값을 제거하는 방법
+function solution(arr) {// 시간초과
+ 
+  const answer = arr.sort((a,b)=>{
+    return a-b
+  })
+answer.shift()
+    const result = answer.sort((a,b)=>
+      b-a
+    )
+    return answer.length === 0 ? [-1] : result
+// return result.length === 0 ? [-1]
+    
+}
+
+
 
 // ========================================
 //문자열 내 p와 y의 개수
@@ -1135,10 +1201,9 @@ function solution(s) {
   let countY = 0;
 
   s = s.toLowerCase();
-  console.log(s);
   for (let i = 0; i < s.length; i++) {
     if (s[i] === "p") {
-      countP++;
+      countP++; // countP = countP + 1 , countP += 1 
     } else if (s[i] === "y") {
       countY++;
     }
@@ -1148,7 +1213,127 @@ function solution(s) {
   } else {
     return false;
   }
+  //return countY === countP ? answer : false 얘와 동일
 }
+
+//
+
+
+function solution(s){
+   
+  let countP = 0;
+  let countY = 0;
+  
+s = s.toLowerCase() 
+ 
+  for(let i = 0 ; i < s.length;i++){
+      if(s[i] === "p"){
+          countP++ // countP = countP + 1 , countP += 1 
+      }
+     else if(s[i] === "y") {
+         countY++
+     }    
+  }
+return countY === countP 
+
+}
+
+
+
+//
+function solution(s){
+   
+  let countP = 0;
+  let countY = 0;
+  
+s = s.toLowerCase() 
+ const obj = {}
+  for(let i = 0 ; i < s.length;i++){
+    
+      if(obj[s[i]] === undefined) obj[s[i]] =0
+      obj[s[i]]++
+  }
+return obj.p === obj.y
+
+ 
+}
+
+// forEach 사용해보기.
+function solution(s){
+   
+  const obj = {}
+s = s.toLowerCase() 
+  const answer = s.split("")
+.forEach((letter)=>{
+   obj[letter] === undefined ? obj[letter] = 1
+    // 기존에 알파뱃이 없다면 1을 초기값으로 설정
+   :obj[letter]++
+       // 아니라면 기존의 알파벳 개수만 1 증가
+})
+  return obj.p === obj.y
+  
+}
+
+// ============================================
+
+// 이상한 문자 만들기 ****
+// 문자열 s는 한 개 이상의 단어로 구성되어 있습니다. 각 단어는 하나 이상의 공백문자로 구분되어 있습니다. 
+// 각 단어의 짝수번째 알파벳은 대문자로, 홀수번째 알파벳은 소문자로 바꾼 문자열을 리턴하는 함수, solution을 완성하세요.
+
+function solution(s) {
+
+  let answer = '';
+    let idx = 0; // 단어별 인덱스 값을 저장
+    for(let i  = 0; i< s.length; i ++){
+        if(s[i]===' '){
+            answer += ' ' // answer += s[i]
+                idx =  0; //  idx를 0으로 초기화
+        
+    
+        
+    }else{
+        
+        answer+= idx % 2 ===0
+        // 짝수라면 대문자를 추가
+        ? s[i].toUpperCase()
+        // 홀수라면 소문자를 추가
+        : s[i].toLowerCase()
+    }
+}
+
+// map사용
+function solution(s) {
+  // 공백을 기준으로 쪼갬
+  const answer = s.split(' ').map((w)=>{
+     // 각각의 단어를 받아와 쪼갬(배열의 배열로..)
+      return w.split("").map((letter,i)=>{
+         return i  % 2 === 0 ? letter.toUpperCase() : letter.toLowerCase()
+      }).join('')
+  }).join(' ')// 다시 공백을 기준으로 합침
+ 
+  
+ }
+
+
+// ======================
+// 알고리즘 테스트 3주차 2번
+function prefix(strs){
+  // 비교해줄 기준점
+  const standard = strs[0];
+  for(let i = 0 ; i <standard.length;i++){
+    const temp = standard.slice(1,standard.length-i)// 뒤에서부터 잘라짐. 가장 긴 중복 문자를 찾으니 ..
+    // 이 자른 temp값이 있어야함.
+    for(let j = 0 ; j <strs.length ; j++){
+      if(strs[j].includes(temp)) break; // 있으면 반복문 중단
+      if(j === strs.length -1) return temp // 같으면 쪼갠 값을 가져오기
+    }
+  }
+  return '' // 모두 없다면 빈문자열을 리턴
+}
+
+prefix(['letter','leaf','leader'])
+
+
 // ============================================
 // 문자열 내림차순으로 정렬하기
 // 문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수, solution을 완성해주세요.

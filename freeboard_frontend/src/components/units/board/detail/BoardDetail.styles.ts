@@ -49,12 +49,14 @@ export const CreateDate = styled.span`
 export const TopIcons = styled.span`
   display: flex;
   gap: 26.67px;
+  position: relative;
 `;
 export const TopIconLink = styled.img`
   width: 32px;
   height: 32px;
 `;
 export const TopIconLoc = styled(TopIconLink)``;
+
 export const ContentsWrap = styled.div`
   padding-top: 80px;
 `;
@@ -78,8 +80,11 @@ export const ContentsImg = styled.img`
 `;
 export const MainContents = styled.div`
   /* padding-top: 40px; */
+  width: 996px;
   font-weight: 400;
   font-size: 16px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
   /* padding-bottom: 120px; */
 `;
 export const VideoBox = styled.div`

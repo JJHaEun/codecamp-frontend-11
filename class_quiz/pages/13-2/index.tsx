@@ -11,10 +11,10 @@ export default function DatePick() {
   //   console.log(value.format("YYYY/MM/DD"), mode);
   //   setValue(value);
   // }
-  function onSelect(value: any) {
+  const onChangeDate = (value: any) => {
     setData(value.format("YYYY-MM-DD")); // picker아래에 나오는 부분.
     // setData(value.format("MM월")); // picker아래에 나오는 부분.
-  }
+  };
   console.log(data);
   return (
     <>
@@ -23,7 +23,7 @@ export default function DatePick() {
         // defaultValue={dayjs("01", dateFormat)} //picker부분에 나오는 부분 숫자부분 기본값
         format={dateFormat}
         // onPanelChange={onPanelChange}
-        onSelect={onSelect}
+        onChange={onChangeDate}
         // picker="month" // picker에서 달만뽑음
       />
       <div>{data}</div>

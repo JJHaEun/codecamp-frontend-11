@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { IBoardWrite, ImyUpdate } from "./BoardWrite.types";
-import { Modal } from "antd";
+import { message, Modal } from "antd";
+import { Address } from "react-daum-postcode";
 
 export default function BoardWrite(props: IBoardWrite) {
+  const router = useRouter();
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
-  const router = useRouter();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -21,13 +23,14 @@ export default function BoardWrite(props: IBoardWrite) {
   const [addressDetail, setAddressDetail] = useState("");
 
   const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [writerErr, setWriterErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [titleErr, setTitleErr] = useState("");
   const [contentsErr, setContentsErr] = useState("");
 
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
     setWriter(event.target.value);
     if (event.target.value !== "") {
       setWriterErr("");
@@ -40,7 +43,7 @@ export default function BoardWrite(props: IBoardWrite) {
       setIsActive(false);
     }
   };
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
     if (event.target.value !== "") {
       setPasswordErr("");
@@ -53,7 +56,7 @@ export default function BoardWrite(props: IBoardWrite) {
       setIsActive(false);
     }
   };
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>): void => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
       setTitleErr("");
@@ -66,7 +69,7 @@ export default function BoardWrite(props: IBoardWrite) {
       setIsActive(false);
     }
   };
-  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setContents(event.target.value);
     if (event.target.value !== "") {
       setContentsErr("");
@@ -79,13 +82,23 @@ export default function BoardWrite(props: IBoardWrite) {
       setIsActive(false);
     }
   };
-  const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>): void => {
     setYoutubeUrl(event.target.value);
   };
-
-  const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddress(event.target.value);
+  const ToggleModal = () => {
+    setIsOpen((prev) => !prev);
   };
+  const onChangeAddress = (data: Address): void => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    ToggleModal();
+  };
+  const onChangeAddresssDetail = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setAddressDetail(event.target.value);
+  };
+
   const onClickSubmit = async () => {
     if (!writer) {
       setWriterErr("작성자를 입력해주세요.");
@@ -130,16 +143,28 @@ export default function BoardWrite(props: IBoardWrite) {
   };
 
   const onClickEdit = async () => {
-    if (!title && !contents) {
-      if (confirm("수정하시겠습니까?")) {
-        alert("수정사항이 없습니다");
-        return;
-      } else if (!password) {
-        alert("비밀번호를 입력해주세요");
-      } else {
-        alert("수정되었습니다");
-        return router.push(`/boards`);
-      }
+    if (
+      !title &&
+      !contents &&
+      !youtubeUrl &&
+      !zipcode &&
+      !address &&
+      !addressDetail
+    ) {
+      messageApi.open({
+        type: "info",
+        content: "수정사항이 없습니다",
+      });
+      return;
+      // if (confirm("수정하시겠습니까?")) {
+      //   alert("수정사항이 없습니다");
+      //   return;
+      // } else if (!password) {
+      //   alert("비밀번호를 입력해주세요");
+      // } else {
+      //   alert("수정되었습니다");
+      //   return router.push(`/boards`);
+      // }
     }
     const updateBoardInput: ImyUpdate = {};
     if (title) updateBoardInput.title = title;
@@ -182,6 +207,14 @@ export default function BoardWrite(props: IBoardWrite) {
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
+      isOpen={isOpen}
+      onChangeAddress={onChangeAddress}
+      onChangeAddresssDetail={onChangeAddresssDetail}
+      ToggleModal={ToggleModal}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
+      contextHolder={contextHolder}
     />
   );
 }

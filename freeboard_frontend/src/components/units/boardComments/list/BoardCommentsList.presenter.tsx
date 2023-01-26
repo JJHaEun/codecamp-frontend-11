@@ -1,7 +1,8 @@
-import { getDate } from "../../../../commons/libraries/date";
-import BoardComments from "../write/BoardCommentsWrite.container";
+// import { getDate } from "../../../../commons/libraries/date";
+// import BoardComments from "../write/BoardCommentsWrite.container";
 import * as S from "./BoardCommentsList.styles";
 import { IPropsBoardCommentsListUI } from "./BoardCommentsList.types";
+import BoardCommentsListItems from "./BoardCommentsListItems";
 
 export default function BoardCommentsListUI(props: IPropsBoardCommentsListUI) {
   return (
@@ -9,8 +10,28 @@ export default function BoardCommentsListUI(props: IPropsBoardCommentsListUI) {
       <S.CommentsList>
         {props.data?.fetchBoardComments.map((el) => (
           <S.MainCommentList key={el._id}>
-            {/* <BoardCommentsListItems el={el} /> */}
-            {props.isOpen && (
+            <BoardCommentsListItems
+              el={el}
+              isEdit={props.isEdit}
+              isOpen={props.isOpen}
+              onClickCheckDelete={props.onClickCheckDelete}
+              onChangeDeleteCommentsPassword={
+                props.onChangeDeleteCommentsPassword
+              }
+              onClickDeleteComment={props.onClickDeleteComment}
+              onClickHideModal={props.onClickHideModal}
+              onClickEdit={props.onClickEdit}
+              setIsEdit={props.setIsEdit}
+            />
+          </S.MainCommentList>
+        ))}
+      </S.CommentsList>
+    </S.CommentsListMain>
+  );
+}
+
+{
+  /* {props.isOpen && (
               <S.DeleteCommentModal
                 title="댓글 삭제"
                 visible={true}
@@ -43,16 +64,8 @@ export default function BoardCommentsListUI(props: IPropsBoardCommentsListUI) {
             </div>
             <S.DefaultStar allowHalf disabled value={el.rating} />
             <S.CommentContens>{el.contents}</S.CommentContens>
-            {props.isEdit && (
-              <BoardComments
-                el={el}
-                isEdit={true}
-                setIsEdit={props.setIsEdit}
-              />
-            )}
           </S.MainCommentList>
         ))}
-      </S.CommentsList>
-    </S.CommentsListMain>
-  );
+        {props.isEdit && (
+          <BoardComments el={el} isEdit={true} setIsEdit={props.setIsEdit} />*/
 }

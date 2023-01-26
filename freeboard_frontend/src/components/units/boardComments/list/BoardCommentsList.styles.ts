@@ -5,7 +5,7 @@ import { Star } from "../write/BoardCommentsWrite.styles";
 import styled from "@emotion/styled";
 
 export const MainCommentList = styled.div`
-  border-bottom: 1px solid lightcoral;
+  border-top: 1px solid lightcoral;
   padding-bottom: 30px;
   padding-top: 30px;
 `;

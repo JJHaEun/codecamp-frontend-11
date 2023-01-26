@@ -1,9 +1,17 @@
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 import * as S from "./BoardWrite.styles";
 import { IBoardWriteUI } from "./BoardWrite.types";
 
 export default function BoardWriteUI(props: IBoardWriteUI) {
   return (
     <S.AllBox>
+      {props.contextHolder}
+      {props.isOpen && (
+        <S.Addressmodal open={true} onCancel={props.ToggleModal}>
+          <DaumPostcodeEmbed onComplete={props.onChangeAddress} />
+        </S.Addressmodal>
+      )}
       <S.MainTitle>게시물 {props.isEdit ? "수정" : "등록"}</S.MainTitle>
       <S.WritePw>
         <S.WritePwArr>
@@ -53,13 +61,31 @@ export default function BoardWriteUI(props: IBoardWriteUI) {
             type="text"
             placeholder="07250"
             readOnly
-            // defaultValue={props.data?.fetchBoard.boardAddress.zipcode}
+            defaultValue={
+              props.zipcode ||
+              (props.data?.fetchBoard.boardAddress?.zipcode ?? "")
+            }
           />
-          <S.SearchButton>우편번호 검색</S.SearchButton>
+          <S.SearchButton onClick={props.ToggleModal}>
+            우편번호 검색
+          </S.SearchButton>
         </S.AddressSearch>
 
-        <S.LongInputAddress type="text" />
-        <S.LongInputAddress type="text" />
+        <S.LongInputAddress
+          type="text"
+          value={
+            props.address ||
+            (props.data?.fetchBoard.boardAddress?.address ?? "")
+          }
+        />
+        <S.LongInputAddress
+          type="text"
+          onChange={props.onChangeAddresssDetail}
+          defaultValue={
+            props.data?.fetchBoard.boardAddress?.addressDetail ??
+            props.addressDetail
+          }
+        />
       </S.AddressArr>
       <S.Lincked>
         <S.Label>유튜브</S.Label>

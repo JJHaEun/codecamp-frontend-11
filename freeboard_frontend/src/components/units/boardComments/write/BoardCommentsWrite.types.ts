@@ -5,7 +5,7 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export interface IPropsBoardCommentsUI {
-  onClickCreateBoardComment: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickCreateBoardComment: () => void;
   onChangeCommentWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeCommentPassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeCommentContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;

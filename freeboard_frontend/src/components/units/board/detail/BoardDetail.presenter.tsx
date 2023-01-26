@@ -31,8 +31,9 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI) {
             )}
             {props.data?.fetchBoard.boardAddress?.address && (
               <Tooltip
-                title={`${props.data?.fetchBoard.boardAddress.address}`}
+                title={`${props.data?.fetchBoard.boardAddress.address} ${props.data?.fetchBoard.boardAddress.addressDetail}`}
                 color={"tomato"}
+                placement="topRight"
               >
                 <S.TopIconLoc src="/location_icon.png" />
               </Tooltip>

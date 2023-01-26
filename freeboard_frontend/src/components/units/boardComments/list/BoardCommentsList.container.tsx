@@ -46,7 +46,7 @@ export default function BoardCommentsList() {
     return;
   };
   const onClickEdit = () => {
-    setIsEdit(true);
+    setIsEdit((prev) => !prev);
   };
   const { data } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
