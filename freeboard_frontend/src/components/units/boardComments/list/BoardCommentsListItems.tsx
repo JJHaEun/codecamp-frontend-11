@@ -7,12 +7,12 @@ import { getDate } from "../../../../commons/libraries/date";
 // } from "./BoardCommentsList.queries";
 // import { ChangeEvent, useState } from "react";
 // import { useRouter } from "next/router";
-import { IPropsBoardCommentsListItemsUI } from "./BoardCommentsList.types";
+import type { IPropsBoardCommentsListItemsUI } from "./BoardCommentsList.types";
 import BoardComments from "../write/BoardCommentsWrite.container";
 
 export default function BoardCommentsListItems(
   props: IPropsBoardCommentsListItemsUI
-) {
+): JSX.Element {
   // const [password, setPassword] = useState("");
   // const router = useRouter();
   // const [isOpen, setIsOpen] = useState(false);

@@ -1,9 +1,9 @@
 import { getDate } from "../../../../commons/libraries/date";
-import { IBoard } from "../../../../commons/types/generated/types";
+import type { IBoard } from "../../../../commons/types/generated/types";
 import * as S from "./BoardList.styles";
-import { IPropsBoardListUI } from "./BoardList.types";
+import type { IPropsBoardListUI } from "./BoardList.types";
 
-export default function BoardListUI(props: IPropsBoardListUI) {
+export default function BoardListUI(props: IPropsBoardListUI): JSX.Element {
   return (
     // <S.BoardListMain>
     //   <S.ButtonWrap>

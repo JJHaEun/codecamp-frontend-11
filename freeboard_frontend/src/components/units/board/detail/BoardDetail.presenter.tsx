@@ -2,9 +2,9 @@ import { Tooltip } from "antd";
 import ReactPlayer from "react-player";
 import { getDate } from "../../../../commons/libraries/date";
 import * as S from "./BoardDetail.styles";
-import { IPropsBoardDetailUI } from "./BoardDetail.types";
+import type { IPropsBoardDetailUI } from "./BoardDetail.types";
 
-export default function BoardDetailUI(props: IPropsBoardDetailUI) {
+export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
   return (
     <S.DetailPageMain>
       {/* 여기는 버튼부분과 포함해 가운데 정렬용 */}
@@ -21,17 +21,21 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI) {
             </S.NameDate>
           </S.Profile>
           <S.TopIcons>
-            {props.data?.fetchBoard.youtubeUrl && (
+            {props.data?.fetchBoard.youtubeUrl !== "" && (
               <Tooltip
-                title={`${props.data?.fetchBoard.youtubeUrl}`}
+                title={`${props.data?.fetchBoard.youtubeUrl ?? ""}`}
                 color={"tomato"}
               >
                 <S.TopIconLink src="/link_icon.png" />
               </Tooltip>
             )}
-            {props.data?.fetchBoard.boardAddress?.address && (
+            {props.data?.fetchBoard.boardAddress?.address !== "" && (
               <Tooltip
-                title={`${props.data?.fetchBoard.boardAddress.address} ${props.data?.fetchBoard.boardAddress.addressDetail}`}
+                title={`${String(
+                  props.data?.fetchBoard.boardAddress?.address
+                )} ${String(
+                  props.data?.fetchBoard.boardAddress?.addressDetail
+                )}`}
                 color={"tomato"}
                 placement="topRight"
               >
@@ -52,11 +56,11 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI) {
           </S.MainWrap>
         </S.ContentsWrap>
         <S.Undder>
-          {props.data?.fetchBoard.youtubeUrl && (
+          {props.data?.fetchBoard.youtubeUrl !== "" && (
             <S.VideoBox>
               <ReactPlayer
                 className="react-player"
-                url={`${props.data?.fetchBoard.youtubeUrl}`}
+                url={`${String(props.data?.fetchBoard.youtubeUrl)}`}
                 playing={false}
                 muted={true}
                 controls={true}
@@ -68,7 +72,7 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI) {
           <S.LikeDisLike>
             <S.LikeDisLikeIcons>
               <Tooltip
-                title={`${props.data?.fetchBoard.likeCount}`}
+                title={`${Number(props.data?.fetchBoard.likeCount)}`}
                 color={"tomato"}
                 placement="topRight"
               >
@@ -78,7 +82,7 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI) {
                 />
               </Tooltip>
               <Tooltip
-                title={`${props.data?.fetchBoard.dislikeCount}`}
+                title={`${Number(props.data?.fetchBoard.dislikeCount)}`}
                 color={"grey"}
               >
                 <S.CountPickImg

@@ -1321,11 +1321,11 @@ function prefix(strs){
   // 비교해줄 기준점
   const standard = strs[0];
   for(let i = 0 ; i <standard.length;i++){
-    const temp = standard.slice(1,standard.length-i)// 뒤에서부터 잘라짐. 가장 긴 중복 문자를 찾으니 ..
+    const temp = standard.slice(0,standard.length-i)// 뒤에서부터 잘라짐. 가장 긴 중복 문자를 찾으니 ..
     // 이 자른 temp값이 있어야함.
     for(let j = 0 ; j <strs.length ; j++){
-      if(strs[j].includes(temp)) break; // 있으면 반복문 중단
-      if(j === strs.length -1) return temp // 같으면 쪼갠 값을 가져오기
+      if(!strs[j].includes(temp)) break; // 없으면 반복문 중단
+      if(j === strs.length-1) return temp // 같으면 쪼갠 값을 가져오기
     }
   }
   return '' // 모두 없다면 빈문자열을 리턴
@@ -1335,8 +1335,162 @@ prefix(['letter','leaf','leader'])
 
 
 // ============================================
+
+// 하샤드 수
+// 양의 정수 x가 하샤드 수이려면 x의 자릿수의 합으로 x가 나누어져야 합니다.
+// 예를 들어 18의 자릿수 합은 1+8=9이고, 18은 9로 나누어 떨어지므로 18은 하샤드 수입니다.
+// 자연수 x를 입력받아 x가 하샤드 수인지 아닌지 검사하는 함수, solution을 완성해주세요.
+
+function solution(x) {
+   
+  // 메서드 사용법. 반복과 연산된결과로 가져오기.
+    // reduce 사용
+    const answer = String(x)
+                    .split("")
+                    .reduce((acc,cur)=>{
+                return acc + Number(cur)
+                    },0) // 초기값이 처음부터 0이라는 숫자. 따라서 acc는 무조건 숫자타입임.
+  return x % answer === 0 ? true : false
+    
+}
+
+//
+function solution(x) {
+  // toString()이라는 메서드로 x를 문자열로 변경
+ const answer = x.toString().split("").reduce((acc,cur)=>{
+ 
+     return Number(acc)+Number(cur)
+ }) // 초기값 지정 안해줬을경우
+   return x % answer === 0 ? true : false
+}
+
+
+// for문
+
+
+function solution(x) {
+   
+  // 메서드 사용법. 반복과 연산된결과로 가져오기.
+    // reduce 사용
+   x = String(x)
+    // x를 문자타입으로 변경
+// 인덱스로 접근
+    let answer =0
+  for(let i = 0 ; i < x.length;i++){
+                      answer += Number(x[i])
+                  }
+   return x % answer === 0 ? true : false
+    
+}
+
+// ============================================
+
+
+
+// 콜라츠 추측
+// 1937년 Collatz란 사람에 의해 제기된 이 추측은, 
+// 주어진 수가 1이 될 때까지 다음 작업을 반복하면, 모든 수를 1로 만들 수 있다는 추측입니다.
+
+//  작업은 다음과 같습니다.
+// 1-1. 입력된 수가 짝수라면 2로 나눕니다. 
+// 1-2. 입력된 수가 홀수라면 3을 곱하고 1을 더합니다. 
+// 2. 결과로 나온 수에 같은 작업을 1이 될 때까지 반복합니다.
+// 예를 들어, 주어진 수가 6이라면 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1 이 되어 총 8번 만에 1이 됩니다. 
+// 위 작업을 몇 번이나 반복해야 하는지 반환하는 함수, solution을 완성해 주세요.
+//  단, 주어진 수가 1인 경우에는 0을, 작업을 500번 반복할 때까지 1이 되지 않는다면 –1을 반환해 주세요.
+
+
+//....function solution(num) {
+   // 짝수면 2로 나누고,, 홀수면 3을 곱하고 1을 더하고, 결국 1이 될때까지 반복.
+    // 몇번 반복해야하는지를 리턴
+    
+// let answer = 0; // 반복횟수 담을 곳.
+// //   // 총 500번을 반복했는데도 1이 안되면 -1을 리턴.
+// //   // 반복... 반복문.. 
+//   for(let i = 0 ; i  <= 500 ; i++ ){
+//        if(num % 2 === 0 ){
+//     num / 2
+//            answer++
+// }else{
+//     num * 3 + 1
+//     answer++
+//       }      
+//   }
+//   // 500 번을 진행했는데도 1이 되지 않는다면 -1 리턴
+  
+//   if(answer === 500 ){
+//       num !== 1
+//       return -1
+//   }
+//   return answer
+
+
+  
+// }
+
+
+//
+
+function solution(num) {
+    
+  let answer = 0;
+ for(let i = 0 ; i<500;i++){
+     if(num === 1) return answer // 반복문종료됨과 동시에 답을 리턴
+     answer++
+     if(num % 2 === 0 ){
+         num /= 2  // num = num / 2
+         
+     }else{
+         num = num * 3 +1
+     }
+ }
+  return -1 // 반복문이 끝났음에도 아무것도 리턴되지 않는다면..
+ 
+}
+
+
+//
+function solution(num) {
+  let answer = 0
+ // forEach사용
+  const result = new Array(500).fill(1)
+                  .forEach(el=>{
+                      if(num !==1){
+                          answer++
+                         if(num%2 === 0){
+                          num /= 2
+                      }else{
+                          num = (num*3) +1
+                      }
+                      // 1을 만나는 순간중단해주어야함.
+                      }
+                    
+                    
+                  })
+ // 반복문 몇번도는지.
+  return num !== 1 ? -1 : answer
+}
+
+
+// ============================================
+
+
 // 문자열 내림차순으로 정렬하기
 // 문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수, solution을 완성해주세요.
 // s는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자보다 작은 것으로 간주합니다.
 
-// ==========================================
+
+
+
+
+
+// =============================================
+
+// 나누어 떨어지는 숫자 배열
+// array의 각 element 중 divisor로 나누어 떨어지는 값을 오름차순으로 정렬한 배열을 반환하는 함수, solution을 작성해주세요.
+// divisor로 나누어 떨어지는 element가 하나도 없다면 배열에 -1을 담아 반환하세요.
+
+
+
+
+

@@ -1,11 +1,6 @@
-import {
-  ChangeEvent,
-  JSXElementConstructor,
-  MouseEvent,
-  ReactElement,
-} from "react";
-import { Address } from "react-daum-postcode";
-import { IQuery } from "../../../../commons/types/generated/types";
+import type { ChangeEvent, JSXElementConstructor, ReactElement } from "react";
+import type { Address } from "react-daum-postcode";
+import type { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWrite {
   isEdit: boolean;

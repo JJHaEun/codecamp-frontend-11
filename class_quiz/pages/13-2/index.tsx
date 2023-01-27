@@ -19,7 +19,7 @@ export default function DatePick() {
   return (
     <>
       <DatePicker
-        defaultValue={dayjs("2023-01-01", dateFormat)} //picker부분에 나오는 부분 숫자부분 기본값
+        defaultValue={dayjs("2023-01-01", dateFormat)} // picker부분에 나오는 부분 숫자부분 기본값
         // defaultValue={dayjs("01", dateFormat)} //picker부분에 나오는 부분 숫자부분 기본값
         format={dateFormat}
         // onPanelChange={onPanelChange}
