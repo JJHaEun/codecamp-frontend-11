@@ -1,8 +1,8 @@
-import { EditOutlined } from "@ant-design/icons";
+// import { EditOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
-import { CommentImg } from "../write/BoardCommentsWrite.styles";
-import { Star } from "../write/BoardCommentsWrite.styles";
+import { CommentImg, Star } from "../write/BoardCommentsWrite.styles";
 import styled from "@emotion/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const MainCommentList = styled.div`
   border-top: 1px solid lightcoral;
@@ -35,10 +35,14 @@ export const DeleteImg = styled(CommentImg)`
     cursor: pointer;
   }
 `;
-export const EditImg = styled(EditOutlined)`
+export const EditButton = styled.span`
   :hover {
     cursor: pointer;
   }
+  width: 25px;
+  height: 20px;
+`;
+export const EditIcon = styled(FontAwesomeIcon)`
   * {
     width: 20px;
     height: 20px;

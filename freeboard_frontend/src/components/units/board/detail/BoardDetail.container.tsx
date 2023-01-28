@@ -8,13 +8,14 @@ import {
 } from "./BoardDetail.queries";
 import BoardDetailUI from "./BoardDetail.presenter";
 import { FETCH_BOARDS } from "../list/BoardList.queries";
-import {
+import type {
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
-import { MouseEvent } from "react";
+import type { MouseEvent } from "react";
+import { Modal } from "antd";
 
-export default function BoardDetail() {
+export default function BoardDetail(): JSX.Element {
   const router = useRouter();
   const [likeBoard] = useMutation(LIKE_BOARD);
   const [dislikeBoard] = useMutation(DISLIKE_BOARD);
@@ -26,8 +27,8 @@ export default function BoardDetail() {
       variables: { boardId: String(router.query.boardId) },
     }
   );
-  const onClickLike = () => {
-    likeBoard({
+  const onClickLike = async (): Promise<void> => {
+    await likeBoard({
       variables: { boardId: router.query.boardId },
       refetchQueries: [
         {
@@ -37,8 +38,8 @@ export default function BoardDetail() {
       ],
     });
   };
-  const onClickDisLike = () => {
-    dislikeBoard({
+  const onClickDisLike = async (): Promise<void> => {
+    await dislikeBoard({
       variables: { boardId: router.query.boardId },
       refetchQueries: [
         {
@@ -48,19 +49,29 @@ export default function BoardDetail() {
       ],
     });
   };
-  const onClickMoveToList = (event: MouseEvent<HTMLButtonElement>) => {
-    router.push(`/boards`);
+  const onClickMoveToList = (event: MouseEvent<HTMLButtonElement>): void => {
+    void router.push(`/boards`);
   };
-  const onClickDelete = (event: MouseEvent<HTMLButtonElement>) => {
-    deleteBoard({
+  const onClickDelete = async (
+    event: MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
+    await deleteBoard({
       variables: { boardId: router.query.boardId },
       refetchQueries: [{ query: FETCH_BOARDS }],
     });
-    router.push(`/boards`);
-    alert("삭제 완료");
+    Modal.success({
+      content: "삭제 완료",
+      afterClose() {
+        void router.push(`/boards`);
+      },
+    });
   };
-  const onClickMoveToEdit = (event: MouseEvent<HTMLButtonElement>) => {
-    router.push(`/boards/${router.query.boardId}/edit`);
+  const onClickMoveToEdit = (): void => {
+    if (typeof router.query.boardId !== "string") {
+      Modal.error({ content: "다시시도해주세요" });
+      return;
+    }
+    void router.push(`/boards/${String(router.query.boardId)}/edit`);
   };
   return (
     <BoardDetailUI

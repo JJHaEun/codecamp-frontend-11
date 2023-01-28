@@ -1,5 +1,5 @@
-import { MouseEvent } from "react";
-import { IQuery } from "../../../../commons/types/generated/types";
+import type { MouseEvent } from "react";
+import type { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IPropsBoardDetailUI {
   data?: Pick<IQuery, "fetchBoard">;
@@ -7,5 +7,5 @@ export interface IPropsBoardDetailUI {
   onClickDisLike: () => void;
   onClickMoveToList: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickDelete: (event: MouseEvent<HTMLButtonElement>) => void;
-  onClickMoveToEdit: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickMoveToEdit: () => void;
 }

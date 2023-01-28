@@ -1,13 +1,14 @@
-import { ChangeEvent, useState } from "react";
+import type { ChangeEvent } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { IBoardWrite, ImyUpdate } from "./BoardWrite.types";
+import type { IBoardWrite, ImyUpdate } from "./BoardWrite.types";
 import { message, Modal } from "antd";
-import { Address } from "react-daum-postcode";
+import type { Address } from "react-daum-postcode";
 
-export default function BoardWrite(props: IBoardWrite) {
+export default function BoardWrite(props: IBoardWrite): JSX.Element {
   const router = useRouter();
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
@@ -37,7 +38,12 @@ export default function BoardWrite(props: IBoardWrite) {
     } else {
       setWriterErr("작성자를 입력해주세요.");
     }
-    if (event.target.value && password && title && contents) {
+    if (
+      event.target.value !== "" &&
+      password !== "" &&
+      title !== "" &&
+      contents !== ""
+    ) {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -100,7 +106,7 @@ export default function BoardWrite(props: IBoardWrite) {
   const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>): void => {
     setYoutubeUrl(event.target.value);
   };
-  const ToggleModal = () => {
+  const ToggleModal = (): void => {
     setIsOpen((prev) => !prev);
   };
   const onChangeAddress = (data: Address): void => {
@@ -146,7 +152,7 @@ export default function BoardWrite(props: IBoardWrite) {
           },
         });
         if (result.data?.createBoard._id === undefined) {
-          alert("요청에 문제가 있습니다.");
+          Modal.info({ content: "요청에 문제가 있습니다." });
           return;
         }
         Modal.success({
@@ -161,7 +167,11 @@ export default function BoardWrite(props: IBoardWrite) {
     }
   };
 
-  const onClickEdit = async () => {
+  const onClickEdit = async (): Promise<void> => {
+    if (password === "") {
+      Modal.info({ content: "비밀번호를 입력해주세요" });
+      return;
+    }
     if (
       title !== "" &&
       contents === "" &&
@@ -204,8 +214,11 @@ export default function BoardWrite(props: IBoardWrite) {
           updateBoardInput,
         },
       });
-
-      void router.push(`/boards/${result.data.updateBoard._id}`);
+      if (typeof result.data.updateBoard._id !== "string") {
+        Modal.info({ content: "다시시도해주세요" });
+        return;
+      }
+      void router.push(`/boards/${String(result.data.updateBoard._id)}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

@@ -1,8 +1,10 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { ChangeEvent, MouseEvent, useState } from "react";
-import {
+import { useState } from "react";
+import type { ChangeEvent } from "react";
+
+import type {
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
@@ -15,12 +17,12 @@ import {
   CREATE_BOARD_COMMENT,
   UPDATE_BOARD_COMMENT,
 } from "./BoardCommentsWrite.queries";
-import {
+import type {
   IMyupdateComment,
   IPropsBoardComments,
 } from "./BoardCommentsWrite.types";
 
-export default function BoardComments(props: IPropsBoardComments) {
+export default function BoardComments(props: IPropsBoardComments): JSX.Element {
   const router = useRouter();
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -66,8 +68,8 @@ export default function BoardComments(props: IPropsBoardComments) {
     setRating(rating);
   };
 
-  const onClickCreateBoardComment = async () => {
-    if (writer && password && contents) {
+  const onClickCreateBoardComment = async (): Promise<void> => {
+    if (writer !== "" && password !== "" && contents !== "") {
       try {
         await createBoardComment({
           variables: {
@@ -97,23 +99,27 @@ export default function BoardComments(props: IPropsBoardComments) {
   };
   // console.log(contents.length);
   const updateBoardCommentInput: IMyupdateComment = {};
-  if (contents) updateBoardCommentInput.contents = contents;
-  if (rating) updateBoardCommentInput.rating = rating;
-  const onClickEditComment = async () => {
-    if (!password) {
+  if (contents !== "") updateBoardCommentInput.contents = contents;
+  if (rating !== 0) updateBoardCommentInput.rating = rating;
+  const onClickEditComment = async (): Promise<void> => {
+    if (password === "") {
       Modal.info({ content: "비밀번호를 입력해주세요" });
       return;
     }
-    if (!contents && !rating) {
+    if (typeof router.query.boardId !== "string") {
+      Modal.info({ content: "다시시도해주세요" });
+      return;
+    }
+    if (contents === "" && rating === 0) {
       Modal.info({ content: "수정사항이 없습니다" });
-      router.push(`/boards/${router.query.boardId}`);
+      props.setIsEdit((prev) => !prev);
       return;
     }
     try {
       await updateBoardComment({
         variables: {
           password,
-          boardCommentId: props.el._id,
+          boardCommentId: props.boardCommentIdEdit,
           updateBoardCommentInput,
         },
         refetchQueries: [

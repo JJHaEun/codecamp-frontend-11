@@ -1,6 +1,6 @@
-import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
+// import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 import * as S from "./BoardCommentsWrite.styles";
-import { IPropsBoardCommentsUI } from "./BoardCommentsWrite.types";
+import type { IPropsBoardCommentsUI } from "./BoardCommentsWrite.types";
 
 // const customIcons: Record<number, React.ReactNode> = { // 별점 얼굴모양
 //   1: <FrownOutlined />,
@@ -9,7 +9,9 @@ import { IPropsBoardCommentsUI } from "./BoardCommentsWrite.types";
 //   4: <SmileOutlined />,
 //   5: <SmileOutlined />,
 // };
-export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
+export default function BoardCommentsUI(
+  props: IPropsBoardCommentsUI
+): JSX.Element {
   return (
     <S.CommentMain>
       <div>
@@ -25,8 +27,8 @@ export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
             placeholder="작성자"
             onChange={props.onChangeCommentWriter}
             // defaultValue={props.el?.writer ?? ""}
-            readOnly={!!props.el?.writer}
-            value={props.el?.writer || props.writer}
+            readOnly={Boolean(props.el?.writer)}
+            value={props.el?.writer ?? props.writer}
           />
           <S.InputWrites
             type="password"
@@ -41,7 +43,7 @@ export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
             // character={({ index }: { index: number }) => customIcons[index + 1]}
             onChange={props.onChangeRating}
             // defaultValue={props.el?.rating ?? 0}
-            value={props.rating || (props.el?.rating ?? "")}
+            value={props.rating !== 0 ? props.rating : props.el?.rating ?? ""}
             // value={props.rating}
           />
         </S.StarRating>
@@ -50,13 +52,15 @@ export default function BoardCommentsUI(props: IPropsBoardCommentsUI) {
             maxLength={200}
             placeholder="댓글을 작성해주세요"
             onChange={props.onChangeCommentContents}
-            defaultValue={props.el?.contents ?? ""}
-            value={props.contents || (props.el?.contents ?? "")}
+            // defaultValue={props.el?.contents ?? ""}
+            value={
+              props.contents !== "" ? props.contents : props.el?.contents ?? ""
+            }
             // value={props.contents}
           />
           {!props.isEdit && (
             <div>
-              {(props.contents
+              {(props.contents !== ""
                 ? props.contents.length
                 : props.el?.contents.length) ?? 0}
               /200

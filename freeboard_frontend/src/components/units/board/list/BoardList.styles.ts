@@ -172,29 +172,17 @@ export const TableBody = styled(TableLine)`
     cursor: pointer;
     color: indianred;
   }
-  /* justify-content: space-between; */
-  /* text-align: center; */
 `;
 export const TableDate = styled(BoardDateTitle)`
-  /* border-top: 1px solid #bdbdbd; */
-  /* padding: 5px 0; */
-  /* text-align: center; */
-
-  /* padding-left: 20px; */
-
   font-size: 16px;
 `;
 export const BoardNumber = styled(BoardNumberTitle)`
   font-size: 16px;
-  /* padding-left: 15px; */
 `;
 export const BoardTitle = styled(BoardMainTitle)`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  /* padding-left: 25px; */
-  /* padding-left: 20px; */
 
   font-size: 16px;
 `;
@@ -202,9 +190,6 @@ export const BoardWriter = styled(BoardWriterTitle)`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  /* padding-left: 25px; */
-  /* padding-left: 20px; */
 
   font-size: 16px;
 `;

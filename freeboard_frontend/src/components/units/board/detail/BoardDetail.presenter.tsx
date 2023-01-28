@@ -21,27 +21,29 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
             </S.NameDate>
           </S.Profile>
           <S.TopIcons>
-            {props.data?.fetchBoard.youtubeUrl !== "" && (
-              <Tooltip
-                title={`${props.data?.fetchBoard.youtubeUrl ?? ""}`}
-                color={"tomato"}
-              >
-                <S.TopIconLink src="/link_icon.png" />
-              </Tooltip>
-            )}
-            {props.data?.fetchBoard.boardAddress?.address !== "" && (
-              <Tooltip
-                title={`${String(
-                  props.data?.fetchBoard.boardAddress?.address
-                )} ${String(
-                  props.data?.fetchBoard.boardAddress?.addressDetail
-                )}`}
-                color={"tomato"}
-                placement="topRight"
-              >
-                <S.TopIconLoc src="/location_icon.png" />
-              </Tooltip>
-            )}
+            {props.data?.fetchBoard.youtubeUrl !== null &&
+              props.data?.fetchBoard.youtubeUrl !== undefined && (
+                <Tooltip
+                  title={`${String(props.data?.fetchBoard.youtubeUrl)}`}
+                  color={"tomato"}
+                >
+                  <S.TopIconLink src="/link_icon.png" />
+                </Tooltip>
+              )}
+            {props.data?.fetchBoard.boardAddress?.address !== undefined &&
+              props.data?.fetchBoard.boardAddress?.address !== null && (
+                <Tooltip
+                  title={`${String(
+                    props.data?.fetchBoard.boardAddress?.address
+                  )} ${String(
+                    props.data?.fetchBoard.boardAddress?.addressDetail
+                  )}`}
+                  color={"tomato"}
+                  placement="topRight"
+                >
+                  <S.TopIconLoc src="/location_icon.png" />
+                </Tooltip>
+              )}
           </S.TopIcons>
         </S.Upper>
         <S.ContentsWrap>
@@ -60,7 +62,7 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
             <S.VideoBox>
               <ReactPlayer
                 className="react-player"
-                url={`${String(props.data?.fetchBoard.youtubeUrl)}`}
+                url={`${String(props.data?.fetchBoard.youtubeUrl ?? "")}`}
                 playing={false}
                 muted={true}
                 controls={true}

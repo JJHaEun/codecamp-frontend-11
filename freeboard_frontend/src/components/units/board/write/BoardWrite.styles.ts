@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Modal } from "antd";
-import { IProps } from "./BoardWrite.types";
+import type { IProps } from "./BoardWrite.types";
 
 export const Addressmodal = styled(Modal)`
   .ant-modal-content {
@@ -27,7 +27,7 @@ export const AllBox = styled.div`
   width: 1200px;
   /* height: 1847px; */
 
-  margin: 100px;
+  margin: 100px 0;
   padding-top: 60px;
   padding-bottom: 100px;
   padding-left: 101px;

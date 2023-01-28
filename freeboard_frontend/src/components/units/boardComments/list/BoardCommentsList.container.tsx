@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, MouseEvent, useState } from "react";
-import {
+import type { ChangeEvent, MouseEvent } from "react";
+import { useState } from "react";
+import type {
   IQuery,
   IQueryFetchBoardCommentsArgs,
 } from "../../../../commons/types/generated/types";
@@ -11,26 +12,28 @@ import {
   FETCH_BOARD_COMMENTS,
 } from "./BoardCommentsList.queries";
 
-export default function BoardCommentsList() {
+export default function BoardCommentsList(): JSX.Element {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [boardCommentId, setBoardCommentId] = useState("");
+  const [boardCommentIdEdit, setBoardCommentIdEdit] = useState("");
+
   const [isOpen, setIsOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
 
-  const onClickCheckDelete = (event: MouseEvent<HTMLImageElement>) => {
+  const onClickCheckDelete = (event: MouseEvent<HTMLImageElement>): void => {
     setIsOpen(true);
     setBoardCommentId(event?.currentTarget.id);
   };
   const onChangeDeleteCommentsPassword = (
     event: ChangeEvent<HTMLInputElement>
-  ) => {
+  ): void => {
     setPassword(event.target.value);
   };
-  const onClickDeleteComment = () => {
-    deleteBoardComment({
+  const onClickDeleteComment = async (): Promise<void> => {
+    await deleteBoardComment({
       variables: { boardCommentId, password },
       refetchQueries: [
         {
@@ -41,12 +44,12 @@ export default function BoardCommentsList() {
     });
     setIsOpen(false);
   };
-  const onClickHideModal = () => {
+  const onClickHideModal = (): void => {
     setIsOpen(false);
-    return;
   };
-  const onClickEdit = () => {
-    setIsEdit((prev) => !prev);
+  const onClickEdit = (event: MouseEvent<HTMLSpanElement>): void => {
+    setIsEdit(true);
+    setBoardCommentIdEdit(event?.currentTarget.id);
   };
   const { data } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
@@ -67,6 +70,7 @@ export default function BoardCommentsList() {
         onClickHideModal={onClickHideModal}
         onClickEdit={onClickEdit}
         setIsEdit={setIsEdit}
+        boardCommentIdEdit={boardCommentIdEdit}
       />
     </>
   );

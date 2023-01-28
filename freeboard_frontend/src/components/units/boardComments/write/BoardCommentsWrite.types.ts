@@ -1,5 +1,5 @@
-import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
-import {
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import type {
   IBoardComment,
   IQuery,
 } from "../../../../commons/types/generated/types";
@@ -29,4 +29,5 @@ export interface IPropsBoardComments {
   el: IBoardComment;
   isEdit: boolean;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
+  boardCommentIdEdit: string;
 }

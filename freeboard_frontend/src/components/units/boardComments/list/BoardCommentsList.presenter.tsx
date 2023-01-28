@@ -1,16 +1,19 @@
-// import { getDate } from "../../../../commons/libraries/date";
-// import BoardComments from "../write/BoardCommentsWrite.container";
+import { getDate } from "../../../../commons/libraries/date";
+import BoardComments from "../write/BoardCommentsWrite.container";
 import * as S from "./BoardCommentsList.styles";
-import { IPropsBoardCommentsListUI } from "./BoardCommentsList.types";
-import BoardCommentsListItems from "./BoardCommentsListItems";
+import type { IPropsBoardCommentsListUI } from "./BoardCommentsList.types";
+// import BoardCommentsListItems from "./BoardCommentsListItems";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 
-export default function BoardCommentsListUI(props: IPropsBoardCommentsListUI) {
+export default function BoardCommentsListUI(
+  props: IPropsBoardCommentsListUI
+): JSX.Element {
   return (
     <S.CommentsListMain>
       <S.CommentsList>
         {props.data?.fetchBoardComments.map((el) => (
           <S.MainCommentList key={el._id}>
-            <BoardCommentsListItems
+            {/* <BoardCommentsListItems
               el={el}
               isEdit={props.isEdit}
               isOpen={props.isOpen}
@@ -22,19 +25,11 @@ export default function BoardCommentsListUI(props: IPropsBoardCommentsListUI) {
               onClickHideModal={props.onClickHideModal}
               onClickEdit={props.onClickEdit}
               setIsEdit={props.setIsEdit}
-            />
-          </S.MainCommentList>
-        ))}
-      </S.CommentsList>
-    </S.CommentsListMain>
-  );
-}
-
-{
-  /* {props.isOpen && (
+            /> */}
+            {props.isOpen && (
               <S.DeleteCommentModal
                 title="댓글 삭제"
-                visible={true}
+                open={true}
                 onOk={props.onClickDeleteComment}
                 onCancel={props.onClickHideModal}
                 okText="삭제"
@@ -47,25 +42,40 @@ export default function BoardCommentsListUI(props: IPropsBoardCommentsListUI) {
                 />
               </S.DeleteCommentModal>
             )}
-
-            <div>
-              <S.CommentsListWriter>{el.writer}</S.CommentsListWriter>
-              <S.CommentsDateAndBt>
-                <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>
-                <S.DeletOrEditBt>
-                  <S.DeleteImg
-                    src="/delete_icon.png"
-                    onClick={props.onClickCheckDelete}
-                    id={el._id}
-                  />
-                  <S.EditImg onClick={props.onClickEdit} id={el._id} />
-                </S.DeletOrEditBt>
-              </S.CommentsDateAndBt>
-            </div>
-            <S.DefaultStar allowHalf disabled value={el.rating} />
-            <S.CommentContens>{el.contents}</S.CommentContens>
+            {!props.isEdit && (
+              <>
+                <div>
+                  <S.CommentsListWriter>{el.writer}</S.CommentsListWriter>
+                  <S.CommentsDateAndBt>
+                    <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>
+                    <S.DeletOrEditBt>
+                      <S.DeleteImg
+                        src="/delete_icon.png"
+                        alt="삭제아이콘"
+                        onClick={props.onClickCheckDelete}
+                        id={el._id}
+                      />
+                      <S.EditButton onClick={props.onClickEdit} id={el._id}>
+                        <S.EditIcon icon={faPenToSquare} />
+                      </S.EditButton>
+                    </S.DeletOrEditBt>
+                  </S.CommentsDateAndBt>
+                </div>
+                <S.DefaultStar allowHalf disabled value={el.rating} />
+                <S.CommentContens>{el.contents}</S.CommentContens>
+              </>
+            )}
+            {props.isEdit && (
+              <BoardComments
+                el={el}
+                isEdit={true}
+                setIsEdit={props.setIsEdit}
+                boardCommentIdEdit={props.boardCommentIdEdit}
+              />
+            )}
           </S.MainCommentList>
         ))}
-        {props.isEdit && (
-          <BoardComments el={el} isEdit={true} setIsEdit={props.setIsEdit} />*/
+      </S.CommentsList>
+    </S.CommentsListMain>
+  );
 }

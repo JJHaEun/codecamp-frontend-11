@@ -2,7 +2,7 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import * as S from "./BoardWrite.styles";
 import type { IBoardWriteUI } from "./BoardWrite.types";
 
-export default function BoardWriteUI(props: IBoardWriteUI) {
+export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
   return (
     <S.AllBox>
       {props.contextHolder}
@@ -21,7 +21,7 @@ export default function BoardWriteUI(props: IBoardWriteUI) {
             placeholder="이름을 적어주세요"
             onChange={props.onChangeWriter}
             defaultValue={props.data?.fetchBoard.writer ?? ""}
-            readOnly={!!props.data?.fetchBoard.writer}
+            readOnly={Boolean(props.data?.fetchBoard.writer)}
           />
         </S.WritePwArr>
         <S.WritePwArr>
@@ -60,9 +60,10 @@ export default function BoardWriteUI(props: IBoardWriteUI) {
             type="text"
             placeholder="07250"
             readOnly
-            defaultValue={
-              props.zipcode ||
-              (props.data?.fetchBoard.boardAddress?.zipcode ?? "")
+            value={
+              props.zipcode !== ""
+                ? props.zipcode
+                : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
             }
           />
           <S.SearchButton onClick={props.ToggleModal}>
@@ -73,16 +74,16 @@ export default function BoardWriteUI(props: IBoardWriteUI) {
         <S.LongInputAddress
           type="text"
           value={
-            props.address ||
-            (props.data?.fetchBoard.boardAddress?.address ?? "")
+            props.address !== ""
+              ? props.address
+              : props.data?.fetchBoard.boardAddress?.address ?? ""
           }
         />
         <S.LongInputAddress
           type="text"
           onChange={props.onChangeAddresssDetail}
           defaultValue={
-            props.data?.fetchBoard.boardAddress?.addressDetail ??
-            props.addressDetail
+            props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
           }
         />
       </S.AddressArr>

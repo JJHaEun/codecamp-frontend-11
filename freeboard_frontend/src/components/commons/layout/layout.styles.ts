@@ -1,35 +1,73 @@
 import styled from "@emotion/styled";
 
 export const HeaderWrap = styled.div`
-  height: 50px;
-  background-color: salmon;
+  height: 80px;
+  background-color: indianred;
 `;
 export const BannerWrap = styled.div`
   height: 400px;
-  background-color: peachpuff;
+  /* background-color: lavenderblush; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .slick-slider {
+    width: 800px;
+    height: 360px;
+    .slick-list {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .slick-arrow {
+    /* width: 800px; */
+  }
+  .slick-prev:before {
+    /* color: palevioletred; */
+  }
+  .slick-next:before {
+    /* color: palevioletred; */
+  }
+  ul {
+    margin-bottom: 5px;
+  }
+
+  ul li button:before {
+    color: indianred;
+  }
+  .slick-dots li.slick-active button:before {
+    color: darkred;
+  }
 `;
+
 export const NavWrap = styled.div`
-  height: 80px;
-  background-color: tomato;
+  height: 100px;
+  background-color: palevioletred;
 `;
 export const MainWrap = styled.div`
   display: flex;
-  /* position: relative; */
+  justify-content: center;
+  position: relative;
 `;
 
 export const SideBarWrap = styled.div`
-  width: 20%;
+  width: 10%;
   height: 500px;
-  border: 1px solid crimson;
-  margin-top: 20px;
-  position: fixed;
-  /* top: -div.height; */
+  border: 2px solid coral;
+  border-radius: 3px;
+  background-color: snow;
+  margin: 80px 0;
+  position: sticky;
+  top: 150px;
+  left: 10px;
   /* width: 100%; */
   /* transition: top 0.5s; */
 `;
 export const PageWrap = styled.div`
-  width: 80%;
+  width: 90%;
+  padding-left: 30px;
 `;
 export const FooterWarp = styled(HeaderWrap)`
-  background-color: indianred;
+  margin-top: 50px;
 `;
