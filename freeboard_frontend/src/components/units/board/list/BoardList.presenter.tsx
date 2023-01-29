@@ -50,7 +50,7 @@ export default function BoardListUI(props: IPropsBoardListUI): JSX.Element {
             onClick={props.onClickDetailPage}
           >
             <S.BoardNumber>
-              {el._id.substring(el._id.length - 4, el._id.length)}
+              {el._id.toUpperCase().substring(el._id.length - 4, el._id.length)}
             </S.BoardNumber>
             <S.BoardTitle>{el.title}</S.BoardTitle>
             <S.BoardWriter>{el.writer}</S.BoardWriter>

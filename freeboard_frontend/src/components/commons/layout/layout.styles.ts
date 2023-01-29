@@ -23,12 +23,11 @@ export const BannerWrap = styled.div`
   .slick-arrow {
     /* width: 800px; */
   }
-  .slick-prev:before {
-    /* color: palevioletred; */
-  }
+  .slick-prev:before,
   .slick-next:before {
-    /* color: palevioletred; */
+    color: palevioletred;
   }
+
   ul {
     margin-bottom: 5px;
   }

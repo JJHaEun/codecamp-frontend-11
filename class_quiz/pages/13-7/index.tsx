@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import { useState } from "react";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 
-export default function ModalAndAddressPage() {
+export default function ModalAndAddressPage(): JSX.Element {
   const [open, setOpen] = useState(false);
   const [address, setAddress] = useState("");
   const onClickToggle = (): void => {

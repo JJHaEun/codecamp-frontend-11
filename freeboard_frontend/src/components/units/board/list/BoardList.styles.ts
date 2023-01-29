@@ -138,7 +138,6 @@ export const ListWrap = styled.div`
   display: flex;
   width: 1200px;
   flex-direction: column;
-
   border-top: 2px solid crimson;
 `;
 
@@ -148,22 +147,19 @@ export const TableLine = styled.div`
   display: flex;
   flex-direction: row;
   padding: 15px;
-
   text-align: center;
   border-bottom: 1px solid crimson;
-
   font-size: 18px;
   font-weight: 500;
 `;
 export const BoardNumberTitle = styled.div`
   width: 10%;
-  text-align: center;
 `;
 export const BoardMainTitle = styled(BoardNumberTitle)`
-  width: 60%;
+  width: 50%;
 `;
 export const BoardWriterTitle = styled(BoardNumberTitle)`
-  width: 20%;
+  width: 30%;
 `;
 export const BoardDateTitle = styled(BoardNumberTitle)``;
 
@@ -183,7 +179,6 @@ export const BoardTitle = styled(BoardMainTitle)`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
   font-size: 16px;
 `;
 export const BoardWriter = styled(BoardWriterTitle)`

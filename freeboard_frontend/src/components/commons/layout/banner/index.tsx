@@ -26,6 +26,9 @@ export default function LayoutBanner(): JSX.Element {
           <div>
             <img src="/banner_img_3.png" />
           </div>
+          <div>
+            <img src="/banner_img_4.png" />
+          </div>
         </Slider>
       </BannerWrap>
     </>
