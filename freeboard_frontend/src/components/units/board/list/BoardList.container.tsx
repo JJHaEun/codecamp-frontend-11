@@ -1,18 +1,13 @@
-import { useQuery } from "@apollo/client";
-import { FETCH_BOARDS } from "./BoardList.queries";
 import BoardListUI from "./BoardList.presenter";
 import { useRouter } from "next/router";
 import type { MouseEvent } from "react";
-import type {
-  IQuery,
-  IQueryFetchBoardsArgs,
-} from "../../../../commons/types/generated/types";
 
-export default function BoardList(): JSX.Element {
+import type { IBoardListProps } from "./BoardList.types";
+// import PagiNationPage from "../../../commons/pagination/boardsPagination/pagination.container";
+
+export default function BoardList(props: IBoardListProps): JSX.Element {
   const router = useRouter();
-  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS
-  );
+
   const onClickDetailPage = (event: MouseEvent<HTMLDivElement>): void => {
     void router.push(`/boards/${event.currentTarget.id}`);
   };
@@ -23,9 +18,10 @@ export default function BoardList(): JSX.Element {
   return (
     <>
       <BoardListUI
-        data={data}
+        data={props.data}
         onClickDetailPage={onClickDetailPage}
         onClickCreateBoard={onClickCreateBoard}
+        refetch={props.refetch}
       />
     </>
   );

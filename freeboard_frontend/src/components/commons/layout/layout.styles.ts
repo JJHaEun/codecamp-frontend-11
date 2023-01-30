@@ -21,7 +21,10 @@ export const BannerWrap = styled.div`
   }
 
   .slick-arrow {
-    /* width: 800px; */
+    display: flex;
+    z-index: 10;
+    width: 1vw;
+    height: 1vw;
   }
   .slick-prev:before,
   .slick-next:before {
@@ -64,9 +67,11 @@ export const SideBarWrap = styled.div`
   /* transition: top 0.5s; */
 `;
 export const PageWrap = styled.div`
-  width: 90%;
+  width: calc(90%-10%);
+
   padding-left: 30px;
 `;
 export const FooterWarp = styled(HeaderWrap)`
   margin-top: 50px;
+  height: 200px;
 `;

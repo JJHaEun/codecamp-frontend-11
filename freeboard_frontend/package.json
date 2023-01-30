@@ -47,5 +47,8 @@
     "eslint-plugin-react": "^7.32.1",
     "prettier": "2.8.3",
     "typescript": "*"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2"
   }
 }

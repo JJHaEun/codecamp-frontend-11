@@ -1,5 +1,6 @@
 import { getDate } from "../../../../commons/libraries/date";
 import type { IBoard } from "../../../../commons/types/generated/types";
+import PagiNationPage from "../../../commons/pagination/boardsPagination/pagination.container";
 import * as S from "./BoardList.styles";
 import type { IPropsBoardListUI } from "./BoardList.types";
 
@@ -63,6 +64,7 @@ export default function BoardListUI(props: IPropsBoardListUI): JSX.Element {
           글쓰기
         </S.CreateBoardBt>
       </S.ButtonWrap>
+      <PagiNationPage refetch={props.refetch} />
     </S.BoardListMain>
   );
 }

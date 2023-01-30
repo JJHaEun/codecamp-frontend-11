@@ -1479,10 +1479,55 @@ function solution(num) {
 // 문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수, solution을 완성해주세요.
 // s는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자보다 작은 것으로 간주합니다.
 
+function solution(s) {
+  let answer = '';
+answer = s.split("").sort((a,b)=> {
+  if (a > b) return -1;
+  else if (b > a) return 1;
+  else return 0; // 문자열 내림차순 정렬시 필요한것.
+})
+  return answer.join("");
+}
 
+// ======================================
 
-
-
+function solution(s) {
+  const answer = [];
+  //sort사용시 배열필요
+  // s.splite("") // 메서드를 사용해 쪼개는 방법
+for(let i = 0 ; i < s.length ; i++){
+      answer.push(s[i]) 
+  // 배열로 쪼개넣는법
+   }
+  answer.sort((a,b)=>{
+      return a > b ? -1 :  1// a가 b보다 크다면 앞으로 보내고 작으면 뒤로보냄.
+  })
+  return answer.join("") // 배열을 문자열로 바꿔주는 메서드
+  // 문자열에는 각 번호가 존재함. => 유니코드 또는 아스키코드라고 불림.
+  // "a".charCodeAt()을 사용하면 해당 아스키코드를 가져올 수 있음
+  // 따라서 문자끼리 `>` `<`으로 비교한다면 유니코드로 변경되어 true나 false를 ...
+  //sort자채는 오름차순 으로 정렬해주니 a,와 b를 넘겨줄 필요는 없으나, 숫자를 정렬하거나 명시적으로 표현하기 위해서는 넘겨줌
+  // arr.sort((a,b)=>{
+  // return b - a // 숫자에서 오름차순 정렬할때 사용.
+// })
+  // a를 찍었을경우 대문자가.b는 소문자가 나오는데..
+  //return a> b ? -1 : 1 // a가 b보다클때.. 
+  // 숫자를 정렬시에도 사용가능하다.
+}
+  // 배열에 숫자뿐만아니라 문자열도 포함되어있을경우도 있을 수 있기에 비교시에는 삼항연산자를 사용하기
+// ======================================
+// 메서드 사용하기
+function solution(s) {
+  const answer = s.split("").sort((a,b)=>{
+      return a > b ? -1 : 1 // 내림차순 정렬(크면 뒤로 보내고, 작으면 앞으로)
+  }).join("");
+ return answer
+//   answer.sort((a,b)=>{
+//       return a > b ? -1 :  1// a가 b보다 크다면 앞으로 보내고 작으면 뒤로보냄.
+//   })
+//   return answer.join("")
+// // 배열에 숫자뿐만아니라 문자열도 포함되어있을경우도 있을 수 있기에 비교시에는 삼항연산자를 사용하기
+}
 
 // =============================================
 
@@ -1490,7 +1535,32 @@ function solution(num) {
 // array의 각 element 중 divisor로 나누어 떨어지는 값을 오름차순으로 정렬한 배열을 반환하는 함수, solution을 작성해주세요.
 // divisor로 나누어 떨어지는 element가 하나도 없다면 배열에 -1을 담아 반환하세요.
 
+function solution(arr, divisor) {
+  const answer =[]; // 나누어떨어지는 숫자만 담음.
+  for(let i = 0 ; i < arr.length;i++){
+      if(arr[i] % divisor === 0){
+         answer.push(arr[i])
+      }
+     
+  }
+ return answer.length === 0 ? [-1] : answer.sort((a,b)=>{
+  // 그냥 sort()만 사용하면 앞자리를 기준으로 비교하기에 오름차순인지 내림차순인지 명시필요.
+      return a > b ? 1 : -1
+     // 오름차순 정렬(return a - b)와 동일.. // 숫자와 문자가 섞여있을 경우도 있을 수 있기에 a - b보다는 안전한 이 방법을 사용.
+       //a가 b보다 크다면 뒤로보내고 아니라면 앞으로 보낸다.
+ })
+}
+// ======================================
+ 
+// 메서드 사용. 배열안에 내가 원하는결과만 담아온다. => filter사용.
 
-
-
-
+function solution(arr, divisor) {
+  const answer =arr.filter((num)=>{
+    return num % divisor === 0
+  }).sort((a,b)=>{
+    return a > b ? 1 : -1
+  })
+ return answer.length === 0 ? [-1] : answer // 빈배열의 경우 : 빈배열이 아닐경우
+ // 얘도 같은 방법
+//   return answer.length === 0 ? [-1] : answer.sort((a,b)=> a > b ? 1 : -1)
+}
