@@ -23,7 +23,8 @@ export const NameDate = styled.div`
 export const Upper = styled.div`
   display: flex;
   gap: 718px;
-  width: 100% - 718px;
+  width: 100%;
+  /* width: 996px; */
   border-bottom: 1px solid lightcoral;
 
   padding-bottom: 20px;
@@ -64,23 +65,28 @@ export const Title = styled.div`
   font-size: 36px;
   font-weight: 700;
   line-height: 53px;
+  word-break: break-word;
+  white-space: pre-wrap;
 `;
 export const MainWrap = styled.div`
   padding-top: 40px;
 `;
 export const ContentsPhoto = styled.div`
-  width: 996px;
+  /* width: 996px; */
+  width: 100%;
   /* height: 480px; //후에auto로할것 */
   margin-top: 40px;
   margin-bottom: 110px;
 `;
 export const ContentsImg = styled.img`
-  width: 996px;
+  /* width: 996px; */
+  width: 100%;
   height: 480px;
 `;
 export const MainContents = styled.div`
   /* padding-top: 40px; */
-  width: 996px;
+  /* width: 996px; */
+  width: 100%;
   font-weight: 400;
   font-size: 16px;
   word-wrap: break-word;

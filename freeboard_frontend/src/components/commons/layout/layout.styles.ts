@@ -5,7 +5,6 @@ export const HeaderWrap = styled.div`
   background-color: indianred;
 `;
 export const BannerWrap = styled.div`
-  height: 400px;
   /* background-color: lavenderblush; */
   display: flex;
   justify-content: center;
@@ -32,7 +31,7 @@ export const BannerWrap = styled.div`
   }
 
   ul {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
   }
 
   ul li button:before {

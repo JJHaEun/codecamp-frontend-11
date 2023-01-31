@@ -173,9 +173,8 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
       return;
     }
     if (
-      title !== "" &&
+      title === "" &&
       contents === "" &&
-      youtubeUrl === "" &&
       zipcode === "" &&
       address === "" &&
       addressDetail === ""
@@ -185,15 +184,6 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
         content: "수정사항이 없습니다",
       });
       return;
-      // if (confirm("수정하시겠습니까?")) {
-      //   alert("수정사항이 없습니다");
-      //   return;
-      // } else if (!password) {
-      //   alert("비밀번호를 입력해주세요");
-      // } else {
-      //   alert("수정되었습니다");
-      //   return router.push(`/boards`);
-      // }
     }
     const updateBoardInput: ImyUpdate = {};
     if (title !== "") updateBoardInput.title = title;
