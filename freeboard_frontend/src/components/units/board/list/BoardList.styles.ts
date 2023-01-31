@@ -142,24 +142,23 @@ export const ListWrap = styled.div`
 `;
 
 export const TableLine = styled.div`
-  /* border-top: 1px solid #bdbdbd; */
-  /* background-color: red; */
   display: flex;
   flex-direction: row;
   padding: 15px;
-  text-align: center;
   border-bottom: 1px solid crimson;
   font-size: 18px;
   font-weight: 500;
 `;
 export const BoardNumberTitle = styled.div`
-  width: 10%;
+  width: 20%;
+  text-align: center;
 `;
 export const BoardMainTitle = styled(BoardNumberTitle)`
-  width: 50%;
+  width: 40%;
+  text-align: left;
 `;
 export const BoardWriterTitle = styled(BoardNumberTitle)`
-  width: 30%;
+  width: 40%;
 `;
 export const BoardDateTitle = styled(BoardNumberTitle)``;
 

@@ -22,6 +22,8 @@ export const CommentsList = styled.div`
   width: 1198px;
   padding-bottom: 30px;
   padding-top: 30px;
+  height: 600px;
+  overflow: auto;
 `;
 
 export const DeletOrEditBt = styled.div`
@@ -72,6 +74,11 @@ export const DeleteCommentModal = styled(Modal)`
   }
   .ant-btn-primary {
     background-color: coral;
+  }
+  input:nth-of-type(1) {
+    outline: none;
+    margin-top: 5px;
+    border-color: coral;
   }
 `;
 export const CommentContens = styled.div`

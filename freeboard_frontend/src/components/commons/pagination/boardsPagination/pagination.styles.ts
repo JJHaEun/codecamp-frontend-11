@@ -12,6 +12,7 @@ export const PaginationWrap = styled.div`
 export const PageNum = styled.span`
   margin: 20px;
   color: ${(props: IPageStyleProps) => (props.isActive ? "orangered" : "")};
+  font-weight: ${(props: IPageStyleProps) => (props.isActive ? "bold" : "")};
   :hover {
     cursor: pointer;
   }

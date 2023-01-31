@@ -23,7 +23,7 @@ export const NameDate = styled.div`
 export const Upper = styled.div`
   display: flex;
   gap: 718px;
-  width: 996px;
+  width: 100% - 718px;
   border-bottom: 1px solid lightcoral;
 
   padding-bottom: 20px;

@@ -29,5 +29,7 @@ export interface IPropsBoardComments {
   el: IBoardComment;
   isEdit: boolean;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
-  boardCommentIdEdit: string;
+  // boardCommentIdEdit: string;
+  boardCommentId: string;
+  id: any;
 }

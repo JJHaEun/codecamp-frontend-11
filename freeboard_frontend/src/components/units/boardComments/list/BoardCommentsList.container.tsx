@@ -16,12 +16,17 @@ export default function BoardCommentsList(): JSX.Element {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [boardCommentId, setBoardCommentId] = useState("");
-  const [boardCommentIdEdit, setBoardCommentIdEdit] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
 
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+
+  const { data, fetchMore } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_BOARD_COMMENTS, {
+    variables: { boardId: String(router.query.boardId) },
+  });
 
   const onClickCheckDelete = (event: MouseEvent<HTMLImageElement>): void => {
     setIsOpen(true);
@@ -47,30 +52,41 @@ export default function BoardCommentsList(): JSX.Element {
   const onClickHideModal = (): void => {
     setIsOpen(false);
   };
-  const onClickEdit = (event: MouseEvent<HTMLSpanElement>): void => {
-    setIsEdit(true);
-    setBoardCommentIdEdit(event?.currentTarget.id);
-  };
-  const { data } = useQuery<
-    Pick<IQuery, "fetchBoardComments">,
-    IQueryFetchBoardCommentsArgs
-  >(FETCH_BOARD_COMMENTS, {
-    variables: { boardId: String(router.query.boardId) },
-  });
 
+  const onLoadMore = (): void => {
+    console.log(data);
+    if (data === undefined) return;
+    void fetchMore({
+      variables: {
+        page: Math.ceil((data.fetchBoardComments.length ?? 10) / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.fetchBoardComments === undefined) {
+          return {
+            fetchBoardComments: [...prev.fetchBoardComments],
+          };
+        }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
   return (
     <>
       <BoardCommentsListUI
         data={data}
-        isEdit={isEdit}
         isOpen={isOpen}
         onClickCheckDelete={onClickCheckDelete}
         onChangeDeleteCommentsPassword={onChangeDeleteCommentsPassword}
         onClickDeleteComment={onClickDeleteComment}
         onClickHideModal={onClickHideModal}
-        onClickEdit={onClickEdit}
-        setIsEdit={setIsEdit}
-        boardCommentIdEdit={boardCommentIdEdit}
+        boardCommentId={boardCommentId}
+        setBoardCommentId={setBoardCommentId}
+        onLoadMore={onLoadMore}
       />
     </>
   );

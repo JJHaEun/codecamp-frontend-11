@@ -73,6 +73,7 @@ export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
 
         <S.LongInputAddress
           type="text"
+          readOnly
           value={
             props.address !== ""
               ? props.address

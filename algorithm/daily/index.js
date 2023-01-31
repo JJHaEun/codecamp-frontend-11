@@ -1564,3 +1564,86 @@ function solution(arr, divisor) {
  // 얘도 같은 방법
 //   return answer.length === 0 ? [-1] : answer.sort((a,b)=> a > b ? 1 : -1)
 }
+
+
+
+// ===================================
+// 정수 제곱근 판별
+// 임의의 양의 정수 n에 대해, n이 어떤 양의 정수 x의 제곱인지 아닌지 판단하려 합니다.
+// n이 양의 정수 x의 제곱이라면 x+1의 제곱을 리턴하고, n이 양의 정수 x의 제곱이 아니라면 -1을 리턴하는 함수를 완성하세요.
+
+function solution(n) {  
+  return !((Math.sqrt(n) % 1)) ? Math.pow(Math.sqrt(n)+1,2) :-1
+
+}
+
+
+// ==========================
+function solution(n) {
+  for(let i = 1 ; i  <= n ; i++){
+      console.log(i,i * i,n)
+      //n까지 반복해 제곱근을 찾음. 
+      if(i * i === n ){
+          //제곱근을 찾은경우
+          answer = i + 1; // 제곱근에 1을 더해준다.
+          // 이 값을 제곱해 리턴한다.
+          return answer * answer
+      }
+  }
+   
+   // 제곱근을 찾지 못한경우(반복문 돌려도 찾지못했을때)
+   return -1
+}
+
+// ====================================
+function solution(n) {
+  let answer = -1 /// 초기값에 -1을 넣음
+ for(let i = 1 ; i  <= n ; i++){
+     console.log(i,i * i,n)
+     //n까지 반복해 제곱근을 찾음. 
+     if(i * i === n ){
+         //제곱근을 찾은경우
+         answer = i + 1; // 제곱근에 1을 더해준다.
+         // 이 값을 제곱해 리턴한다.
+         return answer * answer
+     }
+ }
+  
+  // 제곱근을 찾지 못한경우(반복문 돌려도 찾지못했을때)
+  return answer
+}
+
+
+// ====================================
+
+// while문 사용해보기 ==> 현재 for문보다 효율성이 더 좋음을 알 수 있음.
+
+function solution(n) {
+  let answer = 1 // 최초식
+  while(answer * answer < n){ // 조건식
+      answer++ // 증감식
+  }
+   return answer * answer === n
+   ? (answer + 1) *(answer + 1) // 제곱근을 찾은경우
+   : -1 //제곱근 찾지 못한경우
+}
+
+
+// ================================
+// 메서드 사용 // 속도 빠름.
+function solution(n) {
+  let answer = Math.sqrt(n)  // ==>  n의 제곱근을찾음
+        // 3의 경우 제곱근이 소수로나옴 => 소수점이 나오면 제곱근이 아니라고봄
+  if(Number.isInteget(answer)){ // 정수임을 판별함
+      answer++ // 숫자 하나를 더해주고
+      return answer * answer
+  }
+   return -1 // Number.isInteger => 가 flase인 경우를 봄. 
+// 정수가 아니다 ====> 제곱근이 아니다
+        // 정수인지 확인하기. // true, false로 나옴.
+        // console.log(answer,Number.isInteger(answer))
+}
+
+
+// 2 ** 2 => 앞에있는 숫자를 뒤에있는 숫자만큼 제곱하갰다는 의미
+// 2 ** 5 => 2의 5제곱

@@ -71,7 +71,7 @@ export default function BoardComments(props: IPropsBoardComments): JSX.Element {
   const onClickCreateBoardComment = async (): Promise<void> => {
     if (writer !== "" && password !== "" && contents !== "") {
       try {
-        await createBoardComment({
+        const result = await createBoardComment({
           variables: {
             boardId: String(router.query.boardId),
             createBoardCommentInput: {
@@ -92,6 +92,11 @@ export default function BoardComments(props: IPropsBoardComments): JSX.Element {
         setRating(0);
         setPassword("");
         setContents("");
+        window.scrollTo({
+          top: 2500,
+          behavior: "smooth",
+        });
+        console.log(result);
       } catch (error) {
         if (error instanceof Error) Modal.error({ content: error.message });
       }
@@ -101,6 +106,7 @@ export default function BoardComments(props: IPropsBoardComments): JSX.Element {
   const updateBoardCommentInput: IMyupdateComment = {};
   if (contents !== "") updateBoardCommentInput.contents = contents;
   if (rating !== 0) updateBoardCommentInput.rating = rating;
+
   const onClickEditComment = async (): Promise<void> => {
     if (password === "") {
       Modal.info({ content: "비밀번호를 입력해주세요" });
@@ -119,7 +125,7 @@ export default function BoardComments(props: IPropsBoardComments): JSX.Element {
       await updateBoardComment({
         variables: {
           password,
-          boardCommentId: props.boardCommentIdEdit,
+          boardCommentId: props.id,
           updateBoardCommentInput,
         },
         refetchQueries: [

@@ -31,14 +31,16 @@ export default function PagiNationPage(
   const onClickMovePrv = (): void => {
     setDisAbledBt(false);
     if (startPage === 1) return;
-    setStartPage(startPage - 10);
-    void props.refetch({ page: startPage - 10 });
+    setStartPage((prev) => prev - 10);
+    setNowPage((prev) => prev + 10);
+    void props.refetch({ page: nowPage - 10 });
   };
 
   const onClickMoveNext = (): void => {
     if (startPage + 10 <= lastPage) {
-      setStartPage(startPage + 10);
-      void props.refetch({ page: startPage + 10 });
+      setStartPage((prev) => prev + 10);
+      setNowPage((prev) => prev + 10);
+      void props.refetch({ page: nowPage + 10 });
     }
     if (startPage + 10 > lastPage - endPage) {
       setDisAbledBt(true);
