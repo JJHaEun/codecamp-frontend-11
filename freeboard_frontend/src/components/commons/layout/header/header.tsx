@@ -16,14 +16,13 @@ export default function LayoutHeader(): JSX.Element {
   return (
     <>
       <HeaderWrap>
-        <span>
-          <h1>느린하루</h1>
-          {HADDER_MENU_LEFT.map((el) => (
-            <span key={el.move}>
-              <span>{el.name}</span>
-            </span>
-          ))}
-        </span>
+        <h1>느린하루</h1>
+        {HADDER_MENU_LEFT.map((el) => (
+          <span key={el.move}>
+            <span>{el.name}</span>
+          </span>
+        ))}
+
         <span>
           {HADDER_MENU_RIGHT.map((el) => (
             <span key={el.move}>

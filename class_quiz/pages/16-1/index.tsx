@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import InfiniteScroll from "react-infinite-scroller";
 // import InfiniteScroll from "react-infinite-scroller";
 import type {
   IQuery,
@@ -46,8 +47,8 @@ export default function InfinitiScroll(): JSX.Element {
           <S.Title>제목</S.Title>
           <S.Writer>작성자</S.Writer>
         </S.Row>
-        <div>
-          <S.InfiniteWrap
+        <S.InfiniteWrap>
+          <InfiniteScroll
             pageStart={0}
             loadMore={onLoadMore}
             hasMore={true}
@@ -60,8 +61,8 @@ export default function InfinitiScroll(): JSX.Element {
                 <S.Writer>{el.writer}</S.Writer>
               </S.Row>
             )) ?? <div></div>}
-          </S.InfiniteWrap>
-        </div>
+          </InfiniteScroll>
+        </S.InfiniteWrap>
       </S.ListWrap>
     </>
   );

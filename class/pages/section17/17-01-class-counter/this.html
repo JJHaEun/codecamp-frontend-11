@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>this의 이해</title>
+  </head>
+  <script>
+    class ClassCounterPage {
+      count = 10;
+
+      onClickCountUp = () => {
+        // 방법 1 화살표함수로 변경하는 방법
+        // 눈에보이는 이것이 this라고 정해주려면 화살표함수를 사용
+        console.log(this.count);
+      };
+
+      render() {
+        const button = document.createElement("button"); // JSX는 내부적으로 이런식으로 바뀌어짐. 버튼 태그를 만들어줘
+        button.innerText = "카운트 올리기!!";
+        button.addEventListener("click", this.onClickCountUp.bind(this)); // 방법 2. .bind(this)를 통해 연결시키는 방법
+        document.body.appendChild(button); // html문서의 자식에 button을 추가
+      }
+    }
+    window.onload = () => {
+      // 브라우저가 로드가 되면
+      const counter = new ClassCounterPage();
+      counter.render();
+    };
+  </script>
+  <body></body>
+</html>

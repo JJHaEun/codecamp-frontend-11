@@ -54,7 +54,6 @@ export default function BoardCommentsList(): JSX.Element {
   };
 
   const onLoadMore = (): void => {
-    console.log(data);
     if (data === undefined) return;
     void fetchMore({
       variables: {

@@ -1,5 +1,5 @@
 import LayoutBanner from "./banner";
-import LayoutHeader from "./header";
+import LayoutHeader from "./header/header";
 import LayoutNav from "./navigation";
 import LayoutSideBar from "./sidebar";
 import { MainWrap, PageWrap } from "./layout.styles";

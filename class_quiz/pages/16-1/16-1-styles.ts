@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import InfiniteScroll from "react-infinite-scroller";
 
 export const Wrap = styled.div`
   display: flex;
@@ -23,7 +22,7 @@ export const Title = styled(BoardN)`
 export const Writer = styled(BoardN)`
   width: 20%;
 `;
-export const InfiniteWrap = styled(InfiniteScroll)`
+export const InfiniteWrap = styled.div`
   height: 500px;
   overflow: auto;
 `;

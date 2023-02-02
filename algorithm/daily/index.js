@@ -1647,3 +1647,111 @@ function solution(n) {
 
 // 2 ** 2 => 앞에있는 숫자를 뒤에있는 숫자만큼 제곱하갰다는 의미
 // 2 ** 5 => 2의 5제곱
+
+// =====================
+// K번째 수
+// 배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.
+// 예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면
+// array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.
+// 1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.
+// 2에서 나온 배열의 3번째 숫자는 5입니다.
+// 배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때,
+//  commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를
+  // 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+
+function solution(array, commands) {
+  const answer = [];
+  
+  for(let idx=0 ; idx < commands.length ; idx++){
+      // idx 로는 각 인덱스를 뽑아옴. 각 인덱스로 접근하면 그 안의 해당 배열을 가져올 수 있음
+      const i = commands[idx][0]
+      const j = commands[idx][1]
+      const k = commands[idx][2]
+      
+      // commands[idx][0] => i
+      // commands[idx][1] => j
+      // commands[idx][2] => k
+  
+      const result = array.slice(i-1,j).sort((a,b)=>{
+        return a > b ? 1: -1 // 오름차순정렬
+          // return a - b 과 동일
+      })
+      // i는 차례. 따라서 인덱스값으로 변환시켜야 slice사용가능. 차례-1 이 인덱스값.
+      // 뒤에 인자를 제외한 앞에까지를 의미
+             answer.push(result[k-1])// k번째를 인덱스로 접근하기위해 1을 뺌
+      }
+  return answer
+}
+
+
+// ===============================
+// 메서드 사용해보기
+// 배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.
+// 예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면
+// array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.
+// 1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.
+// 2에서 나온 배열의 3번째 숫자는 5입니다.
+// 배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때,
+// commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+
+
+function solution(array, commands) {// map은 새로운 배열을 리턴. forEach는 undefined를 리턴
+  const answer = commands.map((el)=>{
+    const result = array.slice(el[0]-1,el[1]).sort((a,b)=>{
+        return a > b ? 1 :  -1
+    })
+    return result[el[2]-1]
+      
+  })
+  return answer
+}
+
+
+
+/// ================================
+// 행렬의 덧셈
+
+// 행렬의 덧셈은 행과 열의 크기가 같은
+//  두 행렬의 같은 행, 같은 열의 값을 서로 더한 결과가 됩니다.
+// 2개의 행렬 arr1과 arr2를 입력받아, 행렬 덧셈의 결과를 반환하는 함수, solution을 완성해주세요.
+
+function solution(arr1, arr2) {
+
+    
+  const answer = [[]]
+  for(let i = 0 ; i < arr1.length ; i++){
+      for(let j = 0 ; j < arr1[i].length; j++){
+       const sum= arr1[i][j]+arr2[i][j] 
+        
+          
+          if(answer[i] === undefined){
+              // 배열이 없는경우 // 새로 만듬.
+              // answer[i] = [] // 직접 데이터를 수정
+              answer.push([])// 같은방법임
+          }
+          // answer[i][j] = sum // 배열에 데이터를 직접 할당.
+      answer[i].push(sum)
+      
+      }
+  }
+  return answer  
+  
+     
+  }
+
+
+  // map 사용
+  function solution(arr1, arr2) {
+
+    
+    const answer = arr1.map((el,index)=>{
+        // el로는 각 배열을...
+    return el.map((item,i)=>{
+          const sum = item + arr2[index][i]
+          return sum;
+        })
+        
+    })
+    return answer
+       
+    }

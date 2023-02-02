@@ -53,12 +53,15 @@ export default function FetchBoardPage(): JSX.Element {
 
     if (startPage === 1) return;
     setStartPage(startPage - 10);
-    void refetch({ page: startPage - 10 });
+    setChoicePage(choicePage - 10);
+    void refetch({ page: choicePage - 10 });
   };
   const onClickMoveNext = (): void => {
     if (startPage + 10 <= lastPage) {
       setStartPage(startPage + 10);
-      void refetch({ page: startPage + 10 });
+      setChoicePage(choicePage + 10);
+
+      void refetch({ page: choicePage + 10 });
     }
     if (startPage + 10 > lastPage - restPage) {
       setIsNoneActive(true);

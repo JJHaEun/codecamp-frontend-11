@@ -8,6 +8,22 @@ export default function BoardCommentsListUI(
 ): JSX.Element {
   return (
     <S.CommentsListMain>
+      {props.isOpen && (
+        <S.DeleteCommentModal
+          title="댓글 삭제"
+          open={true}
+          onOk={props.onClickDeleteComment}
+          onCancel={props.onClickHideModal}
+          okText="삭제"
+          cancelText="취소"
+        >
+          <p>비밀번호를 입력하세요</p>
+          <input
+            type="password"
+            onChange={props.onChangeDeleteCommentsPassword}
+          />
+        </S.DeleteCommentModal>
+      )}
       <S.CommentsList>
         <InfiniteScroll
           pageStart={0}
@@ -29,24 +45,8 @@ export default function BoardCommentsListUI(
                 boardCommentId={props.boardCommentId}
                 setBoardCommentId={props.setBoardCommentId}
               />
-              {props.isOpen && (
-                <S.DeleteCommentModal
-                  title="댓글 삭제"
-                  open={true}
-                  onOk={props.onClickDeleteComment}
-                  onCancel={props.onClickHideModal}
-                  okText="삭제"
-                  cancelText="취소"
-                >
-                  <p>비밀번호를 입력하세요</p>
-                  <input
-                    type="password"
-                    onChange={props.onChangeDeleteCommentsPassword}
-                  />
-                </S.DeleteCommentModal>
-              )}
             </S.MainCommentList>
-          ))}
+          )) ?? <></>}
         </InfiniteScroll>
       </S.CommentsList>
     </S.CommentsListMain>
