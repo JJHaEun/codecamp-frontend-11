@@ -24,7 +24,7 @@ export default function OpenAPI(): JSX.Element {
       .request(options)
       .then(function (response) {
         console.log(response.data.forecast.forecastday[0].day.condition.text);
-        setForecastIcon(response.data.forecast.forecastday);
+        setForecastIcon(response.data.forecast.forecastday); // 앞으로 날씨(3일치)
         // response.data.forecastday.map((el)=>(
         //   el.day.condition.icon
         // ))
