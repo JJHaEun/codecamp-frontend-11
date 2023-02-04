@@ -14,7 +14,7 @@ export default function MyComponentPage(): JSX.Element {
   };
   useEffect(() => {
     console.log("컴포넌트가 변경됐습니다~");
-  }, [onClickCounter]);
+  }, [count]);
 
   const onClickMove = (): void => {
     void router.push("/");

@@ -32,7 +32,7 @@ export default function FetchBoardPage(): JSX.Element {
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
-  >(FETCH_BOARDS, { variables: { page: startPage } });
+  >(FETCH_BOARDS, { variables: { page: choicePage } });
 
   const { data: countBoards } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,

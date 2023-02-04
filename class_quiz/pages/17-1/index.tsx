@@ -19,7 +19,7 @@ export default function UseEffectPage(): JSX.Element {
 
   useEffect(() => {
     alert("Changed!");
-  }, [onClickChange]);
+  }, [isChange]);
 
   useEffect(() => {
     return () => {
