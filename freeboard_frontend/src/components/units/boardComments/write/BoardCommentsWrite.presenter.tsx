@@ -15,7 +15,7 @@ export default function BoardCommentsUI(
   return (
     <S.CommentMain>
       <div>
-        {!props.isEdit && (
+        {props.isEdit !== true && (
           <S.CommentTitleMain>
             <S.CommentImg src="/comments_icon.png" />
             <S.CommentTitle>댓글</S.CommentTitle>
@@ -43,7 +43,7 @@ export default function BoardCommentsUI(
             // character={({ index }: { index: number }) => customIcons[index + 1]}
             onChange={props.onChangeRating}
             // defaultValue={props.el?.rating ?? 0}
-            value={props.rating !== 0 ? props.rating : props.el?.rating ?? ""}
+            value={props.rating !== 0 ? props.rating : props.el?.rating ?? 0}
             // value={props.rating}
           />
         </S.StarRating>
@@ -58,7 +58,7 @@ export default function BoardCommentsUI(
             }
             // value={props.contents}
           />
-          {!props.isEdit && (
+          {props.isEdit !== true && (
             <div>
               {(props.contents !== ""
                 ? props.contents.length
@@ -69,12 +69,12 @@ export default function BoardCommentsUI(
           {/* contents가 있으면 그 길이를,그게 없고 fetch해서 받은 contents가 있으면 그 길이를 없으면 기본으로 0을보여줌. 기본: 0/200 */}
           <S.CreateCommentBt
             onClick={
-              props.isEdit
+              props.isEdit === true
                 ? props.onClickEditComment
                 : props.onClickCreateBoardComment
             }
           >
-            댓글{props.isEdit ? "수정" : "등록"}
+            댓글{props.isEdit === true ? "수정" : "등록"}
           </S.CreateCommentBt>
         </S.CommentMainGroup>
       </div>

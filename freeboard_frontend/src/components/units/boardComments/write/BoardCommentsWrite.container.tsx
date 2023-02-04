@@ -118,7 +118,7 @@ export default function BoardComments(props: IPropsBoardComments): JSX.Element {
     }
     if (contents === "" && rating === 0) {
       Modal.info({ content: "수정사항이 없습니다" });
-      props.setIsEdit((prev) => !prev);
+      props.setIsEdit?.((prev) => !prev);
       return;
     }
     try {
@@ -135,7 +135,7 @@ export default function BoardComments(props: IPropsBoardComments): JSX.Element {
           },
         ],
       });
-      props.setIsEdit((prev) => !prev);
+      props.setIsEdit?.((prev) => !prev);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }

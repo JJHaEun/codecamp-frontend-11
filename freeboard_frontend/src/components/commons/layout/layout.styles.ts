@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 
 export const HeaderWrap = styled.div`
-  height: 80px;
-  background-color: indianred;
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+  background-color: #cd5c5c30;
 `;
 export const BannerWrap = styled.div`
   /* background-color: lavenderblush; */
@@ -45,6 +47,7 @@ export const BannerWrap = styled.div`
 export const NavWrap = styled.div`
   height: 100px;
   background-color: palevioletred;
+  margin-bottom: 100px;
 `;
 export const MainWrap = styled.div`
   display: flex;

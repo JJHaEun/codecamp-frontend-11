@@ -16,8 +16,8 @@ export interface IPropsBoardCommentsUI {
   password: string;
   rating: number;
   data?: Pick<IQuery, "fetchBoardComments">;
-  isEdit: boolean;
-  el: IBoardComment;
+  isEdit?: boolean;
+  el?: IBoardComment;
   // onClickCancelEdit: () => void;
 }
 export interface IMyupdateComment {
@@ -26,10 +26,10 @@ export interface IMyupdateComment {
 }
 
 export interface IPropsBoardComments {
-  el: IBoardComment;
-  isEdit: boolean;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  el?: IBoardComment;
+  isEdit?: boolean;
+  setIsEdit?: Dispatch<SetStateAction<boolean>>;
   // boardCommentIdEdit: string;
-  boardCommentId: string;
-  id: any;
+  boardCommentId?: string;
+  id?: any;
 }

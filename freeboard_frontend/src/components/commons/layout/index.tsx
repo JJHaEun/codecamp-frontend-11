@@ -1,10 +1,10 @@
 import LayoutBanner from "./banner";
-import LayoutHeader from "./header/header";
 import LayoutNav from "./navigation";
 import LayoutSideBar from "./sidebar";
 import { MainWrap, PageWrap } from "./layout.styles";
 import LayoutFooter from "./footer";
 import { useRouter } from "next/router";
+import LayoutHeaderWrap from "./header/header.container";
 interface ILayoutProps {
   children: JSX.Element;
 }
@@ -22,7 +22,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
 
   return (
     <>
-      <LayoutHeader />
+      <LayoutHeaderWrap />
       {!isHiddenBanner && <LayoutBanner />}
       {!isHiddenNav && <LayoutNav />}
       <MainWrap>
