@@ -3,6 +3,9 @@ import ReactPlayer from "react-player";
 import { getDate } from "../../../../commons/libraries/date";
 import * as S from "./BoardDetail.styles";
 import type { IPropsBoardDetailUI } from "./BoardDetail.types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faMapLocationDot, faLink } from "@fortawesome/free-solid-svg-icons";
 
 export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
   return (
@@ -26,7 +29,7 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
                 title={`${String(props.data?.fetchBoard.youtubeUrl)}`}
                 color={"tomato"}
               >
-                <S.TopIconLink src="/link_icon.png" />
+                <FontAwesomeIcon icon={faLink} color="	#4682B4" />
               </Tooltip>
             )}
             {props.data?.fetchBoard.boardAddress?.address !== "" && (
@@ -39,7 +42,9 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
                 color={"tomato"}
                 placement="topRight"
               >
-                <S.TopIconLoc src="/location_icon.png" />
+                <span>
+                  <FontAwesomeIcon icon={faMapLocationDot} color="	#4682B4" />
+                </span>
               </Tooltip>
             )}
           </S.TopIcons>
@@ -95,7 +100,6 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
               <S.CountLike>{props.data?.fetchBoard?.likeCount}</S.CountLike>
               <S.CountDisLike>
                 {props.data?.fetchBoard?.dislikeCount}
-                {/* 1259 */}
               </S.CountDisLike>
             </S.LikeDisLikeCount>
           </S.LikeDisLike>

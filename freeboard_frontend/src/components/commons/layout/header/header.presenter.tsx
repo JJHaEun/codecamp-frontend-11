@@ -1,4 +1,3 @@
-import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 import { HeaderWrap } from "../layout.styles";
 // 헤더 매뉴를 왼족 오른쪽 다르게 map으로뿌리고..
 // 사이트 이름은 `느린하루`
@@ -37,7 +36,6 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
               <S.RightMenu id="/login" onClick={props.onClickMenu}>
                 로그인
               </S.RightMenu>
-
               <span onClick={props.onClickOpenRightMenu}>
                 {!props.isOpen ? <S.Down /> : <S.Up />}
               </span>

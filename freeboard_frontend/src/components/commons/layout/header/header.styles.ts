@@ -5,6 +5,7 @@ export const SiteTitle = styled.div`
   transform: rotate(-3deg) translateY(-15px);
   font-size: 48px;
   padding-left: 32px;
+  padding-top: 10px;
   padding-bottom: 0.5vh;
   font-family: "nanum_somi", "Franklin Gothic Medium", "Arial Narrow", Arial,
     sans-serif;
@@ -21,7 +22,7 @@ export const SiteTitle = styled.div`
 export const HeaderMenu = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 25px 5vw;
+  padding: 40px 5vw;
 `;
 
 export const LeftMenuWrap = styled.span`
@@ -47,7 +48,6 @@ export const LoginDownWrap = styled.div`
   gap: 4vw;
 `;
 export const RightMeneWrap = styled.span`
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4vh;

@@ -1,6 +1,6 @@
-import LayoutBanner from "./banner";
+import LayoutBanner from "./banner/banner.container";
 import LayoutNav from "./navigation";
-import LayoutSideBar from "./sidebar";
+import LayoutSideBar from "./sidebar/sidebar.container";
 import { MainWrap, PageWrap } from "./layout.styles";
 import LayoutFooter from "./footer";
 import { useRouter } from "next/router";
