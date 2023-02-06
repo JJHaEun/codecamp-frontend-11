@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CreateBoardBt } from "../list/BoardList.styles";
 import { AllBox } from "../write/BoardWrite.styles";
 
@@ -58,7 +56,6 @@ export const TopIconLink = styled.img`
   width: 32px;
   height: 32px;
 `;
-export const TopIconLoc = styled(faMapLocationDot)``;
 
 export const ContentsWrap = styled.div`
   padding-top: 80px;

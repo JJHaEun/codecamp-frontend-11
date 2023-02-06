@@ -19,7 +19,7 @@ export default function FirebasePage(): JSX.Element {
 
   const onClickFetch = async (): Promise<void> => {
     const board = collection(getFirestore(firebaseApp), "board"); // 연결후에 collection(봉투에서)에서 가져옴
-    const result = await getDocs(board);
+    const result = await getDocs(board); // 문서 전부 가져와줘
     const datas = result.docs.map((el) => el.data());
     console.log(datas);
   };
