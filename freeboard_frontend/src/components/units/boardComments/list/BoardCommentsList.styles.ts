@@ -24,6 +24,11 @@ export const CommentsList = styled.div`
   padding-top: 30px;
   height: 600px;
   overflow: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 export const DeletOrEditBt = styled.div`
