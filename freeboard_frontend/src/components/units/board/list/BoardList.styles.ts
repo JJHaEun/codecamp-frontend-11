@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import type { IPropsSearchStyles } from "./BoardList.types";
 
 // export const BoardListMain = styled.div`
 //   display: flex;
@@ -139,7 +140,7 @@ export const ListWrap = styled.div`
   flex-direction: column;
   border-top: 2px solid crimson;
 `;
-
+export const SearchInput = styled.input``;
 export const TableLine = styled.div`
   display: flex;
   flex-direction: row;
@@ -155,6 +156,12 @@ export const BoardNumberTitle = styled.div`
 export const BoardMainTitle = styled(BoardNumberTitle)`
   width: 40%;
   text-align: left;
+`;
+export const SearchKeyWord = styled.span`
+  color: ${(props: IPropsSearchStyles) =>
+    props.el === props.keyWord ? "red" : ""};
+  font-weight: ${(props: IPropsSearchStyles) =>
+    props.el === props.keyWord ? "bold" : ""};
 `;
 export const BoardWriterTitle = styled(BoardNumberTitle)`
   width: 40%;

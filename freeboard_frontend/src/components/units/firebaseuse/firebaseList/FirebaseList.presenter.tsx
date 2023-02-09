@@ -1,6 +1,7 @@
 import type { IFirebaseListUIProps } from "./FirebaseList.types";
 import * as S from "./FirebaseList.styles";
 import * as St from "../../board/list/BoardList.styles";
+import { v4 as uuidv4 } from "uuid";
 export default function FirebaseListUI(
   props: IFirebaseListUIProps
 ): JSX.Element {
@@ -12,10 +13,12 @@ export default function FirebaseListUI(
           <S.TitleT>제목</S.TitleT>
           <S.ContentT>내용</S.ContentT>
         </S.RowT>
-        {props.boardList.map((el, i) => (
-          <S.Row key={el.i}>
+        {props.boardList.map((el) => (
+          <S.Row key={uuidv4()}>
             <S.Writer>{el.writer}</S.Writer>
-            <S.Title>{el.title}</S.Title>
+            <S.Title id={uuidv4()} onClick={props.onClickDetail}>
+              {el.title}
+            </S.Title>
             <S.Content>{el.contents}</S.Content>
           </S.Row>
         ))}

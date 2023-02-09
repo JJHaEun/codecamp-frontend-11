@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 export const HeaderWrap = styled.div`
   display: flex;
   flex-direction: column;
-  height: 180px;
-  background-color: #cd5c5c30;
+  /* height: 180px; */
+  background-color: #e9f0f9;
 `;
 export const BannerWrap = styled.div`
   /* background-color: lavenderblush; */

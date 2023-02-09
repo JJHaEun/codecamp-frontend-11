@@ -10,6 +10,7 @@ export interface ImyUpdate {
   title?: string;
   contents?: string;
   youtubeUrl?: string;
+  images?: string[];
   boardAddress?: {
     zipcode?: string;
     address?: string;
@@ -39,6 +40,8 @@ export interface IBoardWriteUI {
   address: string;
   addressDetail: string;
   contextHolder: ReactElement<any, string | JSXElementConstructor<any>>;
+  imageUrls: string[];
+  onChangeImageUrls: (imageUrl: string, index: number) => void;
 }
 export interface IProps {
   isActive: boolean;

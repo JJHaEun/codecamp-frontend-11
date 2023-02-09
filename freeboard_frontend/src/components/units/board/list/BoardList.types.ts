@@ -1,5 +1,5 @@
 import type { ApolloQueryResult } from "@apollo/client";
-import type { MouseEvent } from "react";
+import type { Dispatch, MouseEvent, SetStateAction } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -12,4 +12,10 @@ export interface IPropsBoardListUI {
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
+  keyWord: string;
+  setKeyWord: Dispatch<SetStateAction<string>>;
+}
+export interface IPropsSearchStyles {
+  el: string;
+  keyWord: string;
 }

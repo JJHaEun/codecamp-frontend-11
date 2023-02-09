@@ -24,14 +24,15 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
             </S.NameDate>
           </S.Profile>
           <S.TopIcons>
-            {props.data?.fetchBoard.youtubeUrl !== "" && (
-              <Tooltip
-                title={`${String(props.data?.fetchBoard.youtubeUrl)}`}
-                color={"tomato"}
-              >
-                <FontAwesomeIcon icon={faLink} color="	#4682B4" />
-              </Tooltip>
-            )}
+            {props.data?.fetchBoard.youtubeUrl !== "" &&
+              props.data?.fetchBoard.youtubeUrl !== " " && (
+                <Tooltip
+                  title={`${String(props.data?.fetchBoard.youtubeUrl)}`}
+                  color={"tomato"}
+                >
+                  <FontAwesomeIcon icon={faLink} color="	#4682B4" />
+                </Tooltip>
+              )}
             {props.data?.fetchBoard.boardAddress?.address !== "" && (
               <Tooltip
                 title={`${String(
@@ -55,25 +56,33 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
             <S.MainContents>{props.data?.fetchBoard?.contents}</S.MainContents>
 
             <S.ContentsPhoto>
-              <S.ContentsImg src="/image_box.png" />
+              {props.data?.fetchBoard.images
+                ?.filter((el) => el)
+                .map((el) => (
+                  <S.ContentsImg
+                    key={el}
+                    src={`https://storage.googleapis.com/${el}`}
+                  />
+                ))}
             </S.ContentsPhoto>
             {/* <S.MainContents>{props.data?.fetchBoard?.contents}</S.MainContents> */}
           </S.MainWrap>
         </S.ContentsWrap>
         <S.Undder>
-          {props.data?.fetchBoard.youtubeUrl !== "" && (
-            <S.VideoBox>
-              <ReactPlayer
-                className="react-player"
-                url={`${String(props.data?.fetchBoard.youtubeUrl ?? "")}`}
-                playing={false}
-                muted={true}
-                controls={true}
-                light={false}
-                pip={true}
-              />
-            </S.VideoBox>
-          )}
+          {props.data?.fetchBoard.youtubeUrl !== "" &&
+            props.data?.fetchBoard.youtubeUrl !== " " && (
+              <S.VideoBox>
+                <ReactPlayer
+                  className="react-player"
+                  url={`${String(props.data?.fetchBoard.youtubeUrl ?? "")}`}
+                  playing={false}
+                  muted={true}
+                  controls={true}
+                  light={false}
+                  pip={true}
+                />
+              </S.VideoBox>
+            )}
           <S.LikeDisLike>
             <S.LikeDisLikeIcons>
               <Tooltip

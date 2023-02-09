@@ -188,18 +188,7 @@ export const UploadDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const UploadBoxContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  color: #4f4f4f;
-  font-size: 12px;
-  font-weight: 500;
-  :hover {
-    cursor: pointer;
-  }
-`;
+
 export const UploadAndSetting = styled.div`
   display: flex;
   flex-direction: column;

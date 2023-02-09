@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
@@ -13,6 +13,7 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const [messageApi, contextHolder] = message.useMessage();
+  const [imageUrls, setImageUrls] = useState(["", "", ""]);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -120,6 +121,17 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
     setAddressDetail(event.target.value);
   };
 
+  const onChangeImageUrls = (imageUrl: string, index: number): void => {
+    const newImageUrls = [...imageUrls];
+    newImageUrls[index] = imageUrl;
+    setImageUrls(newImageUrls);
+  };
+  useEffect(() => {
+    const images = props.data?.fetchBoard.images;
+    if (images !== undefined && images !== null) {
+      setImageUrls([...images]);
+    }
+  }, [props.data]);
   const onClickSubmit = async (): Promise<void> => {
     if (writer === "") {
       setWriterErr("작성자를 입력해주세요.");
@@ -143,6 +155,7 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
               title,
               contents,
               youtubeUrl,
+              images: [...imageUrls],
               boardAddress: {
                 zipcode,
                 address,
@@ -172,13 +185,17 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
       Modal.info({ content: "비밀번호를 입력해주세요" });
       return;
     }
+    const currentImages = JSON.stringify(imageUrls);
+    const prevImages = JSON.stringify(props.data?.fetchBoard.images);
+    const isChangeImages = currentImages !== prevImages;
     if (
       title === "" &&
       contents === "" &&
       youtubeUrl === "" &&
       zipcode === "" &&
       address === "" &&
-      addressDetail === ""
+      addressDetail === "" &&
+      !isChangeImages
     ) {
       await messageApi.open({
         type: "info",
@@ -197,6 +214,7 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
       if (addressDetail !== "")
         updateBoardInput.boardAddress.addressDetail = addressDetail;
     }
+    if (isChangeImages) updateBoardInput.images = imageUrls;
     try {
       const result = await updateBoard({
         variables: {
@@ -238,6 +256,8 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
       address={address}
       addressDetail={addressDetail}
       contextHolder={contextHolder}
+      imageUrls={imageUrls}
+      onChangeImageUrls={onChangeImageUrls}
     />
   );
 }

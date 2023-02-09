@@ -1,6 +1,8 @@
 import DaumPostcodeEmbed from "react-daum-postcode";
+import UploadImagesBoard from "../../../commons/upload/uploadImgBoard/Upload.container";
 import * as S from "./BoardWrite.styles";
 import type { IBoardWriteUI } from "./BoardWrite.types";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
   return (
@@ -101,24 +103,15 @@ export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
         <div>
           <S.Label>사진첨부</S.Label>
           <S.UploadBox>
-            <S.UploadDiv>
-              <S.UploadBoxContent>
-                <div>+</div>
-                <div>Upload</div>
-              </S.UploadBoxContent>
-            </S.UploadDiv>
-            <S.UploadDiv>
-              <S.UploadBoxContent>
-                <div>+</div>
-                <div>Upload</div>
-              </S.UploadBoxContent>
-            </S.UploadDiv>
-            <S.UploadDiv>
-              <S.UploadBoxContent>
-                <div>+</div>
-                <div>Upload</div>
-              </S.UploadBoxContent>
-            </S.UploadDiv>
+            {props.imageUrls.map((el, index) => (
+              <S.UploadDiv key={uuidv4()}>
+                <UploadImagesBoard
+                  index={index}
+                  imageUrl={el}
+                  onChangeImageUrls={props.onChangeImageUrls}
+                />
+              </S.UploadDiv>
+            ))}
           </S.UploadBox>
         </div>
         <S.Choice>

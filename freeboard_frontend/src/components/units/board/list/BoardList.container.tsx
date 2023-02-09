@@ -1,6 +1,7 @@
 import BoardListUI from "./BoardList.presenter";
 import { useRouter } from "next/router";
 import type { MouseEvent } from "react";
+import { useState } from "react";
 
 import { useQuery } from "@apollo/client";
 import type {
@@ -9,8 +10,9 @@ import type {
 } from "../../../../commons/types/generated/types";
 import { FETCH_BOARDS } from "./BoardList.queries";
 // import PagiNationPage from "../../../commons/pagination/boardsPagination/pagination.container";
-
 export default function BoardList(): JSX.Element {
+  const [keyWord, setKeyWord] = useState("");
+
   const router = useRouter();
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
@@ -23,6 +25,7 @@ export default function BoardList(): JSX.Element {
   const onClickCreateBoard = (): void => {
     void router.push(`/boards/new`);
   };
+
   return (
     <>
       <BoardListUI
@@ -30,6 +33,8 @@ export default function BoardList(): JSX.Element {
         onClickDetailPage={onClickDetailPage}
         onClickCreateBoard={onClickCreateBoard}
         refetch={refetch}
+        keyWord={keyWord}
+        setKeyWord={setKeyWord}
       />
     </>
   );
