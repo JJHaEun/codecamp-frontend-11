@@ -1984,3 +1984,112 @@ b = r;// 작은수에 나머지값 재할당
     return [b , (n*m) / b]
     // 최소 공배수는 두 수를 곱한값에 최대공약수을 ㄹ나눈 몫의 값
 }
+
+// ============================
+
+function solution(nums) {
+  const answer =[];
+   for(let i = 0 ; i < nums.length; i++){
+     
+       //최대한 많ㄴ은 종류의 폰켓몬.
+       // includes는 데이터개수만큼 안에서 또 반복이돌아 속도느림.
+       if(answer.includes(nums[i])===false && (nums.length / 2) !== answer.length){// 동일한 것이 없으면서 answer의 길이와 nums.legth 의 반과 다를떄
+           answer.push(nums[i])
+       }
+     
+   }
+    return answer.length
+}
+
+// set 사용법(중복 자동 제거)
+function solution(nums) {
+  const answer = new Set();
+  for(let i = 0 ; i < nums.length ; i++){
+      if((nums.length / 2) !== answer.size){
+          answer.add(nums[i])
+      }
+  }
+return answer.size
+}
+
+// ==============================
+
+// 반복문 없이 사용
+function solution(nums) {
+  const answer = new Set(nums).size // 전체 폰켓몬 중에서 중복 데이터를 다 빼고, 몇마리남았는지 담아줌.
+  const limit = nums.length / 2 // 내가 가질수 있는 폰캣몬의 최대개수
+  if(limit >= answer){ // 내가 가질수 있는것이 고유한것보다 크거나 같을때
+      return answer // 가져감
+      
+  }
+  
+  return limit;
+  
+  }
+
+  // 예산
+  // 문제 설명
+// S사에서는 각 부서에 필요한 물품을 지원해 주기 위해 부서별로 물품을 구매하는데 필요한 금액을 조사했습니다. 그러나, 전체 예산이 정해져 있기 때문에 모든 부서의 물품을 구매해 줄 수는 없습니다. 그래서 최대한 많은 부서의 물품을 구매해 줄 수 있도록 하려고 합니다.
+// 물품을 구매해 줄 때는 각 부서가 신청한 금액만큼을 모두 지원해 줘야 합니다. 예를 들어 1,000원을 신청한 부서에는 정확히 1,000원을 지원해야 하며, 1,000원보다 적은 금액을 지원해 줄 수는 없습니다.
+// 부서별로 신청한 금액이 들어있는 배열 d와 예산 budget이 매개변수로 주어질 때, 최대 몇 개의 부서에 물품을 지원할 수 있는지 return 하도록 solution 함수를 완성해주세요.
+
+
+function solution(d, budget) {
+  // 지원이 가능한 부서까지 담기
+   const answer = [];
+   // 모든 부서가 신청한 금액을 낮은금액부터 오름차순 정렬
+   d.sort((a,b)=> a > b ? 1   : -1)
+   let sum = 0 // 각각의 부서가 신청한 금액을 합한 가격
+   
+for(let i = 0 ; i<d.length;i++){
+   sum+= d[i]
+   if(sum <= budget){
+       answer.push(d[i])
+   }
+}
+   return answer.length
+}
+// 두개의 변수가있음 => 메모리 소요 다.
+function solution(d, budget) {
+  // 지원이 가능한 부서까지 담기
+   let answer =0;
+   // 모든 부서가 신청한 금액을 낮은금액부터 오름차순 정렬
+   d.sort((a,b)=> a > b ? 1   : -1)
+   let sum = 0 // 각각의 부서가 신청한 금액을 합한 가격
+   
+for(let i = 0 ; i<d.length;i++){
+   sum+= d[i]
+   if(sum <= budget){
+       answer++
+   }
+}
+   return answer
+}
+
+// while문 사용 => 변수가 하나. => 메모리 소요 적음.
+function solution(d, budget) {
+   
+  // 모든 부서가 신청한 금액을 낮은금액부터 오름차순 정렬
+  d.sort((a,b)=> a > b ? 1   : -1)
+ let idx = 0;
+  while(budget - d[idx] >=0 ){// 부서가 신청한 배열에서 idx값을 뺌 // 0이상일때만 반복
+      budget-=d[idx]
+      idx++
+  }
+  return idx
+
+}
+
+// 지원가능한 부서만 골라 배열에 담는다.
+function solution(d, budget) {
+  // 지원가능한 부서만 새 배열에 -> filter사용
+       return d.sort((a,b)=> a > b ? 1   : -1)
+     .filter(mn =>{
+           console.log(mn)
+           budget -= mn
+           console.log(mn,budget)
+       return budget >= 0 // 전체 예산에서 부족하지 안을떄만 새 배열에.
+       }).length // 전체 길이를 return 
+ 
+ }
+// ============================
