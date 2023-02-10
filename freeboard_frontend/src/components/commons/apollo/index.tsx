@@ -6,6 +6,8 @@ import {
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 
+const GLOBAL_STATE = new InMemoryCache();
+
 interface IPropsApolloSettings {
   children: JSX.Element;
 }
@@ -19,7 +21,7 @@ export default function ApolloSettings(
 
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink]),
-    cache: new InMemoryCache(),
+    cache: GLOBAL_STATE,
   });
   // prettier-ignore
   return (

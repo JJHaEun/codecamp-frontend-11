@@ -2093,3 +2093,123 @@ function solution(d, budget) {
  
  }
 // ============================
+
+
+function solution(participant, completion) {
+  //동명이인 존재.
+   // 참가자 이름 소문자
+   // 완주못한사람 한명리턴
+   // 참가자는 participant
+   // 완주자는 completion
+   // participant와 completion을 비교해 같은것을 제거하면 좋은데,
+   //  자리수가 다르면 빈배열을 넣어주....
+const result = [...participant,...completion].sort((a,b)=>{
+ return a > b ? 1 : -1
+}).filter((el,i)=>{
+ console.log(el,i)
+   // el이 두개인것은 제거...
+  return el[i] === el[i+1]
+})
+console.log(result) 
+} // ====> X
+
+// 풀이
+function solution(participant, completion) {
+
+  participant.sort((a,b)=> a>b ? -1 : 1)
+  
+  for(let i = 0 ; i < completion.length ; i++){//1.
+if(participant.includes(completion[i])){//2.
+  // 이 위치에 있는것을 삭제
+  // splice를 사용. 첫번째인자로 어디부터 지우거나 추가할것인지에 관한 인덱스를 넣어줌
+  // 두번째인자는 첫번째  인자로부터 몇개를 지울것인지. => 이렇게 하고 나서의 결과는 splice하고나서 지워진 결과를 반환
+  // 본래의 배열에서는 지워진것이 반영된 배열이 되고,
+  // 아무것도 지우지 않을거면 두번째인자에 0을 넣거나 비워둔다.
+  // 세번째 인자에는 추가하고자하는 데이터를 넣는다.이렇개되면 지워진 그 자리에 추가가 된다.
+  participant.splice(participant.indexOf(completion[i]),1)
+ //3,4 
+}
+      // console.log(participant[0])
+      return participant[0]
+      
+}
+
+ 
+}  // =>> 시간초과 => 반복문이 4번돌아가는꼴
+
+// 
+function solution(participant, completion) {
+
+  // 해시문제 => 키 value값 이용(객체를 이용해 문제를 풀어본다.)
+    const obj = {};
+    // 키는 참가자 이름,value는 참가자포함한 총 명수
+    for(let i = 0;i < participant.length; i++){
+
+        if(obj[participant[i]] === undefined){
+            //undefined라면만들어놓는다.
+            obj[participant[i]] = 0;
+        }
+        obj[participant[i]]++         // 키값의 value값을 하나씩 늘림// 빈객체에 이름을사용한 키값으로 접근하는데, 비어있으니 undefined. 여기에 하나씩 더해주니 NaN값뜸.
+    }
+// console.log(obj);
+    
+    //완주한 수만큼 뺀다.
+    for(let i = 0; i < completion.length;i++){
+        
+        obj[completion[i]]--;
+        // completion에 해당하는 obj의 value를 하나씩뺌
+    }
+   // 참가자 명단에만 있는 사람찾기. value가 0이 아닌사람.
+    // 객체 반복
+    for(let key in obj){
+       if(obj[key] !== 0 ) {
+           return key
+       }
+        
+    }
+   
+}
+
+// ========================
+// set과 같이 나온 문법인 map => map은 객체 대용으로 사용이 가능하다.(new Map())
+
+function solution(participant, completion) {
+
+  participant.sort((a,b)=> 
+    a > b ? 1 : -1
+  );
+      completion.sort((a,b)=>
+        a > b ? 1 : -1
+      );
+      let answer = ""
+      for(let i = 0 ; i < participant.length ; i++){
+          if(participant[i] !== completion[i]){
+              answer = participant[i]
+              break; // 한번찾았다면 반복문 중단
+          }
+          // console.log(i,participant[i],completion[i])
+          
+      }
+   return answer
+  }
+
+
+  // filter사용
+  function solution(participant, completion) {
+
+    participant.sort((a,b)=> 
+      a > b ? 1 : -1
+    );
+    completion.sort((a,b)=>
+          a > b ? 1 : -1
+        );
+       const answer = participant.filter((name,index)=>{
+           // console.log(name, index,completion[index])
+           return name !== completion[index]
+       })
+       return answer[0]
+    }
+
+
+    // ==========================================================
+    

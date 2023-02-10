@@ -104,6 +104,7 @@ export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
           <S.Label>사진첨부</S.Label>
           <S.UploadBox>
             {props.imageUrls.map((el, index) => (
+              // props.imageUrls에서 0번째를 뽑으면 첫번째 이미지가 나오겠지? (props.imageUrls[0])
               <S.UploadDiv key={uuidv4()}>
                 <UploadImagesBoard
                   index={index}

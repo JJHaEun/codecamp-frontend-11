@@ -1,11 +1,6 @@
-import { useQuery } from "@apollo/client";
 import type { MouseEvent } from "react";
 import { useState } from "react";
-import type {
-  IQuery,
-  IQueryFetchBoardsCountArgs,
-} from "../../../../commons/types/generated/types";
-import { FETCH_BOARDS_COUNT } from "../../../units/board/list/BoardList.queries";
+
 import PagiNationUI from "./pagination.presenter";
 import type { IPagiNationPageProps } from "./pagination.types";
 
@@ -15,12 +10,8 @@ export default function PagiNationPage(
   const [startPage, setStartPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
   const [disAbledBt, setDisAbledBt] = useState(false);
-  const { data: countBoards } = useQuery<
-    Pick<IQuery, "fetchBoardsCount">,
-    IQueryFetchBoardsCountArgs
-  >(FETCH_BOARDS_COUNT);
 
-  const lastPage = Math.ceil((countBoards?.fetchBoardsCount ?? 10) / 10);
+  const lastPage = Math.ceil((props.countBoards?.fetchBoardsCount ?? 10) / 10);
   const endPage = lastPage % 10;
   const onClickPage = (event: MouseEvent<HTMLSpanElement>): void => {
     const currentPage = Number(event.currentTarget.id);

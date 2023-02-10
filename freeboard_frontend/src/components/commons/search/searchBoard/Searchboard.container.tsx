@@ -10,14 +10,9 @@ import SearchBoardUI from "./Searchboard.presenter";
 import type { ISearchBoardProps } from "./Searchboard.types";
 
 export default function SearchBoard(props: ISearchBoardProps): JSX.Element {
-  //   const { refetch: refetchCount } = useQuery<
-  //     Pick<IQuery, "fetchBoardsCount">,
-  //     IQueryFetchBoardsCountArgs
-  //   >(FETCH_BOARDS_COUNT);
-
   const getDebounce = _.debounce((value) => {
     void props.refetch({ search: value, page: 1 });
-    // void refetchCount({ search: value });
+    void props.refetchCount({ search: value });
     props.setKeyWord(value);
   }, 500);
 

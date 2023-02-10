@@ -7,8 +7,9 @@ import { useQuery } from "@apollo/client";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
-import { FETCH_BOARDS } from "./BoardList.queries";
+import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.queries";
 // import PagiNationPage from "../../../commons/pagination/boardsPagination/pagination.container";
 export default function BoardList(): JSX.Element {
   const [keyWord, setKeyWord] = useState("");
@@ -18,6 +19,12 @@ export default function BoardList(): JSX.Element {
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
+
+  const { data: countBoards, refetch: refetchCount } = useQuery<
+    Pick<IQuery, "fetchBoardsCount">,
+    IQueryFetchBoardsCountArgs
+  >(FETCH_BOARDS_COUNT);
+
   const onClickDetailPage = (event: MouseEvent<HTMLDivElement>): void => {
     void router.push(`/boards/${event.currentTarget.id}`);
   };
@@ -35,6 +42,8 @@ export default function BoardList(): JSX.Element {
         refetch={refetch}
         keyWord={keyWord}
         setKeyWord={setKeyWord}
+        countBoards={countBoards}
+        refetchCount={refetchCount}
       />
     </>
   );

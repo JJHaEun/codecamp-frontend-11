@@ -7,8 +7,9 @@ import type {
 
 export interface IPagiNationPageProps {
   refetch: (
-    variables?: Partial<IQueryFetchBoardsArgs> | undefined
+    variables?: Partial<IQueryFetchBoardsArgs>
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
+  countBoards?: Pick<IQuery, "fetchBoardsCount">;
 }
 export interface IPagiNationUIProps {
   onClickMovePrv: () => void;

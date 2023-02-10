@@ -71,8 +71,8 @@ export const MainWrap = styled.div`
   padding-top: 40px;
 `;
 export const ContentsPhoto = styled.div`
-  /* width: 996px; */
-  width: 100%;
+  width: 996px;
+  /* width: 100%; */
   /* height: 480px; //후에auto로할것 */
   margin-top: 40px;
   margin-bottom: 110px;

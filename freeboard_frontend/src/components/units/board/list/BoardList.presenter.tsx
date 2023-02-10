@@ -39,7 +39,11 @@ export default function BoardListUI(props: IPropsBoardListUI): JSX.Element {
     //   </S.ButtonWrap>
     // </S.BoardListMain>
     <>
-      <SearchBoard refetch={props.refetch} setKeyWord={props.setKeyWord} />
+      <SearchBoard
+        refetch={props.refetch}
+        setKeyWord={props.setKeyWord}
+        refetchCount={props.refetchCount}
+      />
       <S.BoardListMain>
         <S.ListWrap>
           <S.TableLine>
@@ -86,7 +90,10 @@ export default function BoardListUI(props: IPropsBoardListUI): JSX.Element {
             글쓰기
           </S.CreateBoardBt>
         </S.ButtonWrap>
-        <PagiNationPage refetch={props.refetch} />
+        <PagiNationPage
+          refetch={props.refetch}
+          countBoards={props.countBoards}
+        />
       </S.BoardListMain>
     </>
   );
