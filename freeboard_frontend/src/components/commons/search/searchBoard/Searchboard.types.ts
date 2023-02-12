@@ -1,5 +1,5 @@
 import type { ApolloQueryResult } from "@apollo/client";
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import type { ChangeEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -10,10 +10,10 @@ export interface ISearchBoardProps {
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs>
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-  setKeyWord: Dispatch<SetStateAction<string>>;
   refetchCount: (
     variables?: Partial<IQueryFetchBoardsCountArgs>
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
+  onChangeKeyWord: (value: string) => void;
 }
 export interface ISearchBoardUIProps {
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;

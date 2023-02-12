@@ -32,7 +32,9 @@ export default function BoardList(): JSX.Element {
   const onClickCreateBoard = (): void => {
     void router.push(`/boards/new`);
   };
-
+  const onChangeKeyWord = (value: string): void => {
+    setKeyWord(value);
+  };
   return (
     <>
       <BoardListUI
@@ -41,8 +43,8 @@ export default function BoardList(): JSX.Element {
         onClickCreateBoard={onClickCreateBoard}
         refetch={refetch}
         keyWord={keyWord}
-        setKeyWord={setKeyWord}
-        countBoards={countBoards}
+        onChangeKeyWord={onChangeKeyWord}
+        countBoards={countBoards?.fetchBoardsCount}
         refetchCount={refetchCount}
       />
     </>

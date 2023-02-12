@@ -13,7 +13,7 @@ export default function SearchBoard(props: ISearchBoardProps): JSX.Element {
   const getDebounce = _.debounce((value) => {
     void props.refetch({ search: value, page: 1 });
     void props.refetchCount({ search: value });
-    props.setKeyWord(value);
+    props.onChangeKeyWord(value);
   }, 500);
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>): void => {

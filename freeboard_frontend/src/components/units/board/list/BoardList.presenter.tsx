@@ -41,7 +41,7 @@ export default function BoardListUI(props: IPropsBoardListUI): JSX.Element {
     <>
       <SearchBoard
         refetch={props.refetch}
-        setKeyWord={props.setKeyWord}
+        onChangeKeyWord={props.onChangeKeyWord}
         refetchCount={props.refetchCount}
       />
       <S.BoardListMain>

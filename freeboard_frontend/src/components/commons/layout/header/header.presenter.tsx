@@ -4,16 +4,16 @@ import { HeaderWrap } from "../layout.styles";
 // 느리지만 끝까지 가자는 의지와... 느긋하게 하루하루를 보냈으면 하는 바람을 담음
 import * as S from "./header.styles";
 import type { ILayoutHeaderProps } from "./header.types";
-const HADDER_MENU_LEFT = [
-  { name: "마켓", move: "/markets" },
-  { name: "커뮤니티", move: "/boards" },
-];
-const HADDER_MENU_RIGHT = [
-  // { name: "로그인", move: "/login" },
-  { name: "회원가입", move: "/signUp" },
-  // { name: "비회원 장바구니", move: "/cart" },
-  { name: "장바구니", move: "/myCart" },
-];
+// const HADDER_MENU_LEFT = [
+//   { name: "마켓", move: "/markets" },
+//   { name: "커뮤니티", move: "/boards" },
+// ];
+// const HADDER_MENU_RIGHT = [
+//   // { name: "로그인", move: "/login" },
+//   { name: "회원가입", move: "/signUp" },
+//   // { name: "비회원 장바구니", move: "/cart" },
+//   { name: "장바구니", move: "/myCart" },
+// ];
 export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
   return (
     <>
@@ -21,33 +21,33 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
         <S.SiteTitle id="/boards" onClick={props.onClickMain}>
           느린하루
         </S.SiteTitle>
-        <S.HeaderMenu>
-          <S.LeftMenuWrap>
-            {HADDER_MENU_LEFT.map((el) => (
-              <span key={el.move}>
-                <S.LeftMenu id={el.move} onClick={props.onClickMenu}>
-                  {el.name}
-                </S.LeftMenu>
-              </span>
-            ))}
-          </S.LeftMenuWrap>
-          <S.RightMeneWrap>
-            <S.LoginDownWrap>
-              <S.RightMenu id="/login" onClick={props.onClickMenu}>
-                로그인
-              </S.RightMenu>
-              <span onClick={props.onClickOpenRightMenu}>
-                {!props.isOpen ? <S.Down /> : <S.Up />}
-              </span>
-            </S.LoginDownWrap>
-            {props.isOpen &&
-              HADDER_MENU_RIGHT.map((el) => (
-                <div key={el.move}>
-                  <S.RightMenu>{el.name}</S.RightMenu>
-                </div>
-              ))}
-          </S.RightMeneWrap>
-        </S.HeaderMenu>
+
+        <S.TitleAndMenu>
+          <S.SiteNameWrap>
+            <header>
+              <h2>좋아하는 일,</h2>
+              <h2>여유</h2>
+            </header>
+            <S.HeaderMenu>
+              <S.LeftMeNu
+                onClick={props.onClickMenu}
+                defaultSelectedKeys={["sub1"]}
+                // defaultOpenKeys={["sub1"]}
+                mode="horizontal"
+                items={props.items}
+              />
+            </S.HeaderMenu>
+          </S.SiteNameWrap>
+          <S.MeNuImg>
+            <S.RightMeNu
+              onClick={props.onClick}
+              defaultSelectedKeys={["/boards"]}
+              mode="horizontal"
+              items={props.items2}
+            />
+            <S.Img src={`/sunset.jpg`} alt="" />
+          </S.MeNuImg>
+        </S.TitleAndMenu>
       </HeaderWrap>
     </>
   );

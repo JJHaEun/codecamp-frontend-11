@@ -1,5 +1,5 @@
 import type { ApolloQueryResult } from "@apollo/client";
-import type { Dispatch, MouseEvent, SetStateAction } from "react";
+import type { MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -14,8 +14,8 @@ export interface IPropsBoardListUI {
     variables?: Partial<IQueryFetchBoardsArgs>
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   keyWord: string;
-  setKeyWord: Dispatch<SetStateAction<string>>;
-  countBoards?: Pick<IQuery, "fetchBoardsCount">;
+  onChangeKeyWord: (value: string) => void;
+  countBoards?: number;
   refetchCount: (
     variables?: Partial<IQueryFetchBoardsCountArgs>
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;

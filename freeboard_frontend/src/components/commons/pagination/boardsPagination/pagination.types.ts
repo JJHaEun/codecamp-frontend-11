@@ -9,7 +9,7 @@ export interface IPagiNationPageProps {
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs>
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-  countBoards?: Pick<IQuery, "fetchBoardsCount">;
+  countBoards?: number;
 }
 export interface IPagiNationUIProps {
   onClickMovePrv: () => void;
@@ -18,7 +18,7 @@ export interface IPagiNationUIProps {
   nowPage: number;
   lastPage: number;
   onClickPage: (event: MouseEvent<HTMLSpanElement>) => void;
-  disAbledBt: boolean;
+  // disAbledBt: boolean;
 }
 
 export interface IPageStyleProps {

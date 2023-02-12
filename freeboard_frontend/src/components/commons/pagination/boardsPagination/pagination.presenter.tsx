@@ -20,7 +20,10 @@ export default function PagiNationUI(props: IPagiNationUIProps): JSX.Element {
             </S.PageNum>
           )
       )}
-      <S.MovePageBt onClick={props.onClickMoveNext} disabled={props.disAbledBt}>
+      <S.MovePageBt
+        onClick={props.onClickMoveNext}
+        //  disabled={props.disAbledBt}
+      >
         <S.MoveNextBtMain />
       </S.MovePageBt>
     </S.PaginationWrap>

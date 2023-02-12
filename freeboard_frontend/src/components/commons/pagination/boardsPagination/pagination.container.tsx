@@ -9,33 +9,39 @@ export default function PagiNationPage(
 ): JSX.Element {
   const [startPage, setStartPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
-  const [disAbledBt, setDisAbledBt] = useState(false);
+  // const [disAbledBt, setDisAbledBt] = useState(false);
 
-  const lastPage = Math.ceil((props.countBoards?.fetchBoardsCount ?? 10) / 10);
-  const endPage = lastPage % 10;
+  const lastPage = Math.ceil((props.countBoards ?? 10) / 10);
+  // const endPage = lastPage % 10;
   const onClickPage = (event: MouseEvent<HTMLSpanElement>): void => {
-    const currentPage = Number(event.currentTarget.id);
-    setNowPage(currentPage);
-    void props.refetch({ page: currentPage });
+    const nowPage = Number(event.currentTarget.id);
+    setNowPage(nowPage);
+    void props.refetch({ page: nowPage });
   };
 
   const onClickMovePrv = (): void => {
-    setDisAbledBt(false);
+    // setDisAbledBt(false);
     if (startPage === 1) return;
-    setStartPage((prev) => prev - 10);
-    setNowPage((prev) => prev + 10);
-    void props.refetch({ page: nowPage - 10 });
+    // setStartPage((prev) => prev - 10);
+    setStartPage(startPage - 10);
+    // setNowPage((prev) => prev - 10);
+    setNowPage(startPage - 10);
+    // void props.refetch({ page: nowPage - 10 });
+    void props.refetch({ page: startPage - 10 });
   };
 
   const onClickMoveNext = (): void => {
     if (startPage + 10 <= lastPage) {
-      setStartPage((prev) => prev + 10);
-      setNowPage((prev) => prev + 10);
-      void props.refetch({ page: nowPage + 10 });
+      // setStartPage((prev) => prev + 10);
+      setStartPage(startPage + 10);
+      // setNowPage((prev) => prev + 10);
+      setNowPage(startPage + 10);
+      // void props.refetch({ page: nowPage + 10 });
+      void props.refetch({ page: startPage + 10 });
     }
-    if (startPage + 10 > lastPage - endPage) {
-      setDisAbledBt(true);
-    }
+    // if (startPage + 10 > lastPage - endPage) {
+    //   setDisAbledBt(true);
+    // }
   };
   return (
     <>
@@ -46,7 +52,7 @@ export default function PagiNationPage(
         nowPage={nowPage}
         onClickPage={onClickPage}
         lastPage={lastPage}
-        disAbledBt={disAbledBt}
+        // disAbledBt={disAbledBt}
       />
     </>
   );

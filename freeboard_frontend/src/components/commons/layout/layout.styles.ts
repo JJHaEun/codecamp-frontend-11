@@ -3,51 +3,13 @@ import styled from "@emotion/styled";
 export const HeaderWrap = styled.div`
   display: flex;
   flex-direction: column;
-  /* height: 180px; */
-  background-color: #e9f0f9;
+  height: 500px;
+  /* position: relative; */
+  background-color: #f1e5d8;
 `;
-export const BannerWrap = styled.div`
-  /* background-color: lavenderblush; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 
-  .slick-slider {
-    width: 100%;
-
-    height: 40vh;
-    .slick-list {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  .slick-arrow {
-    /* display: flex;
-    */
-    z-index: 10;
-    width: 40vw;
-  }
-  .slick-prev:before,
-  .slick-next:before {
-    color: palevioletred;
-    font-size: 30px;
-  }
-
-  ul {
-    margin-bottom: 25px;
-  }
-
-  ul li button:before {
-    color: indianred;
-  }
-  .slick-dots li.slick-active button:before {
-    color: darkred;
-  }
-`;
 export const NavWrap = styled.div`
-  height: 2vh;
+  height: 10px;
   background-color: #cd5c5c30;
   margin-bottom: 100px;
 `;
