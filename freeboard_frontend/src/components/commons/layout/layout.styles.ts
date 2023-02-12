@@ -10,13 +10,14 @@ export const HeaderWrap = styled.div`
 
 export const NavWrap = styled.div`
   height: 10px;
-  background-color: #cd5c5c30;
-  margin-bottom: 100px;
+  background-color: #e67e22;
 `;
 export const MainWrap = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  padding-top: 100px;
+  padding-bottom: 50px;
 `;
 
 export const SideBarWrap = styled.div`
@@ -30,6 +31,7 @@ export const SideBarWrap = styled.div`
   top: 150px;
   left: 10px;
   padding-top: 20px;
+
   /* width: 100%; */
   /* transition: top 0.5s; */
 `;
@@ -39,6 +41,5 @@ export const PageWrap = styled.div`
   padding-left: 30px;
 `;
 export const FooterWarp = styled(HeaderWrap)`
-  margin-top: 50px;
   height: 200px;
 `;

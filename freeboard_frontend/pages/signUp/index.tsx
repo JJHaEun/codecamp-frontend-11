@@ -1,9 +1,9 @@
 import SignInUp from "../../src/components/units/signInUp/signInUp.container";
 
-export default function SignInPage(): JSX.Element {
+export default function SignUpPage(): JSX.Element {
   return (
     <>
-      <SignInUp signIn={true} />
+      <SignInUp />
     </>
   );
 }

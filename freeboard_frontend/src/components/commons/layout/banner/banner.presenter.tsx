@@ -3,8 +3,7 @@ import * as S from "./banner.styles";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import type { ILayoutBannerUIProps } from "./banner.types";
-import Link from "next/link";
-
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 export default function LayoutBannerUI(
   props: ILayoutBannerUIProps
 ): JSX.Element {
@@ -14,33 +13,48 @@ export default function LayoutBannerUI(
     dots: true,
     infinite: true,
     speed: 500,
-    centerPadding: "30px",
-    slidesToShow: 3,
+    centerPadding: "80px",
+    slidesToShow: 2,
     slidesToScroll: 1,
-    // autoplay: true,
+    autoplay: true,
+    swipeToSlide: true,
   };
 
   return (
     <>
       <S.BannerWrap>
         <Slider {...settings}>
-          <S.BannerImges>
-            <div>총 게시물수</div>
+          <S.BannerTop>
+            <h2>총 게시물수</h2>
             <div>게시글 총 수: {props.data?.fetchBoardsCount} 개</div>
-            <Link href={"/boards"}>상세보기</Link>
-          </S.BannerImges>
-          <S.BannerImges>
-            {/* <S.BannerImges src="/banner_01.png" /> */}2
-          </S.BannerImges>
-          <S.BannerImges>
-            {/* <S.BannerImges src="/banner_01.png" /> */}3
-          </S.BannerImges>
-          <S.BannerImges>
-            {/* <S.BannerImges src="/banner_01.png" /> */}4
-          </S.BannerImges>
-          <S.BannerImges>
-            {/* <S.BannerImges src="/banner_01.png" /> */}5
-          </S.BannerImges>
+            <S.Move onClick={props.onClickMoveList}>커뮤니티로 이동</S.Move>
+          </S.BannerTop>
+          {props.bestBoards?.fetchBoardsOfTheBest.map((el, i) => (
+            <S.Banner
+              key={el._id}
+              onClick={props.onClickMove}
+              getRandomColor={props.getRandomColor}
+            >
+              <h2>
+                <S.BestMainCrown /> Best #{i + 1}
+              </h2>
+              <div>작성자: {el.writer}</div>
+              <div>제목: {el.title}</div>
+              <S.Picks>
+                <S.Like icon={faHeart} />
+                {el.likeCount}
+              </S.Picks>
+              <S.Picks>
+                <S.Dislike /> {el.dislikeCount}
+              </S.Picks>
+              <div>
+                <S.Move id={el._id} onClick={props.onClickMove}>
+                  상세보기
+                </S.Move>
+              </div>
+            </S.Banner>
+          ))}
+
           {/* <div>
             <S.BannerImges2
               src="/banner_02.png"

@@ -1,12 +1,13 @@
 /* Javascript 샘플 코드 */
 import axios from "axios";
 import { useEffect, useState } from "react";
-import * as S from "./openAPI.styles";
+import OpenAPIUI from "./openAPI.presenter";
 export default function OpenAPI(): JSX.Element {
   const [today, setToday] = useState("");
   const [todayW, setTodayW] = useState("");
   const [conditionIcon, setConditionIcon] = useState("");
   const [forecastIcon, setForecastIcon] = useState([]);
+  const [currentTemp, setCurrentTemp] = useState("");
   useEffect(() => {
     const options = {
       method: "GET",
@@ -23,15 +24,17 @@ export default function OpenAPI(): JSX.Element {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data.forecast.forecastday[0].day.condition.text);
-        setForecastIcon(response.data.forecast.forecastday); // 앞으로 날씨(3일치)
+        // console.log(response.data.forecast.forecastday[0].day.condition.text);
+        console.log(response.data.forecast.forecastday);
+        setForecastIcon(response.data?.forecast?.forecastday); // 앞으로 날씨(3일치)
         // response.data.forecastday.map((el)=>(
         //   el.day.condition.icon
         // ))
-        // console.log(response.data);
+        console.log(response.data);
         setTodayW(response.data.current.condition.text); // 오늘의 날씨 영어
         setConditionIcon(response.data.current.condition.icon); // 오늘의 날씨 아이콘
         setToday(response.data.location.localtime.slice(0, 10)); // 날짜
+        setCurrentTemp(response.data.current.temp_c);
       })
       .catch(function (error) {
         console.error(error);
@@ -40,18 +43,13 @@ export default function OpenAPI(): JSX.Element {
 
   return (
     <>
-      <S.TodayWeatherWrap>
-        <S.WeatherTitle>오늘의 날씨</S.WeatherTitle>
-        <S.WeatherImg src={conditionIcon} />
-        <div>
-          <S.WhatWeather>{todayW}</S.WhatWeather>
-          <span>{today}</span>
-        </div>
-        {forecastIcon.map((el: any) => (
-          // 앞으로의 날씨 3일
-          <img src={el.day.condition.icon} key={el} />
-        ))}
-      </S.TodayWeatherWrap>
+      <OpenAPIUI
+        today={today}
+        todayW={todayW}
+        conditionIcon={conditionIcon}
+        forecastIcon={forecastIcon}
+        currentTemp={currentTemp}
+      />
     </>
   );
 }

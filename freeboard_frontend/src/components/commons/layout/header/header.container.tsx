@@ -29,7 +29,11 @@ const items: MenuProps["items"] = [
       "Sub",
       "g2",
       null,
-      [getItem("로그인", "/signIn"), getItem("회원가입", "/signUp")],
+      [
+        getItem("로그인", "/signIn"),
+        getItem("회원가입", "/signUp"),
+        getItem("출석", "/firebaseuse"),
+      ],
       "group"
     ),
   ]),
@@ -48,6 +52,11 @@ const items2: MenuProps["items"] = [
   {
     label: "회원가입",
     key: "/signUp",
+    // icon: <MailOutlined />,
+  },
+  {
+    label: "출석",
+    key: "/firebaseuse",
     // icon: <MailOutlined />,
   },
 ];

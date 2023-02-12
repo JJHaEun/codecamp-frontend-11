@@ -1,5 +1,5 @@
-import { doc, DocumentData, getDoc } from "firebase/firestore/lite";
-import { collection, getDocs } from "firebase/firestore/lite";
+import type { DocumentData } from "firebase/firestore/lite";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore/lite";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import type { MouseEvent } from "react";

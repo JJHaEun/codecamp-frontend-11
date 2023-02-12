@@ -1,5 +1,5 @@
 import type { ApolloQueryResult } from "@apollo/client";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, RefObject } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -17,4 +17,5 @@ export interface ISearchBoardProps {
 }
 export interface ISearchBoardUIProps {
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  serchRef: RefObject<HTMLInputElement>;
 }

@@ -18,7 +18,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
   return (
     <>
       <HeaderWrap>
-        <S.SiteTitle id="/boards" onClick={props.onClickMain}>
+        <S.SiteTitle id="/" onClick={props.onClickMain}>
           느린하루
         </S.SiteTitle>
 
@@ -26,7 +26,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
           <S.SiteNameWrap>
             <header>
               <h2>좋아하는 일,</h2>
-              <h2>여유</h2>
+              <h2>그리고 , 여유 ..</h2>
             </header>
             <S.HeaderMenu>
               <S.LeftMeNu

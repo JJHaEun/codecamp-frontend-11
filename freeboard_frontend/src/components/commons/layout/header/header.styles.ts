@@ -53,10 +53,12 @@ export const MeNuImg = styled.div`
   justify-content: flex-end;
 `;
 export const RightMeNu = styled(Menu)`
-  width: 300px;
+  width: 350px;
   position: absolute;
   .ant-menu-title-content {
-    color: #b039cc;
+    :hover {
+      color: #b039cc;
+    }
   }
   border-radius: 8px;
 `;
