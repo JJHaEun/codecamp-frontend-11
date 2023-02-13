@@ -6,6 +6,7 @@ import FirebaseWriteUI from "./Firebase.presenter";
 import { useRouter } from "next/router";
 
 export default function FirebaseWrite(): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [boardId, setBoardId] = useState("");
   const router = useRouter();
   const [boardContent, setBoardContent] = useState({

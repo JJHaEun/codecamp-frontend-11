@@ -27,16 +27,8 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
             <header>
               <h2>좋아하는 일,</h2>
               <h2>그리고 , 여유 ..</h2>
+              <h3>{props.data?.fetchUserLoggedIn.name} 환영합니다</h3>
             </header>
-            <S.HeaderMenu>
-              <S.LeftMeNu
-                onClick={props.onClickMenu}
-                defaultSelectedKeys={["sub1"]}
-                // defaultOpenKeys={["sub1"]}
-                mode="horizontal"
-                items={props.items}
-              />
-            </S.HeaderMenu>
           </S.SiteNameWrap>
           <S.MeNuImg>
             <S.RightMeNu

@@ -15,20 +15,24 @@ export default function Layout(props: ILayoutProps): JSX.Element {
     `/boards/new`,
     `/boards/${String(router.query.boardId)}/edit`,
   ];
-
+  const HIDDEN_BANNER = [
+    `/boards/new`,
+    `/boards/${String(router.query.boardId)}/edit`,
+    `/boards/${String(router.query.boardId)}`,
+  ];
   const isShowSidebar = SHOW_SIDEBAR.includes(router.asPath);
-  const isHiddenBanner = SHOW_SIDEBAR.includes(router.asPath);
+  const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath);
   const isHiddenNav = SHOW_SIDEBAR.includes(router.asPath);
 
   return (
     <>
       <LayoutHeaderWrap />
-      {!isHiddenBanner && <LayoutBanner />}
-      {!isHiddenNav && <LayoutNav />}
       <MainWrap>
         {isShowSidebar && <LayoutSideBar />}
         <PageWrap>{props.children}</PageWrap>
       </MainWrap>
+      {!isHiddenNav && <LayoutNav />}
+      {!isHiddenBanner && <LayoutBanner />}
       <LayoutFooter />
     </>
   );

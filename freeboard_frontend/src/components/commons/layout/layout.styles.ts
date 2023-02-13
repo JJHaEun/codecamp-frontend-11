@@ -22,14 +22,9 @@ export const MainWrap = styled.div`
 
 export const SideBarWrap = styled.div`
   width: 10%;
-  height: 400px;
   /* border: 2px solid coral; */
   border-radius: 3px;
-  background-color: #cd5c5c08;
   margin: 80px 0;
-  position: sticky;
-  top: 150px;
-  left: 10px;
   padding-top: 20px;
 
   /* width: 100%; */

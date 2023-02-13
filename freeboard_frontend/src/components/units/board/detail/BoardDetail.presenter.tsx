@@ -30,24 +30,25 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
                   title={`${String(props.data?.fetchBoard.youtubeUrl)}`}
                   color={"tomato"}
                 >
-                  <FontAwesomeIcon icon={faLink} color="	#4682B4" />
+                  <FontAwesomeIcon icon={faLink} color="#4682B4" />
                 </Tooltip>
               )}
-            {props.data?.fetchBoard.boardAddress?.address !== "" && (
-              <Tooltip
-                title={`${String(
-                  props.data?.fetchBoard.boardAddress?.address
-                )} ${String(
-                  props.data?.fetchBoard.boardAddress?.addressDetail
-                )}`}
-                color={"tomato"}
-                placement="topRight"
-              >
-                <span>
-                  <FontAwesomeIcon icon={faMapLocationDot} color="	#4682B4" />
-                </span>
-              </Tooltip>
-            )}
+            {props.data?.fetchBoard.boardAddress?.address !== "" ||
+              (props.data?.fetchBoard.boardAddress?.address !== undefined && (
+                <Tooltip
+                  title={`${String(
+                    props.data?.fetchBoard.boardAddress?.address
+                  )} ${String(
+                    props.data?.fetchBoard.boardAddress?.addressDetail
+                  )}`}
+                  color={"tomato"}
+                  placement="topRight"
+                >
+                  <span>
+                    <FontAwesomeIcon icon={faMapLocationDot} color="	#4682B4" />
+                  </span>
+                </Tooltip>
+              ))}
           </S.TopIcons>
         </S.Upper>
         <S.ContentsWrap>
@@ -62,6 +63,7 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
                   <S.ContentsImg
                     key={el}
                     src={`https://storage.googleapis.com/${el}`}
+                    // src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}` 이렇게하면 0번째사진 뽑을 수  있음. 아마 el[0]이 아닐까?
                   />
                 ))}
             </S.ContentsPhoto>
@@ -70,7 +72,8 @@ export default function BoardDetailUI(props: IPropsBoardDetailUI): JSX.Element {
         </S.ContentsWrap>
         <S.Undder>
           {props.data?.fetchBoard.youtubeUrl !== "" &&
-            props.data?.fetchBoard.youtubeUrl !== " " && (
+            props.data?.fetchBoard.youtubeUrl !== " " &&
+            props.data?.fetchBoard.youtubeUrl !== null && (
               <S.VideoBox>
                 <ReactPlayer
                   className="react-player"

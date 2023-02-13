@@ -10,11 +10,15 @@ import SignInUpUI from "./signInUp.presenter";
 import type { ISignInUpProps } from "./signInUp.types";
 import { CREATE_USER, LOGIN_USER } from "./signUp.quries";
 import { useRouter } from "next/router";
+import { Modal } from "antd";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../commons/stores";
 
 export default function SignInUp(props: ISignInUpProps): JSX.Element {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const router = useRouter();
+  const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputs, setInputs] = useState({
@@ -55,20 +59,39 @@ export default function SignInUp(props: ISignInUpProps): JSX.Element {
     }));
   };
   const onClickSignIn = async (): Promise<void> => {
-    await loginUser({
-      variables: {
-        ...InputsignIn,
-      },
-    });
+    try {
+      const result = await loginUser({
+        variables: {
+          ...InputsignIn,
+        },
+      });
+      console.log(result.data?.loginUser.accessToken);
+      const accessToken = result.data?.loginUser.accessToken;
+      if (accessToken === undefined) {
+        Modal.error({ content: "로그인에 실패했습니다. 다시 시도해주세요" });
+        return;
+      }
+      setAccessToken(accessToken);
+      void router.push(`/`);
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
   };
   const onClickSignUp = async (): Promise<void> => {
-    await createUser({
-      variables: {
-        createUserInput: {
-          ...inputs,
+    try {
+      const result = await createUser({
+        variables: {
+          createUserInput: {
+            ...inputs,
+          },
         },
-      },
-    });
+      });
+      console.log(result.data?.createUser._id);
+      Modal.success({ content: "회원가입을 축하합니다!!" });
+      void router.push(`/`);
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
   };
 
   const onClickMoveSignIn = (): void => {

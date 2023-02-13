@@ -1,43 +1,13 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { useRouter } from "next/router";
 import { useState } from "react";
 import type { MouseEvent } from "react";
 import LayoutHeader from "./header.presenter";
-import type { MenuItem } from "./header.types";
-import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
+import { MailOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
+import { useQuery } from "@apollo/client";
+import { FETCH_USER_LOGGEDIN } from "./header.queries";
+import { IQuery } from "../../../../commons/types/generated/types";
 
-const getItem = (
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: "group"
-): MenuItem => {
-  return { key, icon, children, label, type } as MenuItem;
-};
-const items: MenuProps["items"] = [
-  getItem("Menu", "sub1", <AppstoreOutlined />, [
-    getItem(
-      "Main",
-      "g1",
-      null,
-      [getItem("커뮤니티", "/boards"), getItem("마켓", "/markets")],
-      "group"
-    ),
-    getItem(
-      "Sub",
-      "g2",
-      null,
-      [
-        getItem("로그인", "/signIn"),
-        getItem("회원가입", "/signUp"),
-        getItem("출석", "/firebaseuse"),
-      ],
-      "group"
-    ),
-  ]),
-];
 const items2: MenuProps["items"] = [
   {
     label: "커뮤니티",
@@ -63,7 +33,8 @@ const items2: MenuProps["items"] = [
 export default function LayoutHeaderWrap(): JSX.Element {
   const router = useRouter();
   const [current, setCurrent] = useState("");
-
+  const { data } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGEDIN);
   const onClickMenu: MenuProps["onClick"] = (event) => {
     void router.push(event.key);
   };
@@ -80,11 +51,11 @@ export default function LayoutHeaderWrap(): JSX.Element {
     <>
       <LayoutHeader
         onClickMenu={onClickMenu}
-        items={items}
         onClickMain={onClickMain}
         onClick={onClick}
         items2={items2}
         current={current}
+        data={data}
       />
     </>
   );

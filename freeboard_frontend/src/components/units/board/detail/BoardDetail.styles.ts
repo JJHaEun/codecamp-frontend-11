@@ -79,6 +79,7 @@ export const ContentsPhoto = styled.div`
 `;
 export const ContentsImg = styled.img`
   /* width: 996px; */
+  object-fit: contain;
   width: 100%;
   height: 480px;
 `;

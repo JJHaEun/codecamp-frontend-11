@@ -10,6 +10,7 @@ import BoardWrite from "../../../../src/components/units/board/write/BoardWrite.
 
 export default function BoardEditPage(): JSX.Element {
   const router = useRouter();
+
   if (!router || typeof router.query.boardId !== "string") return <></>;
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
     FETCH_BOARD,

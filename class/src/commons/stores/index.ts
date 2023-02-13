@@ -4,3 +4,8 @@ export const isEditState = atom({
   key: "isEditState", // 변수명
   default: true, // 초기값
 });
+// 이것을 기준으로 state가 만들어지는것!
+export const accessTokenState = atom({
+  key: "accessTokenState",
+  default: "",
+});

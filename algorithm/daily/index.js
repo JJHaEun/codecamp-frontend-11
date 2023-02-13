@@ -2212,4 +2212,47 @@ function solution(participant, completion) {
 
 
     // ==========================================================
-    
+    // 피보나치 수열
+
+    function solution(n) {
+      // n = 5 ==> F(5) = F(5-1) + F(5-2)
+       const answer = [0 ,1] //피보나치 수의 결과들이 담겨있는 배열. 0번째는 0번째 피보나치가...
+               for(let i = 2 ; i <= n; i++ ){
+                   answer[i] = answer[i-1] + answer[i-2]
+   console.log(answer)
+                   
+               }
+       return answer[n] %1234567
+   }
+   // 테스트 미통과 -> 제한사항을 못받는다(n은 2이상 100000이하)
+
+   function solution(n) {
+    // n = 5 ==> F(5) = F(5-1) + F(5-2)
+     const answer = [0 ,1] //피보나치 수의 결과들이 담겨있는 배열. 0번째는 0번째 피보나치가...
+             for(let i = 2 ; i <= n; i++ ){
+                 answer[i] = (answer[i-1] + answer[i-2])%1234567
+                 
+             }
+     return answer[n] 
+ }
+
+ // 얘는 통과됨. 왜??
+// 숫자는 프로그래밍 상 Int타입. 그러나 표현할 수 있는 범위 존재.
+// 나타낼 수 있는 범위 2** 53 -1
+// 프로그래밍상에서 안전한 범위를 알려면 Number.isSafeInteger(여기검증할 숫자를 넣음.)
+
+// 메서드 사용
+
+function solution(n) {
+
+  let prev =0;// n - 2의 피보나치수결과가 저장됨.
+  return new Array(n -1).fill(1).reduce((acc// 누적값
+                                     )=>{
+      const sum = (acc + prev) %1234567;
+  // 첫번째 피보나치 수와 이전것을 더함
+
+      prev = acc // 누적값을 다시 담아줌
+      return sum;
+  },1)// 첫번째 피보나치수의 결과를 초기값으로 사용
+  
+}

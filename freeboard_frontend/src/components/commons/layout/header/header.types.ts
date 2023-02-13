@@ -1,13 +1,11 @@
-import type { MenuProps } from "antd";
 import type { MouseEvent } from "react";
-
-export type MenuItem = Required<MenuProps>["items"][number];
+import type { IQuery } from "../../../../commons/types/generated/types";
 
 export interface ILayoutHeaderProps {
   onClickMenu: any;
-  items: any;
   onClickMain: (event: MouseEvent<HTMLDivElement>) => void;
   onClick: any;
   items2: any;
   current: string;
+  data?: Pick<IQuery, "fetchUserLoggedIn">;
 }

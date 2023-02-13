@@ -14,7 +14,11 @@ export default function FirebaseListUI(
           <S.ContentT>내용</S.ContentT>
         </S.RowT>
         {props.boardList.map((el) => (
-          <S.Row key={uuidv4()} id={uuidv4()} onClick={props.onClickDetail}>
+          <S.Row
+            key={uuidv4()}
+            id={uuidv4()}
+            // onClick={props.onClickDetail}
+          >
             <S.Writer>{el.writer}</S.Writer>
             <S.Title>{el.title}</S.Title>
             <S.Content>{el.contents}</S.Content>

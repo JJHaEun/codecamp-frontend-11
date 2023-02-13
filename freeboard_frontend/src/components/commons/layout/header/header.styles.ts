@@ -55,6 +55,28 @@ export const MeNuImg = styled.div`
 export const RightMeNu = styled(Menu)`
   width: 350px;
   position: absolute;
+  :where(
+      .css-dev-only-do-not-override-ixblex
+    ).ant-menu-light.ant-menu-horizontal
+    > .ant-menu-item-selected,
+  :where(
+      .css-dev-only-do-not-override-ixblex
+    ).ant-menu-light.ant-menu-horizontal
+    > .ant-menu-submenu-selected {
+    color: coral;
+  }
+  :where(
+      .css-dev-only-do-not-override-ixblex
+    ).ant-menu-light.ant-menu-horizontal
+    > .ant-menu-item-selected::after,
+  :where(
+      .css-dev-only-do-not-override-ixblex
+    ).ant-menu-light.ant-menu-horizontal
+    > .ant-menu-submenu-selected::after {
+    border-bottom-width: 2px;
+    border-bottom-color: orangered;
+  }
+
   .ant-menu-title-content {
     :hover {
       color: #b039cc;
@@ -71,26 +93,7 @@ export const Img = styled.img`
   filter: blur(4px);
   -webkit-filter: blur(4px);
 `;
-export const LeftMeNu = styled(Menu)`
-  width: 180px;
-  position: absolute;
-  z-index: 10;
 
-  opacity: 0.5;
-  :hover {
-    opacity: 1;
-  }
-  .anticon > * {
-    color: #e4ddce;
-  }
-  .ant-menu-title-content {
-    color: #b039cc;
-  }
-`;
-export const HeaderMenu = styled.div`
-  display: flex;
-  padding-top: 200px;
-`;
 export const TitleAndMenu = styled.div`
   display: flex;
   justify-content: space-between;
