@@ -71,7 +71,9 @@ export default function SignInUp(props: ISignInUpProps): JSX.Element {
         Modal.error({ content: "로그인에 실패했습니다. 다시 시도해주세요" });
         return;
       }
+
       setAccessToken(accessToken);
+      localStorage.setItem("accessToken", accessToken); // 임시사용
       void router.push(`/`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
@@ -88,7 +90,7 @@ export default function SignInUp(props: ISignInUpProps): JSX.Element {
       });
       console.log(result.data?.createUser._id);
       Modal.success({ content: "회원가입을 축하합니다!!" });
-      void router.push(`/`);
+      void router.push(`/signIn`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }

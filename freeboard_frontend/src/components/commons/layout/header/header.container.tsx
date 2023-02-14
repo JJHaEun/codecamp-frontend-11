@@ -6,7 +6,7 @@ import { MailOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { useQuery } from "@apollo/client";
 import { FETCH_USER_LOGGEDIN } from "./header.queries";
-import { IQuery } from "../../../../commons/types/generated/types";
+import type { IQuery } from "../../../../commons/types/generated/types";
 
 const items2: MenuProps["items"] = [
   {
@@ -25,8 +25,14 @@ const items2: MenuProps["items"] = [
     // icon: <MailOutlined />,
   },
   {
-    label: "출석",
+    label: "오늘의 한줄",
     key: "/firebaseuse",
+    // icon: <MailOutlined />,
+  },
+
+  {
+    label: "마켓",
+    key: "/market",
     // icon: <MailOutlined />,
   },
 ];

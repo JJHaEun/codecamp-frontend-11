@@ -39,7 +39,7 @@ export const TitleT = styled(Title)`
   font-weight: bold;
 `;
 export const Content = styled(Writer)`
-  width: 30%;
+  width: 70%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

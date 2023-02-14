@@ -5,7 +5,7 @@ import * as S from "./BoardList.styles";
 import type { IPropsBoardListUI } from "./BoardList.types";
 import { v4 as uuidv4 } from "uuid";
 import SearchBoard from "../../../commons/search/searchBoard/Searchboard.container";
-
+import { CreateBoardBt } from "../../../commons/commonsStyles";
 export default function BoardListUI(props: IPropsBoardListUI): JSX.Element {
   return (
     // <S.BoardListMain>
@@ -86,9 +86,9 @@ export default function BoardListUI(props: IPropsBoardListUI): JSX.Element {
           ))}
         </S.ListWrap>
         <S.ButtonWrap>
-          <S.CreateBoardBt onClick={props.onClickCreateBoard}>
+          <CreateBoardBt onClick={props.onClickCreateBoard}>
             글쓰기
-          </S.CreateBoardBt>
+          </CreateBoardBt>
         </S.ButtonWrap>
         <PagiNationPage
           refetch={props.refetch}

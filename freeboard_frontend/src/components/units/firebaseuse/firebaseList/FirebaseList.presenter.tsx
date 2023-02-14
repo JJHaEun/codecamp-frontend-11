@@ -1,6 +1,6 @@
 import type { IFirebaseListUIProps } from "./FirebaseList.types";
 import * as S from "./FirebaseList.styles";
-import * as St from "../../board/list/BoardList.styles";
+import { CreateBoardBt } from "../../../commons/commonsStyles";
 import { v4 as uuidv4 } from "uuid";
 export default function FirebaseListUI(
   props: IFirebaseListUIProps
@@ -25,9 +25,9 @@ export default function FirebaseListUI(
           </S.Row>
         ))}
         <S.ButtonWrap>
-          <St.CreateBoardBt onClick={props.onClickMoveCreate}>
+          <CreateBoardBt onClick={props.onClickMoveCreate}>
             글쓰기
-          </St.CreateBoardBt>
+          </CreateBoardBt>
         </S.ButtonWrap>
       </S.MainTable>
     </S.Wrap>

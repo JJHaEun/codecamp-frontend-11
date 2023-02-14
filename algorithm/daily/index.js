@@ -2256,3 +2256,204 @@ function solution(n) {
   },1)// 첫번째 피보나치수의 결과를 초기값으로 사용
   
 }
+
+
+/// 숫자문자열과 영단어
+
+
+const num = {
+  zero:0,
+  one:1,
+  two:2,
+  three:3,
+  four:4,
+  five:5,
+  six:6,
+  seven:7,
+  eight:8,
+  nine:9
+};
+function solution(s) {
+// s의 원래 숫자
+  // 각 숫자에 대응되는 영단어
+let answer = ""
+let str = ""
+for(let i = 0 ; i<s.length ; i++){
+    if(Number.isNaN(Number(s[i]))){
+        //NaN이 뜨면 문자. 숫자가 아닌경우 
+       str += s[i]
+    }else{// 숫자면 바로 넣어줌(isNaN에서 false가 나옴)
+    answer+=s[i]// 순서대로 넣어줌
+        
+    }
+    if(num[str]!==undefined){
+        answer += num[str];
+        str="" // 그다음에 가져올영단어를 위해 초기화
+    }
+}
+  
+return Number(answer)
+}
+
+
+//  ==
+
+// replace, 배열이용
+
+const num= [
+  "zero",
+ "one",
+"two",
+"three",
+"four",
+"five",
+"six",
+"seven",
+"eight",
+"nine"
+]
+
+function solution(s) {
+
+for(let i = 0 ; i<num.length ; i++){
+ // replace로 영어단어를 숫자로바꾸기..
+    s = s.replace(num[i],i)// s에 다시 넣어주기
+    
+}
+  return Number(s)
+  
+
+}
+
+// ===
+const num= [
+  "zero",
+ "one",
+"two",
+"three",
+"four",
+"five",
+"six",
+"seven",
+"eight",
+"nine"
+]
+
+function solution(s) {
+
+for(let i = 0 ; i<num.length ; i++){
+ // replace로 영어단어를 숫자로바꾸기..
+    
+    // 영어단어가 2개이상일경우 있을때까지 무한반복되게 while사용
+    while(s.includes(num[i])){// 내가 바꾸려는 문자열이 있는지 확인
+        // 있으면 replace
+    s = s.replace(num[i],i)// s에 다시 넣어주기
+    // 문자열 자체를 해당하는 문자열로 다 바꾸었다!!
+        
+    }
+    
+}
+  return Number(s)
+  
+
+}
+
+// ===
+const num= [
+  "zero",
+ "one",
+"two",
+"three",
+"four",
+"five",
+"six",
+"seven",
+"eight",
+"nine"
+]
+
+function solution(s) {
+
+for(let i = 0 ; i<num.length ; i++){
+    // 있으면 replace
+s = s.replaceAll(num[i],i)// s에 다시 넣어주기
+// 문자열 자체를 해당하는 문자열로 다 바꾸었다!!
+    // 문자열을 다 바꿀경우 while문 대신 replaceAll을 사용하는 방법
+    
+}
+  return Number(s)
+  
+
+}
+
+
+// forEach사용
+const num= [
+  "zero",
+ "one",
+"two",
+"three",
+"four",
+"five",
+"six",
+"seven",
+"eight",
+"nine"
+]
+
+function solution(s) {
+
+num.forEach((str,i)=>{
+      s = s.split(str).join(i)// num의 i를 기준으로 쪼개고 그 부분을 i로 바꿈. ==>  replaceAll 나오기전에 많이 사용되던 방식
+   })
+return Number(s)
+   // split과
+//join 이용하면 split한어떤 문자자리에 join에 넣어준 문자가 생긴다.
+
+}
+
+
+// 정규표현식 사용하기
+
+function solution(s) {
+s = s.replace(/one/g,1) //one이라는 문자열이 있다면 숫자 1으로 바꿔라
+s = s.replace(/three/g,3)
+s = s.replace(/four/g,4)
+s = s.replace(/five/g,5)
+s = s.replace(/six/g,6)
+s = s.replace(/seven/g,7)
+s = s.replace(/eight/g,8)
+s = s.replace(/nine/g,9)
+  
+  
+  return Number(s)
+
+}
+
+// 반복문과 정규표현식 사용하기
+const num= [
+  "zero",
+ "one",
+"two",
+"three",
+"four",
+"five",
+"six",
+"seven",
+"eight",
+"nine"
+]
+
+function solution(s) {
+for(let i = 0 ; i < num.length; i++){
+  // s = s.replace(/num[i]/g,i) // 정규표현식에서는 변수가 하나의 문자열로 취급이 됨.
+  // 직접적으로 변수 넣고 싶을때는 new RegExp이라는 문법을 사용
+  //const regExp = new RegExp(어떤 변수를 넣을지,플래그) // g는 전역(글로벌)즉, 전체를 의미
+const regExp = new RegExp(num[i],"g")
+s = s.replace(regExp,i) // regExp로만든 정규표현식. 즉, num[i] 부분을 i로 바꿈
+}
+  
+  
+  return Number(s)
+
+}

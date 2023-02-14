@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { CreateBoardBt } from "../board/list/BoardList.styles";
+import { CreateBoardBt } from "../../commons/commonsStyles";
 
 export const LogWrap = styled.div`
   display: flex;

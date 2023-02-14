@@ -1,6 +1,6 @@
 import { addDoc, collection } from "firebase/firestore/lite";
 import { useState } from "react";
-import type { ChangeEvent } from "react";
+// import type { ChangeEvent } from "react";
 import { db } from "../../../commons/libraries/firebase";
 import FirebaseWriteUI from "./Firebase.presenter";
 import { useRouter } from "next/router";
@@ -15,12 +15,14 @@ export default function FirebaseWrite(): JSX.Element {
     contents: "",
   });
 
-  const onChangeContent = (event: ChangeEvent<HTMLInputElement>): void => {
-    setBoardContent((prev) => ({
-      ...prev,
-      [event.target.id]: event.target.value,
-    }));
-  };
+  const onChangeContent =
+    (content: string) =>
+    (event: any): void => {
+      setBoardContent((prev) => ({
+        ...prev,
+        [content]: event.target.value,
+      }));
+    };
 
   const onClickSubmit = async (): Promise<void> => {
     // const board = collection(db, "board");
@@ -39,6 +41,7 @@ export default function FirebaseWrite(): JSX.Element {
       <FirebaseWriteUI
         onChangeContent={onChangeContent}
         onClickSubmit={onClickSubmit}
+        boardContent={boardContent}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Rate } from "antd";
-import { CreateBoardBt } from "../../board/list/BoardList.styles";
+import { CreateBoardBt } from "../../../commons/commonsStyles";
 
 export const CommentMain = styled.div`
   display: flex;

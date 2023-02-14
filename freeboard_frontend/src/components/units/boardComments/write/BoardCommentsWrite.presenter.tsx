@@ -27,7 +27,7 @@ export default function BoardCommentsUI(
             placeholder="작성자"
             onChange={props.onChangeCommentWriter}
             // defaultValue={props.el?.writer ?? ""}
-            readOnly={Boolean(props.el?.writer)}
+            disabled={Boolean(props.el?.writer)}
             value={props.el?.writer ?? props.writer}
           />
           <S.InputWrites

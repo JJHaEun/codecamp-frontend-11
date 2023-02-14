@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { CreateBoardBt } from "../list/BoardList.styles";
+import { CreateBoardBt } from "../../../commons/commonsStyles";
 import { AllBox } from "../write/BoardWrite.styles";
 
 export const DetailPageMain = styled.div`

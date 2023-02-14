@@ -1,3 +1,7 @@
+import { HomeTwoTone } from "@ant-design/icons";
+import { faHryvnia } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../commons/stores";
 import { HeaderWrap } from "../layout.styles";
 // 헤더 매뉴를 왼족 오른쪽 다르게 map으로뿌리고..
 // 사이트 이름은 `느린하루`
@@ -9,12 +13,14 @@ import type { ILayoutHeaderProps } from "./header.types";
 //   { name: "커뮤니티", move: "/boards" },
 // ];
 // const HADDER_MENU_RIGHT = [
-//   // { name: "로그인", move: "/login" },
+//   // { name: "로그인", move: "/signIn" },
 //   { name: "회원가입", move: "/signUp" },
 //   // { name: "비회원 장바구니", move: "/cart" },
 //   { name: "장바구니", move: "/myCart" },
 // ];
 export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
+  const [accessToken] = useRecoilState(accessTokenState);
+
   return (
     <>
       <HeaderWrap>
@@ -30,13 +36,42 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
               <h3>{props.data?.fetchUserLoggedIn.name} 환영합니다</h3>
             </header>
           </S.SiteNameWrap>
+
           <S.MeNuImg>
-            <S.RightMeNu
-              onClick={props.onClick}
-              defaultSelectedKeys={["/boards"]}
-              mode="horizontal"
-              items={props.items2}
-            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+              }}
+            >
+              <S.RightMeNu
+                onClick={props.onClick}
+                defaultSelectedKeys={["/boards"]}
+                mode="horizontal"
+                items={props.items2}
+              />
+              <span
+                style={{ backgroundColor: "red" }}
+                // onClick={!accessToken ? 로그인함수: 로그아웃함수}
+              >
+                SignIn/SignOut
+              </span>
+            </div>
+            {/* {!(accessToken !== "") ? (
+              <span
+              // onClick={}
+              >
+                SignIn
+              </span>
+            ) : (
+              <span
+              // onClick={}
+              >
+                SignOut
+              </span>
+            )} */}
+
             <S.Img src={`/sunset.jpg`} alt="" />
           </S.MeNuImg>
         </S.TitleAndMenu>
