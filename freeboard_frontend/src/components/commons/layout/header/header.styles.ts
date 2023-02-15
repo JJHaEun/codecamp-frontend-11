@@ -50,11 +50,16 @@ export const SiteNameWrap = styled.article`
 
 export const MeNuImg = styled.div`
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  overflow: hidden;
 `;
 export const RightMeNu = styled(Menu)`
   width: 350px;
-  position: absolute;
+  /* position: absolute; */
+  z-index: 10;
+
   :where(
       .css-dev-only-do-not-override-ixblex
     ).ant-menu-light.ant-menu-horizontal
@@ -88,10 +93,11 @@ export const Img = styled.img`
   width: 600px;
   height: 300px;
 
-  margin-top: 80px;
+  margin-top: 60px;
   opacity: 0.5;
   filter: blur(4px);
   -webkit-filter: blur(4px);
+  object-fit: cover;
 `;
 
 export const TitleAndMenu = styled.div`

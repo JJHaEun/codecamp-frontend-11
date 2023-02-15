@@ -37,28 +37,26 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
             </header>
           </S.SiteNameWrap>
 
-          <S.MeNuImg>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-end",
-              }}
-            >
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <S.MeNuImg>
+              <span
+                style={{
+                  backgroundColor: "red",
+                  // zIndex: 10,
+                  // height: "50px",
+                  // width: "30px",
+                }}
+                // onClick={!accessToken ? 로그인함수: 로그아웃함수}
+              >
+                SignIn/SignOut
+              </span>
               <S.RightMeNu
                 onClick={props.onClick}
                 defaultSelectedKeys={["/boards"]}
                 mode="horizontal"
                 items={props.items2}
               />
-              <span
-                style={{ backgroundColor: "red" }}
-                // onClick={!accessToken ? 로그인함수: 로그아웃함수}
-              >
-                SignIn/SignOut
-              </span>
-            </div>
-            {/* {!(accessToken !== "") ? (
+              {/* {!(accessToken !== "") ? (
               <span
               // onClick={}
               >
@@ -72,8 +70,10 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
               </span>
             )} */}
 
+              {/* <S.Img src={`/sunset.jpg`} alt="" /> */}
+            </S.MeNuImg>
             <S.Img src={`/sunset.jpg`} alt="" />
-          </S.MeNuImg>
+          </div>
         </S.TitleAndMenu>
       </HeaderWrap>
     </>

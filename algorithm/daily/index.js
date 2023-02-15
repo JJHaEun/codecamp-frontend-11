@@ -2457,3 +2457,89 @@ s = s.replace(regExp,i) // regExp로만든 정규표현식. 즉, num[i] 부분�
   return Number(s)
 
 }
+
+
+/// ============================================
+
+// 시저암호
+const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function solution(s, n) {
+  // 한칸씩 밀기.
+    // 먼저 지금 가지고있는 알파벳찾기.
+    let answer = ""
+    for (let i = 0; i < s.length;i++){
+        // console.log(i,s[i],n)
+        // 예외처리. 공백은 아무리 밀어도 공백이라 값이 변하지 않음.
+        if(s[i] === " "){
+            answer += s[i] // " "
+        }else{
+            //알파벳만 가져오기// 총 26글자. 인덱스로 z는 25
+            let idx = alphabet.indexOf(s[i]) // 해당 인덱스를 뽑아보기
+            const word = idx > 25 ? alphabet.substring(26)// 대문자라면 26부터 끝까지 잘라..
+            :alphabet.substring(0,26)// 소문자의경우
+            // 이렇게 해당 문자열을 가져오게됨.
+            idx = word.indexOf(s[i]) + n// 자른거에서 다시 인덱스 뽑아옴 + n만큼 밀어줌
+            // 밀어줬을때 undefuned가 나오면 알파벳의 범위(26자)를 초과한것
+            if(word[idx] === undefined){
+                idx -= 26;
+            }
+            answer +=word[idx]
+        }
+    }
+    return answer;
+}
+
+/// 대소문자 구분해 풀어보기  ==> includes를 이용함
+
+
+const lower ="abcdefghijklmnopqrstuvwxyz"
+const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function solution(s, n) {
+  // 한칸씩 밀기.
+    // 먼저 지금 가지고있는 알파벳찾기.
+    let answer = ""
+    for (let i = 0; i < s.length;i++){
+        // console.log(i,s[i],n)
+        // 예외처리. 공백은 아무리 밀어도 공백이라 값이 변하지 않음.
+        if(s[i] === " "){
+            answer += s[i] // " "
+        }else{
+           // 대소문자 판단 => 
+            const word = lower.includes(s[i])// 실제로 소문자에 포함이되는지.// true면 해당 lower문자를 담아주고 아니면 upper을 여기 담아주기.
+            ? lower : upper;
+            let idx = word.indexOf(s[i]) + n
+            console.log(s[i],word,idx)
+            
+            if(idx >=26){// 알파벳 26자를 초과한경우
+                idx -= 26;
+            }
+answer += word[idx]
+        }
+    }
+    return answer;
+}
+
+// 메서드 이용
+
+const lower ="abcdefghijklmnopqrstuvwxyz"
+const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function solution(s, n) {
+  return Array.from(s) // s.split과 동일
+    .reduce((acc,cur)=>{
+  const word = lower.includes(cur) ? 
+lower : upper;// 현재값이 lower에 포함되는지.
+      let idx = word.indexOf(cur) + n
+      // 만약 알파벳개수 26을 초과한경우
+      if(idx >=26){
+          idx -=26
+      }
+      // 다음반복문에 acc를 넘기기위해 return // 공백이면 공백을 아니면 다음 알파벳을 넣어 다음 반복문으로
+      
+      return acc +(cur ===" " ? " "  : word[idx]
+      
+      } ,""
+)
+}          
