@@ -43,7 +43,11 @@ export default function MapBoardPage(): JSX.Element {
     }
 
     // 2. 내가 클릭한것 담기
-    baskets.push(basket);
+    // __typename빼고담기
+    // 좋지못한사레:baskets원본을 건들이는것=> delete baskets.__typename
+
+    const { __typename, ...newBasket } = basket; // __typename을 제외하고 나머지를 newBasket이라는 이름으로뽑아옴.( 관례는 ...rest )
+    baskets.push(newBasket);
 
     // 3.추가된 장바구니 변경하기
     // 객체를 문자열로 바꾸어야 로컬스토리지에 넣을수있음. 따라서 JSON.stringify 를 사용해 문자열로 바꾸기.

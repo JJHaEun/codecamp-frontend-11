@@ -1,9 +1,9 @@
-import SignInUp from "../../src/components/units/signInUp/signInUp.container";
+import SignInUI from "../../src/components/units/signInUp/signIn/signIn.presenter";
 
 export default function SignInPage(): JSX.Element {
   return (
     <>
-      <SignInUp signIn={true} />
+      <SignInUI />
     </>
   );
 }

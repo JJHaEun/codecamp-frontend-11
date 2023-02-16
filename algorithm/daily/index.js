@@ -2543,3 +2543,81 @@ lower : upper;// 현재값이 lower에 포함되는지.
       } ,""
 )
 }          
+
+// =============================
+// 체육복
+function solution(n, lost, reserve) {
+  //   바로 앞뒤에만 빌려줄 수 있음
+   const losted = [...lost]
+   lost = lost.filter(student=>
+                      !reserve.includes(student)
+                      ).sort((a,b)=>a>b ? 1 : -1) // a - b
+   reserve = reserve.filter(student => !losted.includes(student))
+                    .sort((a,b)=>a>b ? 1 : -1)// 오름차순으로 정렬된 상태로 앞뒤로 찾아야함.
+   console.log(lost)
+   let answer = n- lost.length;// 전체학생수에서 잃어버린 학생수를 뺌
+   for(let i = 0;i<lost.length;i++){
+// 앞자리나 뒷자리에 여벌체육복 가지는지
+       if(reserve.includes(lost[i]-1)){
+           // 앞쪽// 빌려주면 여벌체육복 없는 상태여야함.
+      reserve.splice(reserve.indexOf(lost[i] - 1),1)// 뒤에는 몇개를 지울것인지, 처음인자는 시작점의미.
+           answer ++
+       }else if(reserve.includes(lost[i]+1)){
+           // 뒤쪽
+           reserve.splice(reserve.indexOf(lost[i]+1),1)
+           answer++
+       }
+       // 만약 여벌체육복이 있는사람이 도난당했다면
+       
+   }
+   return answer
+}
+
+// 메서드 reduce사용
+function solution(n, lost, reserve) {
+  //   바로 앞뒤에만 빌려줄 수 있음
+   const losted = [...lost]
+   lost = lost.filter(student=>
+                      !reserve.includes(student)
+                      ).sort((a,b)=>a>b ? 1 : -1) // a - b
+   reserve = reserve.filter(student => !losted.includes(student)).sort((a,b)=>a>b ? 1 : -1)
+  
+   return lost.reduce((acc,cur)=>{
+       const prev = reserve.indexOf(cur-1)
+       const next = reserve.indexOf(cur + 1)
+       if(prev !== -1){
+           reserve.splice(prev - 1)
+           acc++
+       }else if(next !== -1){
+           reserve.splice(next - 1)
+           acc++
+       }
+       return acc
+   },n - lost.length)// 지금 체육수업가능한 학생수만큼이 초기값
+}
+/// 배열을 복사해 사용
+function solution(n, lost, reserve) {
+  //   바로 앞뒤에만 빌려줄 수 있음
+   const losted = [...lost]
+   lost = lost.filter(student=>
+                      !reserve.includes(student)
+                      ).sort((a,b)=>a>b ? 1 : -1) // a - b
+   reserve = reserve.filter(student => !losted.includes(student)).sort((a,b)=>a>b ? 1 : -1)
+  
+   // 원본을 건드리는것은 되도록 하지 말아야함. 따라서
+   const temp = [...reserve] // 이것을 사용(복사한것)
+   return lost.reduce((acc,cur)=>{
+       const prev = temp.indexOf(cur-1)
+       const next = temp.indexOf(cur + 1)
+       if(prev !== -1){
+           temp[prev] = null // 안쓰는 부분이니 비워놓겠다
+           // 즉 splice대신 사용하여 없으면 비워줌
+           acc++
+       }else if(next !== -1){
+           temp[next] = null
+           acc++
+       }
+       return acc
+   },n - lost.length)// 지금 체육수업가능한 학생수만큼이 초기값
+}
+
