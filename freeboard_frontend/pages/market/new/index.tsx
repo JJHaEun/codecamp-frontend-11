@@ -1,12 +1,11 @@
-import { withAuth } from "../../../src/components/commons/hoc/loginCheck";
+import { useAuth } from "../../../src/components/commons/hooks/customs/useAuth";
 import MarketUI from "../../../src/components/units/market/write/createUseditem.market";
 
-function MarketWritePage(): JSX.Element {
+export default function MarketWritePage(): JSX.Element {
+  useAuth();
   return (
     <>
       <MarketUI />
     </>
   );
 }
-
-export default withAuth(MarketWritePage);

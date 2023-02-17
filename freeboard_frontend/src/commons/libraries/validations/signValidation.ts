@@ -15,7 +15,6 @@ export const schema = yup.object({
     .required("비밀번호를 입력해주세요"),
 });
 
-
 export const schemaSignIn = yup.object({
   email: yup
     .string()

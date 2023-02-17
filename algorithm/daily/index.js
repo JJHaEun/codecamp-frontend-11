@@ -2621,3 +2621,37 @@ function solution(n, lost, reserve) {
    },n - lost.length)// 지금 체육수업가능한 학생수만큼이 초기값
 }
 
+/// ========================
+// 모의고사 - 수포자
+const answerT = [
+  [1,2,3,4,5], // 1번수포자가 찍는 방식
+  [2,1,2,3,2,4,2,5], //2번 수포자가 찍는 방식
+  [3,3,1,1,2,2,4,4,5,5],// 3번 //
+]
+
+
+function solution(answers) {
+const score = answerT.map((el,i)=>{
+  // console.log(el,i)
+ const studentScore = answers.reduce((acc,cur,l)=>{
+     // console.log(el[l%el.length],el)
+     return acc +( el[l%el.length] ===cur ? 1 : 0)
+     // 누적값을 바로 return
+ },0)
+   return {number:i+1,score:studentScore}
+})
+  // console.log(score)
+  
+  // 제일 많이 맞춘 학생의 점수를 뽑는다.
+  const biggest = Math.max(...score.map((el)=>{
+      return el.score 
+  }))
+const answer =score.filter(el =>{
+  console.log(el)
+  return el.score === biggest
+}).map(el =>
+     {
+  return el.number
+})
+return answer
+  }
