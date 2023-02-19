@@ -57,4 +57,7 @@ export const LogButton = styled(CreateBoardBt)`
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 0.1em;
+  :hover {
+    color: #ffffff;
+  }
 `;

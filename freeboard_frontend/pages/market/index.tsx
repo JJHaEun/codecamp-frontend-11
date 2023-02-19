@@ -1,7 +1,9 @@
+import MarketListUI from "../../src/components/units/market/list/fetchUsedItemList";
+
 export default function MarketPage(): JSX.Element {
   return (
     <>
-      <div>마켓</div>
+      <MarketListUI />
     </>
   );
 }

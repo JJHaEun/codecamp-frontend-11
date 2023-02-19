@@ -1,10 +1,7 @@
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import type {
-  IUpdateProduct,
-  IUseCreateForm,
-} from "../../../../units/market/write/createUsedItem.types";
+import type { IUseCreateForm } from "../../../../units/market/write/createUsedItem.types";
 import { useMutationUpdateUsedItem } from "../mutations/useMutationUpdateUsedItem";
 import { useQueryFetchUsedItem } from "../quries/useQueryFetchUsedItem";
 
@@ -19,26 +16,6 @@ export const useOnclickUpdateUsedItem = () => {
   const isChangeImages = currentImages !== prevImages;
 
   const onClickUpdateUsedItem = async (data: IUseCreateForm): Promise<void> => {
-    const updateUseditemInput: IUpdateProduct = {};
-    if (data.name !== "") updateUseditemInput.name = data.name;
-    if (data.contents !== "") updateUseditemInput.contents = data.contents;
-    if (
-      data?.useditemAddress?.zipcode !== "" ||
-      data?.useditemAddress?.address !== "" ||
-      data?.useditemAddress?.addressDetail !== ""
-    ) {
-      updateUseditemInput.useditemAddress = {};
-      if (data.useditemAddress?.zipcode !== "")
-        updateUseditemInput.useditemAddress.zipcode =
-          data.useditemAddress?.zipcode;
-      if (data.useditemAddress?.address !== "")
-        updateUseditemInput.useditemAddress.address =
-          data.useditemAddress?.address;
-      if (data.useditemAddress?.addressDetail !== "")
-        updateUseditemInput.useditemAddress.addressDetail =
-          data.useditemAddress?.addressDetail;
-    }
-    if (isChangeImages) updateUseditemInput.images = imageUrls;
     if (
       data.contents === "" &&
       data.name === "" &&
@@ -60,9 +37,8 @@ export const useOnclickUpdateUsedItem = () => {
             name: data.name,
             contents: data.contents,
             remarks: data.remarks,
-            images: data.images,
             tags: data.tags,
-            price: data.price,
+            price: Number(data.price),
             useditemAddress: {
               address: data.useditemAddress.address,
               zipcode: data.useditemAddress.zipcode,
@@ -71,6 +47,7 @@ export const useOnclickUpdateUsedItem = () => {
           },
         },
       });
+      console.log(result.data?.updateUseditem.useditemAddress);
       if (typeof result.data?.updateUseditem._id !== "string") {
         Modal.info({ content: "다시시도해주세요" });
         return;

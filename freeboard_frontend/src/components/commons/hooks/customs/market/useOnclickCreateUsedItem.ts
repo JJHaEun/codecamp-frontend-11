@@ -1,13 +1,18 @@
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import type { IUseCreateForm } from "../../../../units/market/write/createUsedItem.types";
 import { useMutationCreateUsedItem } from "../mutations/useMutationCreateUsedItem";
+import { useOnChangeImagUrls } from "./useOnChangeImageUrls";
 
 interface IuseOnclickCreateUsedItem {
   onClickCreateUsedItem: (data: IUseCreateForm) => Promise<void>;
 }
 export const useOnclickCreateUsedItem = (): IuseOnclickCreateUsedItem => {
   const [createUseditem] = useMutationCreateUsedItem();
+  const [address] = useState("");
+  const [zipcode] = useState("");
+  const { imageUrls } = useOnChangeImagUrls();
   const router = useRouter();
   const onClickCreateUsedItem = async (data: IUseCreateForm): Promise<void> => {
     try {
@@ -20,17 +25,17 @@ export const useOnclickCreateUsedItem = (): IuseOnclickCreateUsedItem => {
             price: Number(data.price),
             tags: data.tags,
             useditemAddress: {
-              zipcode: data.useditemAddress.zipcode,
-              address: data.useditemAddress.address,
+              address,
+              zipcode,
               addressDetail: data.useditemAddress.addressDetail,
             },
-            images: data.images,
+            images: [...imageUrls],
           },
         },
         update(cache, { data }) {
           cache.modify({
             fields: {
-              fetchBoards: (prev) => {
+              fetchUseditems: (prev) => {
                 return [data?.createUseditem, ...prev];
               },
             },
