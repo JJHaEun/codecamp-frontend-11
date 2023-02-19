@@ -83,8 +83,10 @@ export default function MarketQuestionUI(
         },
       });
     } catch (error) {
-      if (error instanceof Error) Modal.info({ content: error.message });
-      void router.push(`/signIn`);
+      if (error instanceof Error) {
+        Modal.info({ content: "로그인을 먼저 해주세요" });
+        void router.push(`/signIn`);
+      }
     }
   };
 

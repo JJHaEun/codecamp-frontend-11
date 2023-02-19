@@ -29,7 +29,7 @@ export default function MarketDetailUI() {
         };
 
         const map = new window.kakao.maps.Map(container, options);
-
+        console.log(container);
         const geocoder = new window.kakao.maps.services.Geocoder();
         geocoder.addressSearch(
           data?.fetchUseditem.useditemAddress?.address,
@@ -46,17 +46,11 @@ export default function MarketDetailUI() {
               });
               marker.setMap(map);
 
-              const iwContent = `<div style="text-align:center;padding:6px;">위치</div>`;
-
-              // 인포윈도우를 생성합니다
               const infowindow = new window.kakao.maps.InfoWindow({
-                content: iwContent,
+                content:
+                  '<div style="width:100px;text-align:center;padding:6px 0;">거래위치</div>',
               });
-              //   infowindow = new window.kakao.maps.InfoWindow({
-              //     content:
-              //       '<div style="width:100px;text-align:center;padding:6px 0;">거래위치</div>',
-              //   });
-              //   infowindow.open(map, marker);
+              infowindow.open(map, marker);
               window.kakao.maps.event.addListener(
                 marker,
                 "mouseover",
@@ -95,10 +89,10 @@ export default function MarketDetailUI() {
               <div>{data?.fetchUseditem.useditemAddress?.addressDetail}</div>
             </div>
           </div>
-          {(data?.fetchUseditem.useditemAddress?.address !== "" &&
-            data?.fetchUseditem.useditemAddress?.zipcode !== "") ?? (
-            <div id="map" style={{ width: 250, height: 200 }}></div>
-          )}
+          {data?.fetchUseditem.useditemAddress?.address !== "" &&
+            data?.fetchUseditem.useditemAddress?.zipcode !== "" && (
+              <div id="map" style={{ width: 250, height: 200 }}></div>
+            )}
 
           <div>{data?.fetchUseditem.contents}</div>
         </div>
@@ -117,10 +111,15 @@ export default function MarketDetailUI() {
           </button>
           <button>
             <Link href={`/market/${String(router.query.productBoardId)}/edit`}>
-              <a>수정</a>
+              <a>수정하기</a>
             </Link>
           </button>
-          <button onClick={onClickDelete}>삭제</button>
+          <button onClick={onClickDelete}>삭제하기</button>
+          <button>
+            <Link href={`/market`}>
+              <a>목록으로</a>
+            </Link>
+          </button>
         </div>
       </div>
       <MarketQuestionUI />

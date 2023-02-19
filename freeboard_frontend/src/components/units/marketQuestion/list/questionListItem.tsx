@@ -3,6 +3,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { MessageDate } from "../../../../commons/libraries/date";
+import MarketAnswerUI from "../../marketQuestionAnswer/write/answer";
 import { DELETE_USED_ITEM_QUESTION } from "../question.queries";
 import type { IMarketQuestionItemProps, IPrev } from "../question.types";
 import MarketQuestionUI from "../write/question.container";
@@ -11,6 +12,7 @@ export default function MarketQuestionItem(
   props: IMarketQuestionItemProps
 ): JSX.Element {
   const [isEdit, setIsEdit] = useState(false);
+  const [open, setOpen] = useState(false);
   const [deleteUseditemQuestion] = useMutation(DELETE_USED_ITEM_QUESTION);
   const onClickEdit = (): void => {
     setIsEdit(true);
@@ -36,11 +38,15 @@ export default function MarketQuestionItem(
       },
     });
   };
+
+  const openAnswer = () => {
+    setOpen((prev) => !prev);
+  };
   return (
-    <div>
-      {!isEdit && (
-        <>
-          <div>
+    <>
+      <div>
+        {!isEdit && (
+          <>
             <span>{props.el.user.name}</span>
             <div>
               <span>{MessageDate(props.el.createdAt)}</span>
@@ -53,15 +59,17 @@ export default function MarketQuestionItem(
                 <button onClick={onClickEdit}>
                   <FontAwesomeIcon icon={faPenToSquare} />
                 </button>
+                <button onClick={openAnswer}>답변</button>
               </div>
               <div>{props.el.contents}</div>
             </div>
-          </div>
-        </>
-      )}
-      {isEdit && (
-        <MarketQuestionUI el={props.el} isEdit={true} setIsEdit={setIsEdit} />
-      )}
-    </div>
+          </>
+        )}
+        {isEdit && (
+          <MarketQuestionUI el={props.el} isEdit={true} setIsEdit={setIsEdit} />
+        )}
+      </div>
+      {open && <MarketAnswerUI el={props.el} setOpen={setOpen} />}
+    </>
   );
 }

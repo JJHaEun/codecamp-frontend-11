@@ -54,7 +54,7 @@ export default function MarketQuestionListUI(): JSX.Element {
           <div key={el._id}>
             <MarketQuestionItem el={el} />
           </div>
-        ))}
+        )) ?? <></>}
       </InfiniteScroll>
     </div>
   );

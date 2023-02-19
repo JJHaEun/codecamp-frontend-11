@@ -119,11 +119,10 @@ export default function MarketUI(): JSX.Element {
               <input
                 type="text"
                 placeholder="우편번호"
-                readOnly={Boolean(data?.fetchUseditem.useditemAddress?.zipcode)}
+                readOnly
+                // {...register("useditemAddress.zipcode")}
                 value={
-                  !(String(zipcode) === "")
-                    ? zipcode
-                    : data?.fetchUseditem.useditemAddress?.zipcode ?? ""
+                  zipcode ?? data?.fetchUseditem.useditemAddress?.zipcode ?? ""
                 }
               />
               <button type="button" onClick={ToggleModal}>
@@ -134,10 +133,9 @@ export default function MarketUI(): JSX.Element {
               <input
                 type="text"
                 readOnly
+                // {...register("useditemAddress.address")}
                 value={
-                  !(String(address) === "")
-                    ? address
-                    : data?.fetchUseditem.useditemAddress?.address ?? ""
+                  address ?? data?.fetchUseditem.useditemAddress?.address ?? ""
                 }
               />
               <input

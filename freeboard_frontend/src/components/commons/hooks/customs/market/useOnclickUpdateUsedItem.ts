@@ -3,7 +3,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import type { IUseCreateForm } from "../../../../units/market/write/createUsedItem.types";
 import { useMutationUpdateUsedItem } from "../mutations/useMutationUpdateUsedItem";
-import { useQueryFetchUsedItem } from "../quries/useQueryFetchUsedItem";
+import {
+  FETCH_USED_ITEM,
+  useQueryFetchUsedItem,
+} from "../quries/useQueryFetchUsedItem";
 
 export const useOnclickUpdateUsedItem = () => {
   const [updateUseditem] = useMutationUpdateUsedItem();
@@ -46,14 +49,20 @@ export const useOnclickUpdateUsedItem = () => {
             },
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM,
+            variables: { useditemId: router.query.productBoardId },
+          },
+        ],
       });
-      console.log(result.data?.updateUseditem.useditemAddress);
       if (typeof result.data?.updateUseditem._id !== "string") {
         Modal.info({ content: "다시시도해주세요" });
         return;
       }
-      Modal.success({ content: "성공적으로 수정되었습니다" });
+      console.log(result.data.updateUseditem._id);
       void router.push(`/market/${result.data.updateUseditem._id}`);
+      Modal.success({ content: "성공적으로 수정되었습니다" });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
