@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Address } from "react-daum-postcode";
+import { useForm } from "react-hook-form";
 import { useToggleModal } from "./useToggleModal";
 
 interface IUseOnChangeAddress {
@@ -8,17 +9,18 @@ interface IUseOnChangeAddress {
   zipcode?: string;
 }
 export const useOnChangeAddress = (): IUseOnChangeAddress => {
-  const [address, setAddress] = useState("");
-  const [zipcode, setZipcode] = useState("");
+  const { setValue } = useForm({
+    mode: "onChange",
+  });
   const { ToggleModal } = useToggleModal();
   const onChangeAddress = (data: Address): void => {
-    setAddress(data.address);
-    setZipcode(data.zonecode);
+    setValue("address", data.address);
+    setValue("zipcode", data.zonecode);
     ToggleModal();
   };
   return {
-    address,
+    // address,
     onChangeAddress,
-    zipcode,
+    // zipcode,
   };
 };

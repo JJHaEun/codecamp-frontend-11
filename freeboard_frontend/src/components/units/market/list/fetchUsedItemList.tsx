@@ -24,6 +24,7 @@ export default function MarketListUI(): JSX.Element {
                   alt=""
                 />
               )}
+              <h1>{el.seller?.name}</h1>
               <div>{el.name}</div>
               <Link href={`/market/${el._id}`}>
                 <a>{el.remarks}</a>

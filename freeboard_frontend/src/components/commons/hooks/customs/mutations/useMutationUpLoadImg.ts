@@ -1,6 +1,10 @@
-import { gql } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
+import type {
+  IMutation,
+  IMutationUploadFileArgs,
+} from "../../../../../commons/types/generated/types";
 
-export const UPLOAD_FILE = gql`
+const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
     uploadFile(file: $file) {
       _id
@@ -8,3 +12,10 @@ export const UPLOAD_FILE = gql`
     }
   }
 `;
+export const useMutationUpload = () => {
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
+  return [uploadFile];
+};

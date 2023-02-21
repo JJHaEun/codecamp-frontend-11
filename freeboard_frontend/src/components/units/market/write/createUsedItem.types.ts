@@ -4,7 +4,7 @@ export interface IUseCreateForm {
   contents: string;
   price: number;
   tags?: string[];
-  images: string[];
+  images?: string[];
   useditemAddress: {
     zipcode: string;
     address: string;
@@ -18,6 +18,7 @@ export interface IUpdateProduct {
   price?: number;
   tags?: string[];
   images?: string[];
+
   useditemAddress?: {
     zipcode?: string;
     address?: string;

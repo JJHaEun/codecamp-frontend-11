@@ -42,6 +42,7 @@ export const useOnclickUpdateUsedItem = () => {
             remarks: data.remarks,
             tags: data.tags,
             price: Number(data.price),
+            images: [...imageUrls],
             useditemAddress: {
               address: data.useditemAddress.address,
               zipcode: data.useditemAddress.zipcode,

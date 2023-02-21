@@ -106,7 +106,7 @@ export default function MarketAnswerUI(
       >
         <textarea
           {...register("contents")}
-          value={
+          defaultValue={
             props.el?.contents !== ""
               ? props.el?.contents
               : props.elAnswer?.contents ?? ""

@@ -23,9 +23,10 @@ export const MessageDate = (createdAt: any) => {
 
   let MessageDate = "";
   if (elapsedTime < seconds) {
+    console.log(elapsedTime);
     MessageDate = "방금 전";
   } else if (elapsedTime < minute) {
-    MessageDate = MessageDate + "초 전";
+    MessageDate = elapsedTime + "초 전";
   } else if (elapsedTime < hour) {
     MessageDate = `${Math.trunc(elapsedTime / minute)} 분 전`;
   } else if (elapsedTime < day) {
@@ -33,6 +34,5 @@ export const MessageDate = (createdAt: any) => {
   } else if (elapsedTime < day * 15) {
     MessageDate = `${Math.trunc(elapsedTime / day)} 일 전`;
   }
-
   return MessageDate;
 };

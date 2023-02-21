@@ -38,7 +38,12 @@ export default function UploadImagesItem(
           file,
         },
       });
-      props.onChangeImageUrls(result.data?.uploadFile?.url ?? "", props.index);
+      console.log(result);
+      if (typeof result.data?.uploadFile.url !== "string") {
+        return;
+      }
+      props.onChangeImageUrls(result.data?.uploadFile?.url, props.index);
+      console.log("hjhjh", result);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }

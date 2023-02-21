@@ -2655,3 +2655,147 @@ const answer =score.filter(el =>{
 })
 return answer
   }
+
+
+  // =======================
+  function solution(N, stages) {
+    
+    // 모든 스테이지를 오름차순으로 정렬
+stages.sort((a,b)=>a>b?1:-1);
+    console.log(stages)
+    const infos = []
+    for(let i = 1;i <=N;i++){
+        infos.push({
+            stage:i, //현재 스테이지 번호
+            users:0, //현스테이지 플레이하고있는 유저수
+            fail:0 // 현재스테이지 실패율
+            
+        })
+    }
+    
+    let allUsers = stages.length;// 전체 유저수 저장
+   // 현재 유저가 어떤 스테이지에 머물러있는가
+    for(let i = 0 ; i <stages.length;i++){
+        if(infos[stages[i] -1] ){
+            infos[stages[i]-1].users++ // 유저합계
+            if(stages[i]!==stages[i+1]){
+                
+            // 현재스테이지 번호와 다음 스테이지 번호가 일치하지 않는경우
+                // 즉 현재 스테이지 번호 합산이 끝나는 순간
+const fail = infos[stages[i] -1].users /allUsers // 실패율
+// 모든 유저의수 : stages의 length => allUsers
+allUsers -= infos[stages[i]-1].users // 남는 유저
+                infos[stages[i]-1].fail = fail
+                
+            }
+        }
+    }
+    // 실패율에 따라 내림차순으로 정렬
+return infos.sort((a,b)=>{
+// a와 b가 각각 객체를 가짐.
+        return a.fail > b.fail ? -1 : 1
+    }).map((el)=>el.stage)
+}
+
+
+// === fill, map사용
+function solution(N, stages) {
+  stages.sort( (a, b) => a - b )
+  
+  let allUsers = stages.length; // 총 유저의 수
+  const answer = new Array( N )
+                  .fill(1)
+                  // new Array(N).fill(1).map((num,i)=>{
+    //     // i를 같이 가져옴으로써 1부터 증가된값을 표현
+    //     const stage = num + i;
+    //     console.log(stage)
+    // })
+                  .map( (num, i) => {
+                      const stage = num + i;
+                      const arr = stages.slice(
+                          stages.indexOf( stage ),
+                          stages.lastIndexOf( stage ) + 1
+                      )
+                      const fail = arr.length / allUsers;
+                      allUsers -= arr.length;
+                      
+                      return { stage, fail }
+                  }).sort( (a, b) => {
+                      return b.fail - a.fail // 내림차순
+                  }).map( el => el.stage );
+  return answer;
+}
+
+
+// ========================
+function solution(board, moves) {
+  let answer = 0;
+const bucket = []
+for(let i = 0 ; i< moves.length; i++){
+  // console.log(moves[i])// 크레인이 위치할곳(위치값)구하는 반복문
+  // 2. 크레인이 이동해서 뽑아올 수 있는 인형의 위치값구하는 반복문
+for(let l = 0 ;l<board.length;l++){
+  console.log(board[l],board[l][moves[i]-1])
+const doll = board[l][moves[i]-1];
+  if(doll !== 0){
+//각자칸에 인형이 들어있다면 -> 0이 아니라면
+      
+      board[l][moves[i]-1] = 0 
+      // 0이면 빈칸. 인형을 뽑아오면 해당위치는 빈칸으로만들기.
+      // 내가 지금 뽑은 인형과 바구니 마지막에 들어있는 인형이 동일하다면둘다 제거
+      if(bucket[bucket.length - 1] === doll){
+          bucket.splice(bucket.length -  1 , 1)
+          // === bucket.pop()과 동일
+          
+          answer +=2
+          break ;// 인형삭제하고 멈추고, 다시 반복문으로.
+      }
+      bucket.push(doll)
+      // console.log(board[l],bucket)
+      
+      break ;
+      // 인형을 한번이라도 뽑았다면 해당위치는 멈춘다.
+      // 즉 그 위치에서는 끝나고 다음위치로 이동한다.
+      // 그리고 인형을 뽑았다면 해당 위치에서 제거해준다.
+      
+  }
+  
+}
+}
+  return answer
+}
+
+//  ====================
+
+function solution(board, moves) {
+  let answer = 0
+  const bucket = []
+  moves.forEach(move =>{
+      
+      // 스위치변수. 원하는 위치에서 반복문안에있는 로직을 실행하지 않게하는 변수.
+    let checked = false
+      
+      board.forEach(location =>{
+        const doll = location[move - 1 ]
+        if(checked ===false){
+        if(doll !==0){
+            location[move -1 ] = 0
+            if(bucket.at(-1) === doll){ 
+  // 마지막 인형과 동일할 경우 바구니에서 제거
+                bucket.splice(bucket.length-1 , 1);
+                answer +=2
+            }else{
+            bucket.push(doll);
+                // 동일하지 않을 경우, 인형을 바구니에 추가
+            }
+            checked = true
+        }
+        }
+        // 크레인이 현 위치에서뽑았으면 멈추고 다음위치로이동하는것처리.
+        // forEach에서 내가 원하는 위치에서 멈추고 반복하게할것인지 쓰려면... =>switch 변수를 사용하기
+    })
+  })
+  return answer;
+  }
+
+  // ========================================

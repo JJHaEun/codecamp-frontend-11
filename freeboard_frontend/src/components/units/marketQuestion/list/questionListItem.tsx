@@ -15,7 +15,7 @@ export default function MarketQuestionItem(
   const [open, setOpen] = useState(false);
   const [deleteUseditemQuestion] = useMutation(DELETE_USED_ITEM_QUESTION);
   const onClickEdit = (): void => {
-    setIsEdit(true);
+    setIsEdit((prev) => !prev);
   };
 
   const onClickDelete = (id: string) => async (): Promise<void> => {
