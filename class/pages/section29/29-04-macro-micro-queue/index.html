@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>이벤트 루프</title>
+    <script>
+      const onClickLoop = () => {
+        // 스택실행이 다끝나면 다음에 마이크로큐가 먼저 실행됨!!
+        console.log("시작!!"); // 1
+
+        // 비동기 작업 (메크로큐에 들어감)
+        setTimeout(() => {
+          new Promise((resolve) => {
+            resolve("철수");
+          }).then(() => {
+            console.log("저는 Promise(setTimeout안에서 실행) , 마이크로 큐 !!");
+          });
+          console.log("저는 setTimeout 메크로큐이고, 0초뒤에 실행될 거예요");
+        }, 0); // 4
+
+        //. 비동기 작업(마이크로큐에 들어감)
+        new Promise((resolve) => {
+          resolve("철수");
+        }).then(() => {
+          console.log(
+            "저는 Promise(1) , 마이크로 큐 !! 0초뒤에 실행될 거예요!"
+          );
+        });
+
+        // 비동기 작업 (메크로큐에 들어감)
+        setInterval(() => {
+          console.log("저는 setInterval 메크로큐!!!, 0초마다 실헹");
+        }, 0);
+
+        let sum = 0;
+        for (let i = 0; i <= 9000000000; i++) {
+          sum++; //sum += 1 // sum = sum + 1
+        } // 2
+
+        //. 비동기 작업(마이크로큐에 들어감)
+
+        new Promise((resolve) => {
+          resolve("철수");
+        }).then(() => {
+          console.log(
+            "저는 Promise(2) , 마이크로 큐 !! 0초뒤에 실행될 거예요!"
+          );
+        });
+
+        console.log("끝!!!"); // 3
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickLoop()">시작하기</button>
+  </body>
+</html>

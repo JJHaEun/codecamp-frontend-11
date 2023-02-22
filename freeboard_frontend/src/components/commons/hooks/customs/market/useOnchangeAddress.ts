@@ -1,23 +1,25 @@
-import { useState } from "react";
 import type { Address } from "react-daum-postcode";
-import { useForm } from "react-hook-form";
+import type { UseFormSetValue } from "react-hook-form";
+import type { IUseCreateForm } from "../../../../units/market/write/createUsedItem.types";
 import { useToggleModal } from "./useToggleModal";
 
 interface IUseOnChangeAddress {
-  onChangeAddress: (data: Address) => void;
+  onChangeAddress: (
+    setValue: UseFormSetValue<IUseCreateForm>
+  ) => (data: Address) => void;
   address?: string;
   zipcode?: string;
 }
 export const useOnChangeAddress = (): IUseOnChangeAddress => {
-  const { setValue } = useForm({
-    mode: "onChange",
-  });
   const { ToggleModal } = useToggleModal();
-  const onChangeAddress = (data: Address): void => {
-    setValue("address", data.address);
-    setValue("zipcode", data.zonecode);
-    ToggleModal();
-  };
+  const onChangeAddress =
+    (setValue: UseFormSetValue<IUseCreateForm>) =>
+    (data: Address): void => {
+      console.log(data);
+      setValue("useditemAddress.address", data.address);
+      setValue("useditemAddress.zipcode", data.zonecode);
+      ToggleModal();
+    };
   return {
     // address,
     onChangeAddress,

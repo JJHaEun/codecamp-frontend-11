@@ -86,7 +86,7 @@ export default function MarketDetailUI() {
             <div>{MessageDate(String(data?.fetchUseditem.createdAt))}</div>
             <div>
               <div>{data?.fetchUseditem.useditemAddress?.address}</div>
-              <div>{data?.fetchUseditem.useditemAddress?.addressDetail}</div>
+              {/* <div>{data?.fetchUseditem.useditemAddress?.addressDetail}</div> */}
             </div>
           </div>
           {data?.fetchUseditem.useditemAddress?.address ?? (

@@ -2799,3 +2799,110 @@ function solution(board, moves) {
   }
 
   // ========================================
+
+
+  // 3진법 뒤집기
+  function solution(n) {
+    // 처음 n은 10진법
+    n = n.toString(3) // 3진법으로 만들기
+    n = String(n).split("").reverse().join("") // 뒤집기
+  return parseInt(n,3)
+}
+
+//
+function solution(n) {
+  const answer = n.toString(3).split("").reverse().join("")
+return parseInt(answer,3)
+  }
+// 다른풀이
+
+function solution(n) {
+  n = n.toString(3) // 3진법으로 만들기
+  let reverse = ""
+  for(let i = n.length - 1;i>=0;i--){
+      reverse += n[i] // 앞뒤반던
+  }
+  return parseInt(reverse,3) // 3진법을 10진법으로 변환
+}
+
+
+
+
+  // =================================
+  // 이진변환 반복하기
+  // x의 모든 0을 제거합니다.
+// x의 길이를 c라고 하면, x를 "c를 2진법으로 표현한 문자열"로 바꿉니다.
+
+  function solution(s) {
+    // s가 "1"이 될때까지 반복
+ // 0을 모두 제거
+     // [변환횟수,제거된 0개수]
+  let count = 0;// 이진법 변환횟수
+     let remove = 0; //제거된 0의 개수
+     // 반복문을 몇번돌려야하는지 모르고, s가 1이될때까지 무한반복
+     // while문 사용.
+     while(s !== "1"){
+         count++;
+         //0을 제거한값만 담아보자
+         let temp = ""
+         for(let i = 0;i <s.length;i++){
+             if(s[i] === "0"){
+                 remove++ // 숫자 0을 제거하며 그 횟수를 넣어줌.
+             continue ;// 0일때는 remove에만 더하고 다음 조건문으로 .
+                 
+             }
+             temp+=s[i]// 0이 아니면 temp에 더하기(0을 제거한 나머지 숫자)
+             
+         }
+         
+         s = temp.length;
+         s = s.toString(2)
+     }
+     return [count,remove]
+ }
+
+ // 메서드 사용하기. => while을 대신할 수 있는 메서드는없음. 재귀함수를 사용하기
+
+
+ function solution(s) {
+  // while문을 대신해 사용하는 다른 반복문법 사용하기.
+  // 함수가 함수를 리턴 . 재귀함수(자기자신을 리턴하기)// 자기자신을 계속반복한다. 값이 나올때까지. 무한루프 돌지않게 주의하기.(조건 잘 설정하기)
+  let [count,remove] = [0,0]// 비구조할당(구조분해할당)방식이용
+  // let count = 0; let remove = 0;
+  const recursion = () =>{
+      if(s === "1"){
+          return [count,remove]
+      }
+      count++ // 이진변환횟수++
+      s = s.split("").filter(num=>{
+          console.log(num)
+          if(num ==="0") remove++ // 문자열 0이 맞다면 0제거횟수 추가.
+          return num !== "0"; // num이 문자열 0이 아닌것만 담는다
+      }).length
+      s =s.toString(2)
+      return recursion() // 이렇게하면 다음에 들어오는 s값은 변환된값이 들어오게됨.
+  }
+  return recursion()
+}
+
+// 밖의 s를 건들이지 않고 하기
+function solution(s) {
+  // while문을 대신해 사용하는 다른 반복문법 사용하기.
+  // 함수가 함수를 리턴 . 재귀함수(자기자신을 리턴하기)// 자기자신을 계속반복한다. 값이 나올때까지. 무한루프 돌지않게 주의하기.(조건 잘 설정하기)
+  let [count,remove] = [0,0]// 비구조할당(구조분해할당)방식이용
+  // let count = 0; let remove = 0;
+  const recursion = (s)=>{
+      if(s === "1"){
+          return [count,remove]
+      }
+      count++ // 이진변환횟수++
+      s = s.split("").filter(num=>{
+          console.log(num)
+          if(num ==="0") remove++ // 문자열 0이 맞다면 0제거횟수 추가.
+          return num !== "0"; // num이 문자열 0이 아닌것만 담는다
+      }).length
+      s =s.toString(2)
+      return recursion(s)// 이렇게하면 다음에 들어오는 s값은 변환된값이 들어오게됨.
+  }
+  return recursion(s)
+}

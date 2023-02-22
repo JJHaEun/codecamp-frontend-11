@@ -47,5 +47,6 @@ export const useQueryFetchUsedItem = (): IuseQueryFetchUsedItem => {
       useditemId: String(router.query.productBoardId),
     },
   });
+
   return { data };
 };

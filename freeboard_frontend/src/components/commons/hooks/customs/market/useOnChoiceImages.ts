@@ -1,29 +1,19 @@
 import { Modal } from "antd";
 import type { ChangeEvent } from "react";
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 import { checkValidationFile } from "../../../../../commons/libraries/validationFile";
 import { useMutationUpload } from "../mutations/useMutationUpLoadImg";
-import { useQueryFetchUsedItem } from "../quries/useQueryFetchUsedItem";
 
 export const useOnChoiceImages = () => {
-  const choiceRef = useRef<HTMLInputElement>(null);
   const [uploadFile] = useMutationUpload();
   const [imageUrls, setImageUrls] = useState(["", "", ""]);
-  const { data } = useQueryFetchUsedItem();
-  const onClickImageChoice = async (): Promise<void> => {
-    choiceRef.current?.click();
-  };
+
   const onChangeImageUrls = (imageUrl: string, index: number): void => {
     const newImageUrls = [...imageUrls];
     newImageUrls[index] = imageUrl;
     setImageUrls(newImageUrls);
   };
-  useEffect(() => {
-    const images = data?.fetchUseditem.images;
-    if (images !== undefined && images !== null) {
-      setImageUrls([...images]);
-    }
-  }, [data]);
+
   const onChangeFile = async (
     event: ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
@@ -49,9 +39,9 @@ export const useOnChoiceImages = () => {
   };
 
   return {
-    onClickImageChoice,
     onChangeFile,
-    choiceRef,
     imageUrls,
+    onChangeImageUrls,
+    setImageUrls,
   };
 };

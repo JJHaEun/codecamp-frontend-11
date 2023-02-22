@@ -2,7 +2,7 @@ export interface IUseCreateForm {
   name: string;
   remarks: string;
   contents: string;
-  price: number;
+  price?: number;
   tags?: string[];
   images?: string[];
   useditemAddress: {
@@ -15,7 +15,7 @@ export interface IUpdateProduct {
   name?: string;
   remarks?: string;
   contents?: string;
-  price?: number;
+  price: number;
   tags?: string[];
   images?: string[];
 

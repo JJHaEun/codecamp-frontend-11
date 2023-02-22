@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import type { ChangeEvent } from "react";
-import { useRef } from "react";
+// import { useRef } from "react";
 import type {
   IMutation,
   IMutationUploadFileArgs,
@@ -20,11 +20,11 @@ export default function UploadImagesItem(
   >(UPLOAD_FILE);
   // const [files,setFiles] = useState<File[]>([])
 
-  const choiceRef = useRef<HTMLInputElement>(null);
+  // const choiceRef = useRef<HTMLInputElement>(null);
 
-  const onClickImageChoice = async (): Promise<void> => {
-    choiceRef.current?.click();
-  };
+  // const onClickImageChoice = async (): Promise<void> => {
+  //   choiceRef.current?.click();
+  // };
   const onChangeFile = async (
     event: ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
@@ -38,12 +38,12 @@ export default function UploadImagesItem(
           file,
         },
       });
-      console.log(result);
       if (typeof result.data?.uploadFile.url !== "string") {
         return;
       }
+      console.log(props.index);
       props.onChangeImageUrls(result.data?.uploadFile?.url, props.index);
-      console.log("hjhjh", result);
+      console.log("hjhjh", result.data.uploadFile.url);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
@@ -52,9 +52,9 @@ export default function UploadImagesItem(
   return (
     <>
       <UploadImagesBoardUI
-        onClickImageChoice={onClickImageChoice}
+        // onClickImageChoice={onClickImageChoice}
         onChangeFile={onChangeFile}
-        choiceRef={choiceRef}
+        // choiceRef={choiceRef}
         imageUrl={props.imageUrl}
       />
     </>

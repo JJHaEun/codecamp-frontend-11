@@ -6,7 +6,7 @@ export default function UploadImagesBoardUI(
   return (
     <>
       {props.imageUrl === "" ? (
-        <S.UploadBoxContent onClick={props.onClickImageChoice}>
+        <S.UploadBoxContent>
           <div>+</div>
           <div>Upload</div>
         </S.UploadBoxContent>
@@ -14,15 +14,14 @@ export default function UploadImagesBoardUI(
         <S.UploadImages
           src={`https://storage.googleapis.com/${props.imageUrl}`}
           alt=""
-          onClick={props.onClickImageChoice}
         />
       )}
       <input
         type="file"
         onChange={props.onChangeFile}
         accept="image/*"
-        ref={props.choiceRef}
-        style={{ display: "none" }}
+        // ref={props.choiceRef}
+        // style={{ display: "none" }}
       />
     </>
   );

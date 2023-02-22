@@ -19,7 +19,4 @@ export const UploadBoxContent = styled.div`
   color: #4f4f4f;
   font-size: 12px;
   font-weight: 500;
-  :hover {
-    cursor: pointer;
-  }
 `;
