@@ -28,7 +28,6 @@ export default function SignInUI(): JSX.Element {
               type="email"
               {...register("email")}
               placeholder="Email"
-              //   ref={inputRef}
             />
           </div>
           <div>{formState.errors.email?.message}</div>

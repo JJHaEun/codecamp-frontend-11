@@ -41,9 +41,8 @@ export default function UploadImagesItem(
       if (typeof result.data?.uploadFile.url !== "string") {
         return;
       }
-      console.log(props.index);
+
       props.onChangeImageUrls(result.data?.uploadFile?.url, props.index);
-      console.log("hjhjh", result.data.uploadFile.url);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
@@ -52,9 +51,7 @@ export default function UploadImagesItem(
   return (
     <>
       <UploadImagesBoardUI
-        // onClickImageChoice={onClickImageChoice}
         onChangeFile={onChangeFile}
-        // choiceRef={choiceRef}
         imageUrl={props.imageUrl}
       />
     </>

@@ -3,12 +3,14 @@ import {
   InMemoryCache,
   ApolloProvider,
   ApolloLink,
+  fromPromise,
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/stores";
-
+import { onError } from "@apollo/client/link/error";
+import { getAccessToken } from "../../../commons/libraries/getAccessToken";
 const GLOBAL_STATE = new InMemoryCache();
 
 interface IApolloSettingProps {
@@ -46,17 +48,49 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
     setAccessToken(result ?? "");
   }, []);
 
+  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+    // 1. 에러캐치.
+    // 그에러가 토큰만료에러면
+    if (typeof graphQLErrors !== "undefined") {
+      // 에러가 있으면이라는 말
+      for (const err of graphQLErrors) {
+        if (err.extensions.code === "UNAUTHENTICATED") {
+          // 토큰 만료에러라면
+          // 2. refresh토큰으로 accessToken재발급받기
+          return fromPromise(
+            getAccessToken().then((newAccessToken) => {
+              console.log(newAccessToken);
+
+              setAccessToken(newAccessToken ?? ""); // 기존것말고 다시 재발급받은것을 담아줌., 새로고침시에도 필요!!따라서 이 함수따로빼기
+              // 없으면 빈문자열이라도넣기
+              // 3. 재발급받은 accessToken으로 방금 실패한 쿼리 정보수정하기
+
+              operation.setContext({
+                headers: {
+                  ...operation.getContext().headers, // 기존의 만료된토큰이 추가되어있는 상태
+                  Authorization: `Bearer ${newAccessToken}`, // 토큰만 새것으로 바꿔치기
+                },
+              }); // 방금실패한 헤더를 변경(accessToken만 변경)
+            })
+          ).flatMap(
+            () => forward(operation) // 실패했던것 (방금 수정한 쿼리)다시 요청하기
+          );
+        }
+      }
+    }
+  });
   const uploadLink = createUploadLink({
-    uri: "http://backend-practice.codebootcamp.co.kr/graphql ",
+    uri: "https://backend-practice.codebootcamp.co.kr/graphql ",
     // 모든 그래프큐엘api요청시마다 헤더추가
     headers: {
       // Authorization: "Bearer 토큰"
       Authorization: `Bearer ${accessToken}`,
     },
+    credentials: "include",
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink]),
+    link: ApolloLink.from([errorLink, uploadLink]),
     cache: GLOBAL_STATE, // 컴퓨터의 메모리에  벡엔드에서 받아온 데이터 임시로 저장해놓기 => 니중에 더 자세히 알아보기
   });
 

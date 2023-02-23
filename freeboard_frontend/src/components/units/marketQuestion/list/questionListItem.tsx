@@ -7,6 +7,7 @@ import MarketAnswerUI from "../../marketQuestionAnswer/write/answer";
 import { DELETE_USED_ITEM_QUESTION } from "../question.queries";
 import type { IMarketQuestionItemProps, IPrev } from "../question.types";
 import MarketQuestionUI from "../write/question.container";
+import * as S from "./questionList.styles";
 
 export default function MarketQuestionItem(
   props: IMarketQuestionItemProps
@@ -51,14 +52,14 @@ export default function MarketQuestionItem(
             <div>
               <span>{MessageDate(props.el.createdAt)}</span>
               <div>
-                <img
+                <S.ADeleteImg
                   src="/delete_icon.png"
                   alt="삭제아이콘"
                   onClick={onClickDelete(props.el._id)}
                 />
-                <button onClick={onClickEdit}>
+                <S.AEdit onClick={onClickEdit}>
                   <FontAwesomeIcon icon={faPenToSquare} />
-                </button>
+                </S.AEdit>
                 <button onClick={openAnswer}>답변</button>
               </div>
               <div>{props.el.contents}</div>

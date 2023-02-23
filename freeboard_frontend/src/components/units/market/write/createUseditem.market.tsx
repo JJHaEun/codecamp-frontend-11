@@ -14,7 +14,6 @@ import "react-quill/dist/quill.snow.css";
 // import { isEditState, isOpenState } from "../../../../commons/stores";
 import { useOnclickCreateUsedItem } from "../../../commons/hooks/customs/market/useOnclickCreateUsedItem";
 import type { IUseCreateForm } from "./createUsedItem.types";
-import { useOnclickUpdateUsedItem } from "../../../commons/hooks/customs/market/useOnclickUpdateUsedItem";
 import { useQueryFetchUsedItem } from "../../../commons/hooks/customs/quries/useQueryFetchUsedItem";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { usedItemSchema } from "../../../../commons/libraries/validations/usedItemValidation";
@@ -22,9 +21,7 @@ import { useReactQuill } from "../../../commons/hooks/customs/market/onChangeCon
 import dynamic from "next/dynamic";
 // import type { IUseCreateForm } from "./createUsedItem.types";
 import { v4 as uuidv4 } from "uuid";
-import { useOnChoiceImages } from "../../../commons/hooks/customs/market/useOnChoiceImages";
 import UploadImagesItem from "../../../commons/upload/uploadImgItems/Upload.container";
-import { useEffect } from "react";
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
@@ -32,10 +29,15 @@ const ReactQuill = dynamic(async () => await import("react-quill"), {
 export default function MarketUI(): JSX.Element {
   const [isEdit] = useRecoilState(isEditState);
   const [isOpen] = useRecoilState(isOpenState);
-  const { onClickUpdateUsedItem } = useOnclickUpdateUsedItem();
-  const { onChangeImageUrls, imageUrls, setImageUrls } = useOnChoiceImages();
+  // const { onClickUpdateUsedItem } = useOnclickUpdateUsedItem();
+  // const { onChangeImageUrls, imageUrls, setImageUrls } = useOnChoiceImages();
   const { ToggleModal } = useToggleModal();
-  const { onClickCreateUsedItem } = useOnclickCreateUsedItem();
+  const {
+    onClickCreateUsedItem,
+    onClickUpdateUsedItem,
+    imageUrls,
+    onChangeImageUrls,
+  } = useOnclickCreateUsedItem();
   const { onChangeAddress } = useOnChangeAddress();
   const { data } = useQueryFetchUsedItem();
   const { onChangeContents } = useReactQuill();
@@ -51,12 +53,13 @@ export default function MarketUI(): JSX.Element {
       },
     });
   const onChange = onChangeAddress(setValue);
-  useEffect(() => {
-    const images = data?.fetchUseditem.images;
-    if (images !== undefined && images !== null) {
-      setImageUrls([...images]);
-    }
-  }, [data]);
+
+  // useEffect(() => {
+  //   const images = data?.fetchUseditem.images;
+  //   if (images !== undefined && images !== null) {
+  //     setImageUrls([...images]);
+  //   }
+  // }, [data?.fetchUseditem.images]);
   //   // 오늘 본 상품 로컬스토리지를 이용해 visited를 이용해서 저장
   return (
     <>
@@ -70,8 +73,10 @@ export default function MarketUI(): JSX.Element {
           isEdit ? onClickUpdateUsedItem : onClickCreateUsedItem
         )}
       >
-        <h1>상품명</h1>
+        <h1>상품{isEdit ? "수정" : "등록"}</h1>
+        <label>상품명</label>
         <input type="text" {...register("name")} />
+        <div>{formState.errors.name?.message}</div>
         <div>
           <label>가격</label>
           <input type="text" {...register("price")} />

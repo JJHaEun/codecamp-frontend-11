@@ -2906,3 +2906,68 @@ function solution(s) {
   }
   return recursion(s)
 }
+
+
+// 비밀지도
+function solution(n, arr1, arr2) {
+  //    console.log(arr1,":",arr2)
+  //     const arr1result = []
+  //     const arr2result = []
+  //     const a1 = []
+  //     const a2 = []
+  // // 인자들을 뽑아 이진수로 변경하기
+  //     for(let i = 0 ; i <arr1.length;i++){
+  //         arr1result.push(arr1[i].toString(2))
+  //         arr2result.push(arr2[i].toString(2))
+  //     }
+  //     for(let i = 0 ; i<arr1result.length;i++){
+  //     a1.push(arr1result[i].split(""))
+  //       a2.push(arr2result[i].split(""))  
+          
+  //   }
+  //     for(let i = 0; i <a1.length;i++){
+  //         for(let j = 0; j < a1[i].length;i++){
+  //             if(a1)
+  //         }
+  //     }
+  //     console.log(a1)
+      
+      //이진수로 바꾼숫자의 길이가 다름.
+      
+  const answer =[]
+  for(let i = 0 ; i<arr1.length;i++){
+      answer[i] = ""
+  // 이진법으로 변환한 숫자의 자리수를 통일시키기 위해 앞에서부터 0으로 채움.
+      const map1 = arr1[i].toString(2).padStart(n,"0") // 0은 공백이라고했음.
+      const map2 = arr2[i].toString(2).padStart(n,"0")
+      // 자리수 맞추기위해 앞에 0을 붙인다.
+      for(let j = 0 ; j < map1.length ; j++){
+          answer[i]+=(map1[j] === "1" || map2[j] === "1"? "#" : " ") // 지도두개중 하나라도 1이라면 #을 넣는다.
+          // 둘다 1이 아니라면 공백이라는말이고, 그럼 공백을 넣는다.
+  
+          
+      }
+  }
+  return answer  
+      
+  }
+
+
+  // 메서드 사용하기. 답은 배열형태로 나옴.
+
+  // => map과 reduce사용
+
+  function solution(n, arr1, arr2) {
+    return arr1.map((map1,i)=>{
+        const map = map1.toString(2).padStart(n,"0")
+        const map2 = arr2[i].toString(2).padStart(n,"0")
+ return map.split("").reduce((acc,cur,j)=>{
+    return acc +(
+    cur === "1" || map2[j] === "1" ? "#" : " "
+    )
+ },"")
+   
+        
+    })
+   // map을 통해서 배열로 만들고, 그 배열을 사용해 reduce....  
+ }
