@@ -1,4 +1,4 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, RefObject } from "react";
 
 export interface UploadImagesBoardProps {
   onChangeImageUrls: (imageUrl: string, index: number) => void;
@@ -6,8 +6,8 @@ export interface UploadImagesBoardProps {
   imageUrl: string;
 }
 export interface IUploadImagesBoardUIProps {
-  // onClickImageChoice: () => void;
+  onClickImageChoice: () => void;
   onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
-  // choiceRef: RefObject<HTMLInputElement>;
+  choiceRef: RefObject<HTMLInputElement>;
   imageUrl: string;
 }

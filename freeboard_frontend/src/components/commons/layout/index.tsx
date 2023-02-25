@@ -1,6 +1,6 @@
 import LayoutBanner from "./banner/banner.container";
 import LayoutNav from "./navigation";
-import LayoutSideBar from "./sidebar/sidebar.container";
+// import LayoutSideBar from "./sidebar/sidebar.container";
 import { MainWrap, PageWrap } from "./layout.styles";
 import LayoutFooter from "./footer";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
     `/boards/${String(router.query.boardId)}/edit`,
     `/boards/${String(router.query.boardId)}`,
   ];
-  const isShowSidebar = SHOW_SIDEBAR.includes(router.asPath);
+  // const isShowSidebar = SHOW_SIDEBAR.includes(router.asPath);
   const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath);
   const isHiddenNav = SHOW_SIDEBAR.includes(router.asPath);
 
@@ -28,7 +28,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
     <>
       <LayoutHeaderWrap />
       <MainWrap>
-        {isShowSidebar && <LayoutSideBar />}
+        {/* {isShowSidebar && <LayoutSideBar />} */}
         <PageWrap>{props.children}</PageWrap>
       </MainWrap>
       {!isHiddenNav && <LayoutNav />}

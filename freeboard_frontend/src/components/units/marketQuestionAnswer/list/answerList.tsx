@@ -47,7 +47,7 @@ export default function MarketAnswerListUI(
   };
 
   return (
-    <div>
+    <div style={{ width: "1119px", height: "400px", overflow: "auto" }}>
       <InfiniteScroll
         pageStart={0}
         loadMore={onLoadMore}

@@ -8,7 +8,8 @@ export const useReactQuill = () => {
       trigger: UseFormTrigger<IUseCreateForm>
     ) =>
     (value: string) => {
-      setValue("contents", value === "<p><br/></p>" ? "" : value);
+      console.log(value);
+      setValue("contents", value === "<p><br></p>" ? "" : value);
       void trigger("contents");
     };
   return {

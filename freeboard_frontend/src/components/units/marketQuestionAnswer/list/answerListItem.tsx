@@ -31,14 +31,12 @@ export default function MarketAnswerListItemUI(
         update(cache, { data }) {
           cache.modify({
             fields: {
-              fetchBoards: (prev: IPrev[], { readField }) => {
-                // IPrev라는 타입의 배열이라는 말
+              fetchUseditemQuestionAnswers: (prev: IPrev[], { readField }) => {
                 const deletedId = data?.deleteUseditemQuestionAnswer; // 삭제된 아이디
                 const filteredPrev = prev.filter(
                   (el) => readField("_id", el) !== deletedId
-                ); // 다른것만 필터링해줘// 필터된것들(삭제가 적용된..)
-                // readField("_id",el) readField헤서 _id를 꺼내와줘. el에서
-                return [...filteredPrev]; // 그런데, prev안의 el이 객체로 들어오지않음. __ref라는 키에 해당 주소만 가지고있음. 그래서 ._id가없고 이 주소를 타고가서 ._id를 찾아와야함.
+                );
+                return [...filteredPrev];
               },
             },
           });

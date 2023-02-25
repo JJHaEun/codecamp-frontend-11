@@ -66,16 +66,11 @@ export default function KakaoMap(): JSX.Element {
         );
       });
     };
-  }, [data?.fetchUseditem.useditemAddress?.address]);
+  }, [data]);
 
   return (
     <>
-      {data?.fetchUseditem.useditemAddress?.address !== "" &&
-      data?.fetchUseditem.useditemAddress?.zipcode !== "" ? (
-        <div id="map" style={{ width: 250, height: 200 }}></div>
-      ) : (
-        <></>
-      )}
+      <div id="map" style={{ width: 250, height: 200 }}></div>
     </>
   );
 }

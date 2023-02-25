@@ -7,8 +7,11 @@ import {
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../commons/stores";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import {
+  accessTokenState,
+  restoreAccessTokenLoadable,
+} from "../../../commons/stores";
 import { onError } from "@apollo/client/link/error";
 import { getAccessToken } from "../../../commons/libraries/getAccessToken";
 const GLOBAL_STATE = new InMemoryCache();
@@ -19,7 +22,7 @@ interface IApolloSettingProps {
 
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-
+  const aaa = useRecoilValueLoadable(restoreAccessTokenLoadable); // api요청등을 글로벌로 하는...(필요한곳에만하는것.)
   // 1. 프리랜더링 예제 - process.browser방법
   // if (process.browser) {
   //   alert("방가 . 지금은 브라우저~");
@@ -44,8 +47,19 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   // 3. 프리랜더링 무시 -useEffect방법  --> 가장깔끔
   useEffect(() => {
     // console.log("지금은 브라우저");
-    const result = localStorage.getItem("accessToken");
-    setAccessToken(result ?? "");
+    // 1. refreshToken배우기 이전방식
+    // const result = localStorage.getItem("accessToken");
+    // setAccessToken(result ?? ""); // 기존방법. 다만 이제는 쿠키로 바뀌었으니 쿠키안에있는 refreshToken가져와야함. 그러나 얘는 secure옵션과 httpOnly설정이 되어있어 document.~~으로 꺼내오지 못함
+
+    // 2. refreshToken 이후 방식 // (refreshToken없애기 => 로그아웃 api요청)
+    // 글로벌 스테이트랑 비슷한 방법. 글로벌에 저장하고 뽑는것.요청 받은결과를 필요한곳에서 뽑아사용
+    void aaa.toPromise().then((newAccessToken) => {
+      setAccessToken(newAccessToken ?? "");
+    });
+    // void getAccessToken().then((newAccessToken) => {
+    //   // 받아온 refreshToken을 다시 넣어줌으로써 새로고침시에도 사라지지않게함.
+    //   setAccessToken(newAccessToken ?? "");
+    // });
   }, []);
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
@@ -59,6 +73,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
           // 2. refresh토큰으로 accessToken재발급받기
           return fromPromise(
             getAccessToken().then((newAccessToken) => {
+              // restoreAccessToken을 발급받아와서 accessToken을 교체.
               console.log(newAccessToken);
 
               setAccessToken(newAccessToken ?? ""); // 기존것말고 다시 재발급받은것을 담아줌., 새로고침시에도 필요!!따라서 이 함수따로빼기
@@ -66,6 +81,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
               // 3. 재발급받은 accessToken으로 방금 실패한 쿼리 정보수정하기
 
               operation.setContext({
+                // 쿠키에 refreshToken을 넣어
                 headers: {
                   ...operation.getContext().headers, // 기존의 만료된토큰이 추가되어있는 상태
                   Authorization: `Bearer ${newAccessToken}`, // 토큰만 새것으로 바꿔치기
@@ -90,7 +106,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([errorLink, uploadLink]),
+    link: ApolloLink.from([errorLink, uploadLink]), // 순서가 중요. errorLink가 먼저 나와야함.
     cache: GLOBAL_STATE, // 컴퓨터의 메모리에  벡엔드에서 받아온 데이터 임시로 저장해놓기 => 니중에 더 자세히 알아보기
   });
 

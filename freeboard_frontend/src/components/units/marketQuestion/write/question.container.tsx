@@ -13,6 +13,8 @@ import {
   UPDATE_USED_ITEM_QUESTION,
 } from "../question.queries";
 import type { IMarketQuestionUIProps, IQuestionForm } from "../question.types";
+import * as S from "../question.styles";
+import { useToggleModal } from "../../../commons/hooks/customs/market/useToggleModal";
 
 export default function MarketQuestionUI(
   props: IMarketQuestionUIProps
@@ -21,7 +23,9 @@ export default function MarketQuestionUI(
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IQuestionForm>();
+  } = useForm<IQuestionForm>({
+    mode: "onChange",
+  });
 
   const [createUseditemQuestion] = useMutation<
     Pick<IMutation, "createUseditemQuestion">,
@@ -29,7 +33,7 @@ export default function MarketQuestionUI(
   >(CREATE_USED_ITEM_QUESTION);
 
   const router = useRouter();
-
+  const { ToggleModal } = useToggleModal();
   const [updateUseditemQuestion] = useMutation<
     Pick<IMutation, "updateUseditemQuestion">,
     IMutationUpdateUseditemQuestionArgs
@@ -95,10 +99,10 @@ export default function MarketQuestionUI(
       <div>
         <div>
           {Boolean(props.isEdit !== true) && (
-            <div>
-              <img src="/comments_icon.png" />
-              <span>댓글</span>
-            </div>
+            <S.CommentTitle>
+              <S.Qcomment src="/comments_icon.png" />
+              <S.QuestionTitle>댓글</S.QuestionTitle>
+            </S.CommentTitle>
           )}
           <form
             onSubmit={
@@ -108,16 +112,29 @@ export default function MarketQuestionUI(
             }
           >
             <div>
-              <textarea
-                maxLength={200}
-                placeholder="댓글을 작성해주세요"
-                {...register("contents", { required: true })}
-              />
-              <div style={{ color: "red", fontSize: "10px" }}>
-                {Boolean(errors?.contents) && "내용을 입력해주세요"}
-              </div>
+              <div>
+                <S.CommentBox
+                  placeholder="댓글을 작성해주세요"
+                  {...register("contents", { required: true })}
+                  defaultValue={
+                    props.el?.contents !== "" ? props.el?.contents : ""
+                  }
+                />
 
-              <button>댓글{props.isEdit === true ? "수정" : "등록"}</button>
+                <div style={{ color: "red", fontSize: "10px" }}>
+                  {Boolean(errors?.contents) && "내용을 입력해주세요"}
+                </div>
+              </div>
+              <S.CommentButtonWrap>
+                <S.Buttons>
+                  질문{props.isEdit === true ? "수정" : "등록"}
+                </S.Buttons>
+                {props.isEdit !== true && <button type="reset">초기화</button>}
+
+                {props.isEdit === true && (
+                  <button onClick={ToggleModal}>수정취소</button>
+                )}
+              </S.CommentButtonWrap>
             </div>
           </form>
         </div>

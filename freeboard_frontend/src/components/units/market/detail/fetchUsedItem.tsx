@@ -1,14 +1,15 @@
 import DOMPurify from "dompurify";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import Slider from "react-slick";
 import { MessageDate } from "../../../../commons/libraries/date";
+import { useOnClickBuy } from "../../../commons/hooks/customs/market/useOnClickBuy";
 import { useDeleteUsedItem } from "../../../commons/hooks/customs/market/useOnclickDeleteUsedItem";
 import { useQueryFetchUsedItem } from "../../../commons/hooks/customs/quries/useQueryFetchUsedItem";
 import MarketQuestionListUI from "../../marketQuestion/list/questionList";
 import MarketQuestionUI from "../../marketQuestion/write/question.container";
 import KakaoMap from "../kakaoMap/kakaoMap";
-
+import * as S from "./fetchUsedItem.styles";
 declare const window: typeof globalThis & {
   kakao: any;
 };
@@ -16,57 +17,80 @@ export default function MarketDetailUI() {
   const router = useRouter();
   const { onClickDelete } = useDeleteUsedItem();
   const { data } = useQueryFetchUsedItem();
-
+  const { onClickBuy } = useOnClickBuy();
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    swipeToSlide: true,
+  };
   return (
     <>
-      <div>
+      <S.ProductDetailWrap>
+        <S.Title>
+          <S.Sellers>
+            판매자 : <S.Seller>{data?.fetchUseditem.seller?.name}</S.Seller>
+          </S.Sellers>
+          <div>{MessageDate(String(data?.fetchUseditem.createdAt))}</div>
+        </S.Title>
+        <S.ProductName>
+          <div>상품명 :</div>
+          <h2>{data?.fetchUseditem.name}</h2>
+        </S.ProductName>
+        <Slider {...settings}>
+          {data?.fetchUseditem.images
+            ?.filter((el) => el)
+            .map((el) => (
+              <S.ImgWrap key={el}>
+                <S.ProductImg src={`https://storage.googleapis.com/${el}`} />
+              </S.ImgWrap>
+            ))}
+        </Slider>
         <div>
-          <h1>{data?.fetchUseditem.remarks}</h1>
-        </div>
-        <div>
-          <div>
-            <div>{data?.fetchUseditem.seller?.name}</div>
-            <div>{MessageDate(String(data?.fetchUseditem.createdAt))}</div>
-            <div>
-              <div>{data?.fetchUseditem.useditemAddress?.address}</div>
-              <div>{data?.fetchUseditem.useditemAddress?.addressDetail}</div>
-            </div>
-          </div>
-          <KakaoMap />
+          <S.ProductRemarks>{data?.fetchUseditem.remarks}</S.ProductRemarks>
+          <S.AddressGroup>
+            <S.Address>
+              <span>{data?.fetchUseditem.useditemAddress?.address}</span>
+              <span>{data?.fetchUseditem.useditemAddress?.addressDetail}</span>
+            </S.Address>
+
+            {data?.fetchUseditem.useditemAddress?.address !== undefined &&
+            data.fetchUseditem.useditemAddress.address !== "" ? (
+              <KakaoMap />
+            ) : (
+              <></>
+            )}
+          </S.AddressGroup>
           {typeof window !== "undefined" ? (
-            <div
-              style={{ color: "blue" }}
+            <S.Contents
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(
                   String(data?.fetchUseditem.contents)
                 ),
               }}
-            ></div>
+            ></S.Contents>
           ) : (
-            <div style={{ color: "blue" }} />
+            <S.Contents></S.Contents>
           )}
         </div>
-        <div>
-          {data?.fetchUseditem.images
-            ?.filter((el) => el)
-            .map((el) => (
-              <img key={el} src={`https://storage.googleapis.com/${el}`} />
-            ))}
-        </div>
-        <div>
-          <button>
-            <Link href={`/market/${String(router.query.productBoardId)}/edit`}>
-              <a>수정하기</a>
-            </Link>
-          </button>
-          <button onClick={onClickDelete}>삭제하기</button>
-          <button>
-            <Link href={`/market`}>
-              <a>목록으로</a>
-            </Link>
-          </button>
-        </div>
-      </div>
+      </S.ProductDetailWrap>
+      <S.ButtonWrap>
+        <S.Buttons>
+          <Link href={`/market/${String(router.query.productBoardId)}/edit`}>
+            <S.ALink>수정하기</S.ALink>
+          </Link>
+        </S.Buttons>
+        <S.Buttons onClick={onClickDelete}>삭제하기</S.Buttons>
+        <S.Buttons>
+          <Link href={`/market`}>
+            <S.ALink>목록으로</S.ALink>
+          </Link>
+        </S.Buttons>
+        <button onClick={onClickBuy}>구매하기</button>
+      </S.ButtonWrap>
       <MarketQuestionUI />
       <MarketQuestionListUI />
     </>

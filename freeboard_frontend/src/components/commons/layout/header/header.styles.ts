@@ -104,8 +104,6 @@ export const TitleAndMenu = styled.div`
   display: flex;
   justify-content: space-between;
   padding-right: 50px;
-  /* gap: 0 200px; */
-  /* gap: 0px 0px 0px 200px; */
 `;
 // export const LeftMenuWrap = styled.span`
 //   display: flex;

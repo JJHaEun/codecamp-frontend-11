@@ -8,7 +8,7 @@ import type {
 } from "../../../../commons/types/generated/types";
 import { FETCH_USED_ITEM_QUESTIONS } from "../question.queries";
 import MarketQuestionItem from "./questionListItem";
-
+import * as S from "./questionList.styles";
 export default function MarketQuestionListUI(): JSX.Element {
   const router = useRouter();
   const { data, fetchMore } = useQuery<
@@ -43,7 +43,7 @@ export default function MarketQuestionListUI(): JSX.Element {
   };
 
   return (
-    <div>
+    <S.QuestionWrap>
       <InfiniteScroll
         pageStart={0}
         loadMore={onLoadMore}
@@ -56,6 +56,6 @@ export default function MarketQuestionListUI(): JSX.Element {
           </div>
         )) ?? <></>}
       </InfiniteScroll>
-    </div>
+    </S.QuestionWrap>
   );
 }

@@ -7,7 +7,9 @@ import type {
 export interface CreateAnswerFrom {
   contents: string;
 }
-
+export interface IPrev {
+  __ref: string;
+}
 export interface IMarketAnswerUIProps {
   el?: IUseditemQuestion;
   elAnswer?: IUseditemQuestionAnswer;

@@ -10,7 +10,6 @@ import type {
 } from "../../../../commons/types/generated/types";
 import {
   CREATE_USED_ITEM_QUESTION_ANSWER,
-  FETCH_USED_ITEM_QUESTION_ANSWERS,
   UPDATE_USED_ITEM_QUSETION_ANSWER,
 } from "../answer.queris";
 import type { CreateAnswerFrom, IMarketAnswerUIProps } from "../answer.types";
@@ -50,12 +49,21 @@ export default function MarketAnswerUI(
             contents: data.contents,
           },
         },
-        refetchQueries: [
-          {
-            query: FETCH_USED_ITEM_QUESTION_ANSWERS,
-            variables: { useditemQuestionId: props.elAnswer?._id },
-          },
-        ],
+        // refetchQueries: [
+        //   {
+        //     query: FETCH_USED_ITEM_QUESTION_ANSWERS,
+        //     variables: { useditemQuestionId: props.el?._id },
+        //   },
+        // ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchUseditemQuestionAnswers: (prev) => {
+                return [data?.createUseditemQuestionAnswer, ...prev];
+              },
+            },
+          });
+        },
       });
       Modal.success({ content: "답변완료" });
       props.setOpen?.(false);
@@ -82,7 +90,7 @@ export default function MarketAnswerUI(
         update(cache, { data }) {
           cache.modify({
             fields: {
-              fetchUseditemQuestions: (prev) => {
+              fetchUseditemQuestionAnswers: (prev) => {
                 return [data?.updateUseditemQuestionAnswer, ...prev];
               },
             },
@@ -107,17 +115,15 @@ export default function MarketAnswerUI(
         <textarea
           {...register("contents")}
           defaultValue={
-            props.el?.contents !== ""
-              ? props.el?.contents
-              : props.elAnswer?.contents ?? ""
+            props.elAnswer?.contents !== "" ? props.elAnswer?.contents : ""
           }
         />
+
         <div style={{ color: "red", fontSize: "10px" }}>
           {Boolean(errors?.contents) && "내용을 입력해주세요"}
         </div>
-        <button>답변완료</button>
+        <button>답변{props.isEdit === true ? "수정" : "등록"}</button>
       </form>
-      {/* <div>ghgh</div> */}
       <MarketAnswerListUI el={props.el} />
     </>
   );

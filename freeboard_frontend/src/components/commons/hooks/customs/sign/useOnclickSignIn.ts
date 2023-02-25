@@ -21,7 +21,6 @@ export const useOnclickSignIn = (): IUseonclickSignIn => {
           ...data,
         },
       });
-      console.log(result.data?.loginUser.accessToken);
       const accessToken = result.data?.loginUser.accessToken;
       if (accessToken === undefined) {
         Modal.error({ content: "로그인에 실패했습니다. 다시 시도해주세요" });
@@ -29,7 +28,7 @@ export const useOnclickSignIn = (): IUseonclickSignIn => {
       }
 
       setAccessToken(accessToken);
-      localStorage.setItem("accessToken", accessToken); // 임시사용
+
       void router.push(`/`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
