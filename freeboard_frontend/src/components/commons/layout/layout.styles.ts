@@ -18,19 +18,20 @@ export const MainWrap = styled.div`
   justify-content: center;
   /* position: relative; */
   width: 100%;
+  gap: 2%;
   padding-top: 100px;
   padding-bottom: 50px;
 `;
 
 // export const SideBarWrap = styled.div`
-//   width: 10%;
+//   width: calc(100% - 75%);
 //   /* border: 2px solid coral; */
 //   border-radius: 3px;
 //   margin: 80px 0;
 //   padding-top: 20px;
 
-//   /* width: 100%; */
-//   /* transition: top 0.5s; */
+/* width: 100%; */
+/* transition: top 0.5s; */
 // `;
 export const PageWrap = styled.div`
   width: 75%;

@@ -1,5 +1,3 @@
-import { HomeTwoTone } from "@ant-design/icons";
-import { faHryvnia } from "@fortawesome/free-solid-svg-icons";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 import { HeaderWrap } from "../layout.styles";
@@ -40,12 +38,13 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <S.MeNuImg>
               <span
-                style={{
-                  backgroundColor: "red",
-                  // zIndex: 10,
-                  // height: "50px",
-                  // width: "30px",
-                }}
+                style={
+                  {
+                    // zIndex: 10,
+                    // height: "50px",
+                    // width: "30px",
+                  }
+                }
                 // onClick={!accessToken ? 로그인함수: 로그아웃함수}
               >
                 SignIn/SignOut

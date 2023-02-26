@@ -7,7 +7,7 @@ declare const window: typeof globalThis & {
   IMP: any;
 };
 
-export const useOnClickChargeKakao = () => {
+export const useOnClickCharge = () => {
   const { data: Data } = useQueryFetchUserLoggedIn();
   const [createPointTransactionOfLoading] =
     useMutationCreatePointTransactionOfLoading();
@@ -27,6 +27,7 @@ export const useOnClickChargeKakao = () => {
         buyer_tel: "010-4242-4242",
         buyer_addr: "서울특별시 강남구 신사동",
         buyer_postcode: "01181",
+        m_redirect_url: "http://localhost:3000/myPage", // 모바일에서는 결제시 페이지 주소가 바뀜. 따라서 결제가 끝나고 돌아갈 주소 입력해야함
       },
       async (rsp: any) => {
         // callback
@@ -64,6 +65,7 @@ export const useOnClickChargeKakao = () => {
         amount: data.price,
         buyer_email: Data?.fetchUserLoggedIn.email,
         buyer_name: Data?.fetchUserLoggedIn.name,
+        m_redirect_url: "http://localhost:3000/myPage", // 모바일에서는 결제시 페이지 주소가 바뀜. 따라서 결제가 끝나고 돌아갈 주소 입력해야함
       },
       async (rsp: any) => {
         // callback

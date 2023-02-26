@@ -35,6 +35,10 @@ const items2: MenuProps["items"] = [
     key: "/market",
     // icon: <MailOutlined />,
   },
+  {
+    label: "마이페이지",
+    key: "/myPage",
+  },
 ];
 export default function LayoutHeaderWrap(): JSX.Element {
   const router = useRouter();

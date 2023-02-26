@@ -18,7 +18,7 @@ const SiteNameAnimation = keyframes`
 `;
 export const SiteTitle = styled.div`
   transform: rotate(-3deg) translate(50px, 10px);
-  /* width: 400px; */
+  width: 400px;
   font-size: 48px;
   padding-left: 5px;
   /* margin-top: 90px; */

@@ -17,7 +17,7 @@ export const Seller = styled.h1`
 `;
 export const ProductName = styled.div`
   display: flex;
-  gap: 2%;
+  gap: 5px;
 `;
 export const Title = styled.div`
   display: flex;
@@ -26,6 +26,24 @@ export const Title = styled.div`
 `;
 export const ProductRemarks = styled.div`
   font-size: 18px;
+`;
+export const SliderWrap = styled.div`
+  width: 100%;
+  .slick-dots {
+    padding-bottom: 15px;
+  }
+  .slick-slider {
+    .slick-list {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: rgba(95, 158, 160);
+    font-size: 20px;
+  }
 `;
 export const AddressGroup = styled.div`
   display: flex;
@@ -52,6 +70,7 @@ export const ImgWrap = styled.div`
 export const ProductImg = styled.img`
   width: 100%;
   height: 300px;
+  object-fit: contain;
 `;
 export const Contents = styled.div`
   width: 100%;
@@ -66,4 +85,14 @@ export const ButtonWrap = styled.div`
 export const Buttons = styled(UpLoad)``;
 export const ALink = styled.a`
   text-decoration: none;
+`;
+export const NameAndLikeWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const PickWrap = styled.div`
+  position: relative;
+`;
+export const PickNumber = styled.span`
+  position: absolute;
 `;

@@ -2,11 +2,13 @@ import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroller";
 import { MessageDate } from "../../../../commons/libraries/date";
 import type { IUseditem } from "../../../../commons/types/generated/types";
+import { AddLocal } from "../../../commons/hooks/customs/market/onClickMoveAndLocal";
 import { useQueryFetchUsedItems } from "../../../commons/hooks/customs/quries/useQueryFetchUsedItems";
+import { FcLike } from "react-icons/fc";
 
 export default function MarketListUI(): JSX.Element {
   const { data, onLoadMore } = useQueryFetchUsedItems();
-
+  const { onClickAddTodayAndMove } = AddLocal();
   return (
     <>
       <div style={{ width: "1119px", height: "400px", overflow: "auto" }}>
@@ -17,7 +19,7 @@ export default function MarketListUI(): JSX.Element {
           useWindow={false}
         >
           {data?.fetchUseditems.map((el: IUseditem) => (
-            <div key={el._id}>
+            <div key={el._id} onClick={onClickAddTodayAndMove(el)}>
               {el.images !== undefined && el.images !== null && (
                 <img
                   src={`https://storage.googleapis.com/${el.images[0]}`}
@@ -26,12 +28,15 @@ export default function MarketListUI(): JSX.Element {
               )}
               <h1>{el.seller?.name}</h1>
               <div>{el.name}</div>
-              <Link href={`/market/${el._id}`}>
-                <a>{el.remarks}</a>
-              </Link>
+
+              <div>{el.remarks}</div>
+
               <footer>
                 <div>{MessageDate(el.createdAt)}</div>
-                <div>{el.pickedCount}</div>
+                <div>
+                  <FcLike />
+                  {el.pickedCount}
+                </div>
               </footer>
             </div>
           ))}

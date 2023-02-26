@@ -10,6 +10,9 @@ import MarketQuestionListUI from "../../marketQuestion/list/questionList";
 import MarketQuestionUI from "../../marketQuestion/write/question.container";
 import KakaoMap from "../kakaoMap/kakaoMap";
 import * as S from "./fetchUsedItem.styles";
+import { FcLike } from "react-icons/fc";
+import { useOnClickPick } from "../../../commons/hooks/customs/market/useOnClickPick";
+
 declare const window: typeof globalThis & {
   kakao: any;
 };
@@ -18,10 +21,12 @@ export default function MarketDetailUI() {
   const { onClickDelete } = useDeleteUsedItem();
   const { data } = useQueryFetchUsedItem();
   const { onClickBuy } = useOnClickBuy();
+  const { onClickPick } = useOnClickPick();
+
   const settings = {
     dots: true,
     infinite: true,
-    speed: 800,
+    speed: 1200,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -36,19 +41,29 @@ export default function MarketDetailUI() {
           </S.Sellers>
           <div>{MessageDate(String(data?.fetchUseditem.createdAt))}</div>
         </S.Title>
-        <S.ProductName>
-          <div>상품명 :</div>
-          <h2>{data?.fetchUseditem.name}</h2>
-        </S.ProductName>
-        <Slider {...settings}>
-          {data?.fetchUseditem.images
-            ?.filter((el) => el)
-            .map((el) => (
-              <S.ImgWrap key={el}>
-                <S.ProductImg src={`https://storage.googleapis.com/${el}`} />
-              </S.ImgWrap>
-            ))}
-        </Slider>
+        <S.NameAndLikeWrap>
+          <S.ProductName>
+            <div>상품명 :</div>
+            <h2>{data?.fetchUseditem.name}</h2>
+          </S.ProductName>
+          <S.PickWrap>
+            <span onClick={onClickPick(String(router.query.productBoardId))}>
+              <FcLike />
+            </span>
+            <S.PickNumber>{data?.fetchUseditem.pickedCount}</S.PickNumber>
+          </S.PickWrap>
+        </S.NameAndLikeWrap>
+        <S.SliderWrap>
+          <Slider {...settings}>
+            {data?.fetchUseditem.images
+              ?.filter((el) => el)
+              .map((el) => (
+                <S.ImgWrap key={el}>
+                  <S.ProductImg src={`https://storage.googleapis.com/${el}`} />
+                </S.ImgWrap>
+              ))}
+          </Slider>
+        </S.SliderWrap>
         <div>
           <S.ProductRemarks>{data?.fetchUseditem.remarks}</S.ProductRemarks>
           <S.AddressGroup>
@@ -58,6 +73,7 @@ export default function MarketDetailUI() {
             </S.Address>
 
             {data?.fetchUseditem.useditemAddress?.address !== undefined &&
+            data?.fetchUseditem.useditemAddress?.address !== null &&
             data.fetchUseditem.useditemAddress.address !== "" ? (
               <KakaoMap />
             ) : (

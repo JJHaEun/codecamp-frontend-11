@@ -1,55 +1,41 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
-
-import { AppstoreOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { useRouter } from "next/router";
-// import type { MouseEvent } from "react";
-import LayoutSideBarUI from "./sidebar.presenter";
-import type { MenuItem } from "./sidebar.types";
-
-const getItem = (
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: "group"
-): MenuItem => {
-  return { key, icon, children, label, type } as MenuItem;
-};
-const items: MenuProps["items"] = [
-  getItem("Menu", "sub1", <AppstoreOutlined />, [
-    getItem(
-      "Main",
-      "g1",
-      null,
-      [getItem("커뮤니티", "/boards"), getItem("마켓", "/markets")],
-      "group"
-    ),
-    getItem(
-      "Sub",
-      "g2",
-      null,
-      [
-        getItem("로그인", "/signIn"),
-        getItem("회원가입", "/signUp"),
-        getItem("출석", "/firebaseuse"),
-      ],
-      "group"
-    ),
-  ]),
-];
+import { useEffect, useState } from "react";
+import type { IUseditem } from "../../../../commons/types/generated/types";
+import { v4 as uuidv4 } from "uuid";
 
 export default function LayoutSideBar(): JSX.Element {
-  const router = useRouter();
-  // const onClickMove = (event: MouseEvent<HTMLSpanElement>): void => {
-  //   void router.push(`/${event.currentTarget.id}`);
-  // };
-  const onClickMove: MenuProps["onClick"] = (event) => {
-    void router.push(event.key);
-  };
+  const [todayList, setTodayList] = useState([]);
+  useEffect(() => {
+    const TodayLists = localStorage.getItem("TodayLists");
+    const TodayList = JSON.parse(String(TodayLists));
+
+    setTodayList(TodayList);
+  }, [todayList]);
   return (
-    <>
-      <LayoutSideBarUI onClickMove={onClickMove} items={items} />
-    </>
+    <div>
+      <h2>최근본 목록</h2>
+      <div>
+        {todayList
+          .filter((_, i: number) => Number([i]) >= todayList.length - 3)
+          .map((el: IUseditem) => (
+            <div key={el._id}>
+              <h3>{el.name}</h3>
+              <div>
+                <span>{el.price}</span>
+                <span>{el.pickedCount}</span>
+              </div>
+
+              {el.images !== undefined && el.images !== null && (
+                <div key={uuidv4()}>
+                  <img
+                    src={`https://storage.googleapis.com/${el.images[0]}`}
+                    alt=""
+                    style={{ width: "30px" }}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+      </div>
+    </div>
   );
 }
