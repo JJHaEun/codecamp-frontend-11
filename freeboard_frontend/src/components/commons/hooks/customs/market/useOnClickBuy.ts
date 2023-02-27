@@ -12,11 +12,16 @@ export const useOnClickBuy = () => {
       Modal.info({ content: "다시시도해주세요" });
       return;
     }
-    await createPointTransactionOfBuyingAndSelling({
-      variables: {
-        useritemId: router.query.productBoardId,
-      },
-    });
+    try {
+      await createPointTransactionOfBuyingAndSelling({
+        variables: {
+          useritemId: router.query.productBoardId,
+        },
+      });
+      Modal.success({ content: "구매완료!" });
+    } catch (error) {
+      if (error instanceof Error) Modal.info({ content: error.message });
+    }
   };
   return {
     onClickBuy,

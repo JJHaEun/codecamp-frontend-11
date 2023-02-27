@@ -2975,4 +2975,116 @@ function solution(n, arr1, arr2) {
 
  //// ===============================
 
- 
+ // 신규아이디 추천
+
+
+const filter = 'qwertyuiopasdfghjklzxcvbnm1234567890-_.';
+// 새로운 아이디에 들어갈 수 있는 문자열..
+
+
+function solution(new_id) {
+    // 1. 모든 대문자를 소문자로 치환
+        new_id = new_id.toLowerCase()
+    // 2. 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거
+    let answer =""// 제거하고 남은것을 담음.
+    for(let i = 0 ; i<new_id.length;i++){
+        // new_id[i] 로 각각의 요소들을 뽑아옴
+        if(filter.includes(new_id[i])){
+            answer += new_id[i]
+        }
+    }
+    
+    // 3. 마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환
+// 마침표가 무수히 많을수 있음. 몇번 반복해 치환해야하는지 모름.
+    while(answer.includes('..')){
+        answer = answer.replace('..','.')// 마침표두개를 하나로
+        //이 while문은 마침표두개가 하나가 될때까지 무한정반복
+        
+    }
+    // 4. 마침표가 처음이나 끝에 위치한다면
+    if(answer[0] === "."){
+        // 맨앞에것 제거. (첫번째부터 끝까지자르면 앞의 0번째는 자동으로 제거됨)
+        answer = answer.substring(1)
+    }
+  const removeLastDot = ()=>{
+      if(answer[answer.length-1] ==="."){// at이라는것 사용하는법
+        // if(answer.at(-1) === '.') // 위랑 동일.
+        // 끝이 마침표라면 => 마지막인덱스만 제외하고 자르기
+        answer = answer.substring(0,answer.length-1)
+    }}
+   removeLastDot()
+    // 5. 빈문자열일경우
+        if(!answer){
+            answer = "a"
+    // 문자열 "a"를 대입
+            
+        }
+// 6. 길이가 16자 이상이라면 15자까지 제거.
+if(answer.length >=16){
+    answer = answer.substring(0,15)
+    // if(answer.at(-1) === "."){
+    //     answer = answer.substring(0,answer.length - 1)
+    // }
+    removeLastDot()
+}
+    //7. 길이가 2글자 이하
+    if(answer.length <=2){
+       answer = answer.padEnd(3,answer[answer.length-1])
+    // 마지막글자를 3글자될때까지 반복해 붙여주기
+        
+    }
+    return answer
+}
+
+
+// =============
+
+// 새로운 아이디에 들어갈 수 있는 문자열
+const filter = 'qwertyuiopasdfghjklzxcvbnm1234567890-_.';
+
+function solution(new_id) {
+    // 1단계 : 대문자를 소문자로 치환
+    new_id = new_id.toLowerCase().split("");
+    
+    // 2단계 : 알파벳 소문자, 숫자, 빼기, 밑줄, 마침표를 제외한 모든 문자 제거
+    let answer = new_id.filter( str => filter.includes( str ) );
+    
+    // 3단계 : 마침표가 2번 이상 연속된다면, 1개의 마침표로 치환
+    answer = answer.filter( (str, i) => {
+        return str !== "." || (str === "." && answer[i + 1] !== ".")
+    })
+    
+    // 4단계 : 마침표가 처음이나 끝에 위치한다면 제거
+    if( answer[0] === "." ) {
+        answer = answer.slice( 1 )  
+    } 
+    
+    const removeLastDot = () => {
+        if( answer.at(-1) === "." ) { // === answer[ answer.length - 1 ]
+            answer = answer.slice( 0, answer.length - 1 ) // answer.pop();
+        }
+    }
+    removeLastDot();
+
+    // 5단계 : 빈 배열일 경우 문자열 "a"를 추가
+    if( !answer.length ) {
+        answer.push( "a" )
+    }
+    
+    // 6단계 : 길이가 16자 이상이라면, 15자까지 제거
+    //        제거 한 후에 문자열 끝에 마침표가 있다면 제거
+    if( answer.length >= 16 ) {
+        answer = answer.slice( 0, 15 );
+        removeLastDot();
+    }
+    
+    // 7단계 : 길이가 2글자 이하라면, 마지막 글자를 3글자가 될 때까지 뒤에 붙여준다.
+    if( answer.length <= 2 ) {
+        const add = Array.from( 
+            new Array( 3 - answer.length ),
+            () => answer.at(-1)
+        );
+        answer = [ ...answer, ...add ]; // === answer.concat( add )
+    }
+    return answer.join("")
+}

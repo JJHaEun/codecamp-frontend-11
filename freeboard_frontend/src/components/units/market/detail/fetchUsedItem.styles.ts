@@ -15,7 +15,7 @@ export const Seller = styled.h1`
   font-size: 20px;
   padding-left: 10px;
 `;
-export const ProductName = styled.div`
+export const ProductNamePrice = styled.div`
   display: flex;
   gap: 5px;
 `;
@@ -79,7 +79,7 @@ export const Contents = styled.div`
 `;
 export const ButtonWrap = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 30px 0;
 `;
 export const Buttons = styled(UpLoad)``;

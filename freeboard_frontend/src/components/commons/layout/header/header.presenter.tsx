@@ -1,5 +1,8 @@
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
+// import { useOnClickLogOut } from "../../hooks/customs/sign/useOnclickLogout";
+
+// import { useMovePage } from "../../hooks/customs/useMovePage";
 import { HeaderWrap } from "../layout.styles";
 // 헤더 매뉴를 왼족 오른쪽 다르게 map으로뿌리고..
 // 사이트 이름은 `느린하루`
@@ -18,7 +21,9 @@ import type { ILayoutHeaderProps } from "./header.types";
 // ];
 export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
   const [accessToken] = useRecoilState(accessTokenState);
+  // const [logoutUser] = useOnClickLogOut();
 
+  // const { onClickMovePage } = useMovePage();
   return (
     <>
       <HeaderWrap>
@@ -31,24 +36,15 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
             <header>
               <h2>좋아하는 일,</h2>
               <h2>그리고 , 여유 ..</h2>
-              <h3>{props.data?.fetchUserLoggedIn.name} 환영합니다</h3>
+              {accessToken !== "" && (
+                <h3>{props.data?.fetchUserLoggedIn.name}님 환영합니다</h3>
+              )}{" "}
             </header>
           </S.SiteNameWrap>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
             <S.MeNuImg>
-              <span
-                style={
-                  {
-                    // zIndex: 10,
-                    // height: "50px",
-                    // width: "30px",
-                  }
-                }
-                // onClick={!accessToken ? 로그인함수: 로그아웃함수}
-              >
-                SignIn/SignOut
-              </span>
+              <span>SignIn/SignOut</span>
               <S.RightMeNu
                 onClick={props.onClick}
                 defaultSelectedKeys={["/boards"]}
@@ -63,7 +59,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
               </span>
             ) : (
               <span
-              // onClick={}
+              
               >
                 SignOut
               </span>

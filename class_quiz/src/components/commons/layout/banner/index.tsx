@@ -10,8 +10,8 @@ export default function LayoutBanner(): JSX.Element {
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3500,
+    // autoplay: true,
+    // autoplaySpeed: 3500,
   };
   return (
     <>

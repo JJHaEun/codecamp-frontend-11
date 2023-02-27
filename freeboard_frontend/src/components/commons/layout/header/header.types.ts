@@ -6,6 +6,5 @@ export interface ILayoutHeaderProps {
   onClickMain: (event: MouseEvent<HTMLDivElement>) => void;
   onClick: any;
   items2: any;
-  current: string;
   data?: Pick<IQuery, "fetchUserLoggedIn">;
 }

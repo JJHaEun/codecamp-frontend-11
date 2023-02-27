@@ -42,10 +42,11 @@ export default function MarketDetailUI() {
           <div>{MessageDate(String(data?.fetchUseditem.createdAt))}</div>
         </S.Title>
         <S.NameAndLikeWrap>
-          <S.ProductName>
+          <S.ProductNamePrice>
             <div>상품명 :</div>
             <h2>{data?.fetchUseditem.name}</h2>
-          </S.ProductName>
+          </S.ProductNamePrice>
+
           <S.PickWrap>
             <span onClick={onClickPick(String(router.query.productBoardId))}>
               <FcLike />
@@ -53,17 +54,25 @@ export default function MarketDetailUI() {
             <S.PickNumber>{data?.fetchUseditem.pickedCount}</S.PickNumber>
           </S.PickWrap>
         </S.NameAndLikeWrap>
-        <S.SliderWrap>
-          <Slider {...settings}>
-            {data?.fetchUseditem.images
-              ?.filter((el) => el)
-              .map((el) => (
-                <S.ImgWrap key={el}>
-                  <S.ProductImg src={`https://storage.googleapis.com/${el}`} />
-                </S.ImgWrap>
-              ))}
-          </Slider>
-        </S.SliderWrap>
+        <S.ProductNamePrice>
+          <span>가 격 : </span>
+          <h2>{data?.fetchUseditem.price}</h2>
+        </S.ProductNamePrice>
+        {data?.fetchUseditem.images != null && (
+          <S.SliderWrap>
+            <Slider {...settings}>
+              {data?.fetchUseditem.images
+                ?.filter((el) => el)
+                .map((el) => (
+                  <S.ImgWrap key={el}>
+                    <S.ProductImg
+                      src={`https://storage.googleapis.com/${el}`}
+                    />
+                  </S.ImgWrap>
+                ))}
+            </Slider>
+          </S.SliderWrap>
+        )}
         <div>
           <S.ProductRemarks>{data?.fetchUseditem.remarks}</S.ProductRemarks>
           <S.AddressGroup>
@@ -105,7 +114,7 @@ export default function MarketDetailUI() {
             <S.ALink>목록으로</S.ALink>
           </Link>
         </S.Buttons>
-        <button onClick={onClickBuy}>구매하기</button>
+        <S.Buttons onClick={onClickBuy}>구매하기</S.Buttons>
       </S.ButtonWrap>
       <MarketQuestionUI />
       <MarketQuestionListUI />

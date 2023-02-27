@@ -39,12 +39,14 @@ export default function ApolloSettings(
         if (err.extensions.code === "UNAUTHENTICATED") {
           return fromPromise(
             getAccessToken().then((newAccessToken) => {
+              console.log(newAccessToken);
+
               setAccessToken(newAccessToken ?? "");
 
               operation.setContext({
                 headers: {
                   ...operation.getContext().headers,
-                  Authorization: `Bearer ${newAccessToken ?? ""}`,
+                  Authorization: `Bearer ${String(newAccessToken)}`,
                 },
               });
             })

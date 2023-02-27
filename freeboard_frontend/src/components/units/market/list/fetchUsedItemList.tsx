@@ -20,11 +20,15 @@ export default function MarketListUI(): JSX.Element {
         >
           {data?.fetchUseditems.map((el: IUseditem) => (
             <div key={el._id} onClick={onClickAddTodayAndMove(el)}>
-              {el.images !== undefined && el.images !== null && (
+              {el.images !== undefined &&
+              el.images !== null &&
+              el.images[0] !== "" ? (
                 <img
                   src={`https://storage.googleapis.com/${el.images[0]}`}
                   alt=""
                 />
+              ) : (
+                <img src={`/crown.png`} />
               )}
               <h1>{el.seller?.name}</h1>
               <div>{el.name}</div>

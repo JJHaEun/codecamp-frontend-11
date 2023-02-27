@@ -7,7 +7,7 @@ import type { MenuProps } from "antd";
 import { useQuery } from "@apollo/client";
 import { FETCH_USER_LOGGEDIN } from "./header.queries";
 import type { IQuery } from "../../../../commons/types/generated/types";
-
+// import { useOnClickLogOut } from "../../hooks/customs/sign/useOnclickLogout";
 const items2: MenuProps["items"] = [
   {
     label: "커뮤니티",
@@ -42,7 +42,7 @@ const items2: MenuProps["items"] = [
 ];
 export default function LayoutHeaderWrap(): JSX.Element {
   const router = useRouter();
-  const [current, setCurrent] = useState("");
+  const [, setCurrent] = useState("");
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGEDIN);
   const onClickMenu: MenuProps["onClick"] = (event) => {
@@ -57,6 +57,7 @@ export default function LayoutHeaderWrap(): JSX.Element {
   const onClickMain = (event: MouseEvent<HTMLDivElement>): void => {
     void router.push(event.currentTarget.id);
   };
+
   return (
     <>
       <LayoutHeader
@@ -64,7 +65,6 @@ export default function LayoutHeaderWrap(): JSX.Element {
         onClickMain={onClickMain}
         onClick={onClick}
         items2={items2}
-        current={current}
         data={data}
       />
     </>

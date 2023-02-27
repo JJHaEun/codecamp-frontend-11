@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import type { IUseditem } from "../../../../commons/types/generated/types";
 import { v4 as uuidv4 } from "uuid";
+import { useMovePage } from "../../hooks/customs/useMovePage";
 
 export default function LayoutSideBar(): JSX.Element {
   const [todayList, setTodayList] = useState([]);
+  const { onClickMovePage } = useMovePage();
   useEffect(() => {
     const TodayLists = localStorage.getItem("TodayLists");
     const TodayList = JSON.parse(String(TodayLists));
 
-    setTodayList(TodayList);
-  }, [todayList]);
+    if (TodayList !== "") {
+      setTodayList(TodayList);
+    }
+  }, []);
+
   return (
     <div>
       <h2>최근본 목록</h2>
@@ -18,13 +23,13 @@ export default function LayoutSideBar(): JSX.Element {
           .filter((_, i: number) => Number([i]) >= todayList.length - 3)
           .map((el: IUseditem) => (
             <div key={el._id}>
-              <h3>{el.name}</h3>
+              <h3 onClick={onClickMovePage(`/market/${el._id}`)}>{el.name}</h3>
               <div>
                 <span>{el.price}</span>
                 <span>{el.pickedCount}</span>
               </div>
 
-              {el.images !== undefined && el.images !== null && (
+              {el.images?.[0] !== undefined && (
                 <div key={uuidv4()}>
                   <img
                     src={`https://storage.googleapis.com/${el.images[0]}`}
