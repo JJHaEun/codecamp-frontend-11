@@ -3088,3 +3088,84 @@ function solution(new_id) {
     }
     return answer.join("")
 }
+
+
+/// ================
+
+// 키패드 누르기
+// 왼손가락으로 누를 번호들
+const leftNumbers = [1,4,7];
+const rightNumbers = [3,6,9];
+
+
+
+
+
+function solution(numbers, hand) {
+   let answer = "";
+    
+    //현재손가락의 위치가 어느키패드에있는지
+    const current ={
+        left : 10, // *은 10으로
+        right :12 // #은 12로
+    }
+    for(let i = 0;i<numbers.length;i++){
+        if(leftNumbers.includes(numbers[i])){
+            // 누를번호가 왼쪽키패드에 해당할 경우 왼손 엄지손가락으로 키패드를 누른다.
+            answer += "L"
+            current["left"] = numbers[i] // 왼손 엄지손가락이동
+        }else if(rightNumbers.includes(numbers[i])){
+            // 누를번호가 오른쪽키패드에 해당할경우 오른쪽으로 누르기
+            answer += "R"
+            current["right"] = numbers[i] // current의 right라는키값의value값을 numbers[i]로 변경
+        }else{
+            //가운데 키패드
+            const centerObj = {...current}// 양 손가락 위치의 거리계산.하기위한 객체복사
+        // 객체를 반복한다.
+            for(let key in centerObj){
+                // console.log(key, centerObj,centerObj[key],numbers[i]) // key로는 키를 가져옴.
+                //numbers가 눌러야할 번호.
+                // centerObj는 지금 있는위치
+                numbers[i] = numbers[i]===0 ? 11 : numbers[i]
+                // 0번 키패드의 경우 해당 거리값 11로 환산..
+                
+                let location = Math.abs(numbers[i] - centerObj[key])
+                // 얼마나 떨어져있는지 // 다만 음수도 나오기때문에 Math.abs를 사용해 절댓값으로 바꿈(음수 -> 양수)
+                // console.log(hand,centerObj[hand], numbers[i],location)
+                if(location >=3){
+                    // 왼쪽이나 오른쪽으로 3칸 이동했을 경우(=위아래한칸으로 이동가능)
+                    location = Math.trunc(location / 3) + location % 3
+                    // 와우...
+                    
+                    // 위아래로 한칸.... 네ㅔㅔㅔㅔㅔ??? // location = ~~(location/3) // 뒤의 인자값을 내림시킴. 같은것. 보통은 Math.trunc나 Math.floor을 사용. (소수점을 없앨시에는 주로 trunc사용)
+                    console.log(location)
+                }
+                centerObj[key] = location
+                
+            }
+           if(centerObj["left"] === centerObj["right"]){
+               // 둘의 거리값이 같으면 주로 사용하는 손가락으로 가운데를 누른다.
+               // 주로 사용하는 손은 hand라는 매개변수에 들어있다.
+               answer += hand ==="left" ? "L" : "R";
+               current[hand] = numbers[i]
+           }else{
+               // 두 손가락의 거리값이 서로 같지않을경우 
+               // 더 가까운 손가락을 이용해 누른다.
+               if(centerObj["left"] > centerObj["right"]){
+                   // 왼쪽이 더 멈.
+                   answer += "R"
+                   current["right"] = numbers[i]
+               }else{
+                   answer += "L"
+                   current["left"] = numbers[i]
+               }
+           }
+        
+            
+        }
+    }
+    return answer
+}
+
+
+// =========================

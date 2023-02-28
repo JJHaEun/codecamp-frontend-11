@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Promise.all 연습!!</title>
+    <script>
+      const startPromise = async () => {
+        console.time("=============개별 Promise각각================");
+        const result1 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공1"); // 요청성공시 실행될 함수
+          }, 2000);
+        });
+        const result2 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공2"); // 요청성공시 실행될 함수
+          }, 3000);
+        });
+        const result3 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공3"); // 요청성공시 실행될 함수
+          }, 1000);
+        });
+        const results = [result1, result2, result3];
+        console.log(results);
+        console.timeEnd("=============개별 Promise각각================"); // 전부 합친시간을 볼 수 있음. 서로동시에 요청하는것이 아니라 하나끝나면 다음것 요청되는식.
+      };
+      const startPromiseAll = async () => {
+        // Promise.all([promise,promise,promise]) 얘네 다 기다렸다가 같이가지고 오고싶으면 앞에 await붙이기
+
+        console.time("============ 한방 Promise.all===========");
+        const results = await Promise.all([
+          // 한방에 보내고 한번 await(일단 다 보내놓고 기다림)
+          // Promise.all에는 실제로 Promise가 안들어가도됨. 중간에 undefined가 있건, "철수"가 있던 그대로 차례대로나옴
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공1"); // 요청성공시 실행될 함수
+            }, 2000);
+          }),
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공2"); // 요청성공시 실행될 함수
+            }, 3000);
+          }),
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공3"); // 요청성공시 실행될 함수
+            }, 1000);
+          }),
+        ]);
+        console.log(results);
+        console.timeEnd("============ 한방 Promise.all===========");
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="startPromise()">Promise 연습하기</button>
+    <button onclick="startPromiseAll()">Promise.all 연습하기</button>
+  </body>
+</html>

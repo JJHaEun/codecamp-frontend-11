@@ -7,10 +7,6 @@ import { useOnChangeAddress } from "../../../commons/hooks/customs/market/useOnc
 import { useToggleModal } from "../../../commons/hooks/customs/market/useToggleModal";
 import "react-quill/dist/quill.snow.css";
 
-// import { useForm } from "react-hook-form";
-// import { useRecoilState } from "recoil";
-// import { usedItemSchema } from "../../../../commons/libraries/validations/usedItemValidation";
-// import { isEditState, isOpenState } from "../../../../commons/stores";
 import { useOnclickCreateUsedItem } from "../../../commons/hooks/customs/market/useOnclickCreateUsedItem";
 import type { IUseCreateForm } from "./createUsedItem.types";
 import { useQueryFetchUsedItem } from "../../../commons/hooks/customs/quries/useQueryFetchUsedItem";
@@ -24,8 +20,6 @@ import UploadImagesItem from "../../../commons/upload/uploadImgItems/Upload.cont
 export default function MarketUI(): JSX.Element {
   const [isEdit] = useRecoilState(isEditState);
   const [isOpen] = useRecoilState(isOpenState);
-  // const { onClickUpdateUsedItem } = useOnclickUpdateUsedItem();
-  // const { onChangeImageUrls, imageUrls, setImageUrls } = useOnChoiceImages();
 
   const { ToggleModal } = useToggleModal();
   const {

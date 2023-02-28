@@ -22,7 +22,7 @@ const FETCH_USED_ITEMS = gql`
 `;
 
 export const useQueryFetchUsedItems = () => {
-  const { data, fetchMore } = useQuery<
+  const { data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS, {
@@ -54,5 +54,6 @@ export const useQueryFetchUsedItems = () => {
   return {
     data,
     onLoadMore,
+    refetch,
   };
 };

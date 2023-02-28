@@ -1,8 +1,9 @@
+import { Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
-// import { useOnClickLogOut } from "../../hooks/customs/sign/useOnclickLogout";
+import { useOnClickLogOut } from "../../hooks/customs/sign/useOnclickLogout";
 
-// import { useMovePage } from "../../hooks/customs/useMovePage";
+import { useMovePage } from "../../hooks/customs/useMovePage";
 import { HeaderWrap } from "../layout.styles";
 // 헤더 매뉴를 왼족 오른쪽 다르게 map으로뿌리고..
 // 사이트 이름은 `느린하루`
@@ -21,9 +22,13 @@ import type { ILayoutHeaderProps } from "./header.types";
 // ];
 export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
   const [accessToken] = useRecoilState(accessTokenState);
-  // const [logoutUser] = useOnClickLogOut();
-
-  // const { onClickMovePage } = useMovePage();
+  const [logoutUser] = useOnClickLogOut();
+  const onClickLogout = async () => {
+    await logoutUser();
+    Modal.success({ title: "로그아웃성공", content: "로그아웃되었습니다" });
+    window.location.reload();
+  };
+  const { onClickMovePage } = useMovePage();
   return (
     <>
       <HeaderWrap>
@@ -38,32 +43,23 @@ export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
               <h2>그리고 , 여유 ..</h2>
               {accessToken !== "" && (
                 <h3>{props.data?.fetchUserLoggedIn.name}님 환영합니다</h3>
-              )}{" "}
+              )}
             </header>
           </S.SiteNameWrap>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
             <S.MeNuImg>
-              <span>SignIn/SignOut</span>
               <S.RightMeNu
                 onClick={props.onClick}
                 defaultSelectedKeys={["/boards"]}
                 mode="horizontal"
                 items={props.items2}
               />
-              {/* {!(accessToken !== "") ? (
-              <span
-              // onClick={}
-              >
-                SignIn
-              </span>
-            ) : (
-              <span
-              
-              >
-                SignOut
-              </span>
-            )} */}
+              {accessToken === "" ? (
+                <span onClick={onClickMovePage(`/signIn`)}>SignIn</span>
+              ) : (
+                <span onClick={onClickLogout}>SignOut</span>
+              )}
 
               {/* <S.Img src={`/sunset.jpg`} alt="" /> */}
             </S.MeNuImg>

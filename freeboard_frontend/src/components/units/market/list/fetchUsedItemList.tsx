@@ -5,12 +5,22 @@ import type { IUseditem } from "../../../../commons/types/generated/types";
 import { AddLocal } from "../../../commons/hooks/customs/market/onClickMoveAndLocal";
 import { useQueryFetchUsedItems } from "../../../commons/hooks/customs/quries/useQueryFetchUsedItems";
 import { FcLike } from "react-icons/fc";
-
+import SearchProductBoard from "../../../commons/search/searchProductBoard/SearchProductboard.container";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import * as S from "./fetchUsedItemList.styles";
 export default function MarketListUI(): JSX.Element {
-  const { data, onLoadMore } = useQueryFetchUsedItems();
+  const [keyWord, setKeyWord] = useState("");
+
+  const { data, onLoadMore, refetch } = useQueryFetchUsedItems();
   const { onClickAddTodayAndMove } = AddLocal();
+
+  const onChangeKeyWord = (value: string): void => {
+    setKeyWord(value);
+  };
   return (
     <>
+      <SearchProductBoard refetch={refetch} onChangeKeyWord={onChangeKeyWord} />
       <div style={{ width: "1119px", height: "400px", overflow: "auto" }}>
         <InfiniteScroll
           pageStart={0}
@@ -20,9 +30,7 @@ export default function MarketListUI(): JSX.Element {
         >
           {data?.fetchUseditems.map((el: IUseditem) => (
             <div key={el._id} onClick={onClickAddTodayAndMove(el)}>
-              {el.images !== undefined &&
-              el.images !== null &&
-              el.images[0] !== "" ? (
+              {el.images?.[0] !== undefined ? (
                 <img
                   src={`https://storage.googleapis.com/${el.images[0]}`}
                   alt=""
@@ -31,7 +39,16 @@ export default function MarketListUI(): JSX.Element {
                 <img src={`/crown.png`} />
               )}
               <h1>{el.seller?.name}</h1>
-              <div>{el.name}</div>
+              <div>
+                {el.name
+                  .replaceAll(keyWord, `@#$#@%$#^&*#@${keyWord}@#$#@%$#^&*#@`)
+                  .split("@#$#@%$#^&*#@")
+                  .map((el) => (
+                    <S.SearchKeyWord key={uuidv4()} el={el} keyWord={keyWord}>
+                      {el}
+                    </S.SearchKeyWord>
+                  ))}
+              </div>
 
               <div>{el.remarks}</div>
 
