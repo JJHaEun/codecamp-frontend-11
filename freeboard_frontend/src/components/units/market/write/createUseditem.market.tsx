@@ -14,10 +14,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { usedItemSchema } from "../../../../commons/libraries/validations/usedItemValidation";
 import { useReactQuill } from "../../../commons/hooks/customs/market/onChangeContents";
 import * as S from "./createUsedItem.styles";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import UploadImagesItem from "../../../commons/upload/uploadImgItems/Upload.container";
+import { memo } from "react";
 
-export default function MarketUI(): JSX.Element {
+function MarketUI(): JSX.Element {
   const [isEdit] = useRecoilState(isEditState);
   const [isOpen] = useRecoilState(isOpenState);
 
@@ -140,7 +141,7 @@ export default function MarketUI(): JSX.Element {
             <S.Label>사진등록</S.Label>
             <S.ImgGroup>
               {imageUrls.map((el, index) => (
-                <S.Imgs key={uuidv4()}>
+                <S.Imgs key={index}>
                   <UploadImagesItem
                     imageUrl={el}
                     index={index}
@@ -156,3 +157,4 @@ export default function MarketUI(): JSX.Element {
     </S.CreateUpdate>
   );
 }
+export default memo(MarketUI);

@@ -1,3 +1,4 @@
+// import { FETCH_USER_LOGGEDIN } from "../../../layout/header/header.queries";
 import { useMutationPick } from "../mutations/useMutationPick";
 import {
   FETCH_USED_ITEM,
@@ -21,6 +22,9 @@ export const useOnClickPick = () => {
           query: FETCH_USED_ITEM,
           variables: { useditemId },
         },
+        // {
+        //   query: FETCH_USER_LOGGEDIN,
+        // },
       ],
     });
   };

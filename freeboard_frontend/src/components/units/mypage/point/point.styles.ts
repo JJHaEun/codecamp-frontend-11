@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Modal } from "antd";
 
 export const PointPageWrap = styled.div`
   display: flex;
@@ -33,4 +34,17 @@ export const PTitle = styled.div`
 
 export const PointTitle = styled.h1`
   font-size: 20px;
+`;
+export const ChangePWModal = styled(Modal)`
+  .ant-modal-content {
+    width: 400px;
+  }
+  .ant-btn-primary {
+    background-color: coral;
+  }
+  input:nth-of-type(1) {
+    outline: none;
+    margin-top: 5px;
+    border-color: coral;
+  }
 `;

@@ -7,7 +7,12 @@ const FETCH_USER_LOGGED_IN = gql`
       _id
       email
       name
-      userPoint
+      userPoint {
+        _id
+        amount
+      }
+      createdAt
+      updatedAt
     }
   }
 `;

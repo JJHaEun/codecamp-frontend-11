@@ -4,11 +4,11 @@ import { MessageDate } from "../../../../commons/libraries/date";
 import type { IUseditem } from "../../../../commons/types/generated/types";
 import { AddLocal } from "../../../commons/hooks/customs/market/onClickMoveAndLocal";
 import { useQueryFetchUsedItems } from "../../../commons/hooks/customs/quries/useQueryFetchUsedItems";
-import { FcLike } from "react-icons/fc";
 import SearchProductBoard from "../../../commons/search/searchProductBoard/SearchProductboard.container";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./fetchUsedItemList.styles";
+import { BiCopyright } from "react-icons/bi";
 export default function MarketListUI(): JSX.Element {
   const [keyWord, setKeyWord] = useState("");
 
@@ -21,53 +21,61 @@ export default function MarketListUI(): JSX.Element {
   return (
     <>
       <SearchProductBoard refetch={refetch} onChangeKeyWord={onChangeKeyWord} />
-      <div style={{ width: "1119px", height: "400px", overflow: "auto" }}>
+      <S.InfiniteWrap>
         <InfiniteScroll
           pageStart={0}
           loadMore={onLoadMore}
           hasMore={true}
           useWindow={false}
         >
-          {data?.fetchUseditems.map((el: IUseditem) => (
-            <div key={el._id} onClick={onClickAddTodayAndMove(el)}>
-              {el.images?.[0] !== undefined ? (
-                <img
-                  src={`https://storage.googleapis.com/${el.images[0]}`}
-                  alt=""
-                />
-              ) : (
-                <img src={`/crown.png`} />
-              )}
-              <h1>{el.seller?.name}</h1>
-              <div>
-                {el.name
-                  .replaceAll(keyWord, `@#$#@%$#^&*#@${keyWord}@#$#@%$#^&*#@`)
-                  .split("@#$#@%$#^&*#@")
-                  .map((el) => (
-                    <S.SearchKeyWord key={uuidv4()} el={el} keyWord={keyWord}>
-                      {el}
-                    </S.SearchKeyWord>
-                  ))}
-              </div>
-
-              <div>{el.remarks}</div>
-
-              <footer>
-                <div>{MessageDate(el.createdAt)}</div>
+          <S.MainWrap>
+            {data?.fetchUseditems.map((el: IUseditem) => (
+              <S.Main key={el._id} onClick={onClickAddTodayAndMove(el)}>
+                <S.SellerName>{el.seller?.name}</S.SellerName>
                 <div>
-                  <FcLike />
-                  {el.pickedCount}
+                  <S.ProductNameTitle>상품명:</S.ProductNameTitle>
+                  {el.name
+                    .replaceAll(keyWord, `@#$#@%$#^&*#@${keyWord}@#$#@%$#^&*#@`)
+                    .split("@#$#@%$#^&*#@")
+                    .map((el) => (
+                      <S.SearchKeyWord key={uuidv4()} el={el} keyWord={keyWord}>
+                        {el}
+                      </S.SearchKeyWord>
+                    ))}
                 </div>
-              </footer>
-            </div>
-          ))}
+
+                <div>{el.remarks}</div>
+                <div>
+                  {el.price}
+                  <BiCopyright />
+                </div>
+                <S.FooterWrap>
+                  <S.TimeAndPick>{MessageDate(el.createdAt)}</S.TimeAndPick>
+                  <S.PickNum>
+                    <S.PickIcon />
+                    {el.pickedCount}
+                  </S.PickNum>
+                </S.FooterWrap>
+                <S.ProductImgWrap>
+                  {el.images?.[0] !== undefined && el.images?.[0] !== "" ? (
+                    <S.ProductImg
+                      src={`https://storage.googleapis.com/${el.images[0]}`}
+                      alt=""
+                    />
+                  ) : (
+                    <S.ProductImg src={`/crown.png`} alt="" />
+                  )}
+                </S.ProductImgWrap>
+              </S.Main>
+            ))}
+          </S.MainWrap>
         </InfiniteScroll>
-      </div>
-      <button>
+      </S.InfiniteWrap>
+      <S.MoveCreate>
         <Link href={`/market/new`}>
           <a>등록하기</a>
         </Link>
-      </button>
+      </S.MoveCreate>
     </>
   );
 }

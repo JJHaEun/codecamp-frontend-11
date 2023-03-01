@@ -1,4 +1,3 @@
-import { Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 import { useOnClickLogOut } from "../../hooks/customs/sign/useOnclickLogout";
@@ -22,12 +21,12 @@ import type { ILayoutHeaderProps } from "./header.types";
 // ];
 export default function LayoutHeader(props: ILayoutHeaderProps): JSX.Element {
   const [accessToken] = useRecoilState(accessTokenState);
-  const [logoutUser] = useOnClickLogOut();
-  const onClickLogout = async () => {
-    await logoutUser();
-    Modal.success({ title: "로그아웃성공", content: "로그아웃되었습니다" });
-    window.location.reload();
-  };
+  const { onClickLogout } = useOnClickLogOut();
+  // const onClickLogout = async () => {
+  //   await logoutUser();
+  //   Modal.success({ title: "로그아웃성공", content: "로그아웃되었습니다" });
+  //   window.location.reload();
+  // };
   const { onClickMovePage } = useMovePage();
   return (
     <>

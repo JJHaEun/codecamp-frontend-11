@@ -11,7 +11,7 @@ export const SearchWrap = styled.div`
   width: 300px;
   height: 30px;
   margin-bottom: 20px;
-  border: 2px solid salmon;
+  border: 2px solid Teal;
 
   border-radius: 10px;
   padding: 15px;

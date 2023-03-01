@@ -25,12 +25,10 @@ export default function OpenAPI(): JSX.Element {
       .request(options)
       .then(function (response) {
         // console.log(response.data.forecast.forecastday[0].day.condition.text);
-        console.log(response.data.forecast.forecastday);
         setForecastIcon(response.data?.forecast?.forecastday); // 앞으로 날씨(3일치)
         // response.data.forecastday.map((el)=>(
         //   el.day.condition.icon
         // ))
-        console.log(response.data);
         setTodayW(response.data.current.condition.text); // 오늘의 날씨 영어
         setConditionIcon(response.data.current.condition.icon); // 오늘의 날씨 아이콘
         setToday(response.data.location.localtime.slice(0, 10)); // 날짜

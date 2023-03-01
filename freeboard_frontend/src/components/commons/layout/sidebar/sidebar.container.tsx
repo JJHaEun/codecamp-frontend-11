@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { IUseditem } from "../../../../commons/types/generated/types";
 import { v4 as uuidv4 } from "uuid";
 import { useMovePage } from "../../hooks/customs/useMovePage";
+import * as S from "./sidebar.styles";
 
 export default function LayoutSideBar(): JSX.Element {
   const [todayList, setTodayList] = useState([]);
@@ -14,7 +15,6 @@ export default function LayoutSideBar(): JSX.Element {
       setTodayList(TodayList);
     }
   }, []);
-
   return (
     <div>
       <h2>최근본 목록</h2>
@@ -26,10 +26,10 @@ export default function LayoutSideBar(): JSX.Element {
               <h3 onClick={onClickMovePage(`/market/${el._id}`)}>{el.name}</h3>
               <div>
                 <span>{el.price}</span>
-                <span>{el.pickedCount}</span>
+                <S.Remarks>{el.remarks}</S.Remarks>
               </div>
 
-              {el.images?.[0] !== undefined && (
+              {el.images?.[0] !== undefined && el.images?.[0] !== "" && (
                 <div key={uuidv4()}>
                   <img
                     src={`https://storage.googleapis.com/${el.images[0]}`}
