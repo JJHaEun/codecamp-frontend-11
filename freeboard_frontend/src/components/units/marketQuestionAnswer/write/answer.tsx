@@ -14,6 +14,8 @@ import {
 } from "../answer.queris";
 import type { CreateAnswerFrom, IMarketAnswerUIProps } from "../answer.types";
 import MarketAnswerListUI from "../list/answerList";
+import * as S from "../answer.styles";
+import { CommentBox } from "../../marketQuestion/question.styles";
 
 export default function MarketAnswerUI(
   props: IMarketAnswerUIProps
@@ -49,12 +51,7 @@ export default function MarketAnswerUI(
             contents: data.contents,
           },
         },
-        // refetchQueries: [
-        //   {
-        //     query: FETCH_USED_ITEM_QUESTION_ANSWERS,
-        //     variables: { useditemQuestionId: props.el?._id },
-        //   },
-        // ],
+
         update(cache, { data }) {
           cache.modify({
             fields: {
@@ -65,8 +62,8 @@ export default function MarketAnswerUI(
           });
         },
       });
-      Modal.success({ content: "답변완료" });
       props.setOpen?.(false);
+      Modal.success({ content: "답변완료" });
     } catch (error) {
       if (error instanceof Error) {
         Modal.info({ content: "로그인을 먼저 해주세요" });
@@ -104,7 +101,7 @@ export default function MarketAnswerUI(
     }
   };
   return (
-    <>
+    <S.AnswerWriteWrap>
       <form
         onSubmit={
           props.isEdit !== true
@@ -112,7 +109,7 @@ export default function MarketAnswerUI(
             : wrapFormAsync(handleSubmit(onClickEditAnswer))
         }
       >
-        <textarea
+        <CommentBox
           {...register("contents")}
           defaultValue={
             props.elAnswer?.contents !== "" ? props.elAnswer?.contents : ""
@@ -125,6 +122,6 @@ export default function MarketAnswerUI(
         <button>답변{props.isEdit === true ? "수정" : "등록"}</button>
       </form>
       <MarketAnswerListUI el={props.el} />
-    </>
+    </S.AnswerWriteWrap>
   );
 }

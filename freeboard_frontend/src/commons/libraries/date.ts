@@ -23,7 +23,6 @@ export const MessageDate = (createdAt: any) => {
 
   let MessageDate = "";
   if (elapsedTime < seconds) {
-    console.log(elapsedTime);
     MessageDate = "방금 전";
   } else if (elapsedTime < minute) {
     MessageDate = elapsedTime + "초 전";

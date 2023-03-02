@@ -3,4 +3,5 @@ export interface PriceForm {
 }
 export interface PasswordForm {
   password: string;
+  passwordcheck: string;
 }

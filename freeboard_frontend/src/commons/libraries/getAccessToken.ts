@@ -1,4 +1,3 @@
-import { Modal } from "antd";
 import { gql, GraphQLClient } from "graphql-request";
 // import { useRouter } from "next/router";
 
@@ -23,7 +22,6 @@ export const getAccessToken = async (): Promise<string | undefined> => {
     console.log(newAccessToken);
     return newAccessToken;
   } catch (error) {
-    if (error instanceof Error) Modal.error({ content: "회원정보가 없습니다" });
-    // void router.push(`/signIn`);
+    if (error instanceof Error) console.log(error.message);
   }
 };

@@ -1,9 +1,9 @@
-// import { FETCH_USER_LOGGEDIN } from "../../../layout/header/header.queries";
 import { useMutationPick } from "../mutations/useMutationPick";
 import {
   FETCH_USED_ITEM,
   useQueryFetchUsedItem,
 } from "../quries/useQueryFetchUsedItem";
+import { FETCH_USER_LOGGED_IN } from "../quries/useQueryFetchUserLoggedIn";
 
 export const useOnClickPick = () => {
   const [toggleUseditemPick] = useMutationPick();
@@ -22,9 +22,9 @@ export const useOnClickPick = () => {
           query: FETCH_USED_ITEM,
           variables: { useditemId },
         },
-        // {
-        //   query: FETCH_USER_LOGGEDIN,
-        // },
+        {
+          query: FETCH_USER_LOGGED_IN,
+        },
       ],
     });
   };

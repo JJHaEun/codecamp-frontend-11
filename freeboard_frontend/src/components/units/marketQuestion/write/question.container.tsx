@@ -101,7 +101,7 @@ export default function MarketQuestionUI(
           {Boolean(props.isEdit !== true) && (
             <S.CommentTitle>
               <S.Qcomment src="/comments_icon.png" />
-              <S.QuestionTitle>댓글</S.QuestionTitle>
+              <S.QuestionTitle>질문드립니다</S.QuestionTitle>
             </S.CommentTitle>
           )}
           <form
@@ -121,9 +121,9 @@ export default function MarketQuestionUI(
                   }
                 />
 
-                <div style={{ color: "red", fontSize: "10px" }}>
+                <S.ContentsErrM>
                   {Boolean(errors?.contents) && "내용을 입력해주세요"}
-                </div>
+                </S.ContentsErrM>
               </div>
               <S.CommentButtonWrap>
                 <S.Buttons>

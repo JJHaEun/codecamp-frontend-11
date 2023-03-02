@@ -8,11 +8,14 @@ import type {
   IMutation,
   IMutationDeleteUseditemQuestionAnswerArgs,
 } from "../../../../commons/types/generated/types";
+import {
+  ADeleteImg,
+  AEdit,
+} from "../../marketQuestion/list/questionList.styles";
 import type { IPrev } from "../../marketQuestion/question.types";
 import { DELETE_USED_ITEM_QUESTION_ANSWER } from "../answer.queris";
 import type { IMarketAnswerListItemUIProps } from "../answer.types";
 import MarketAnswerUI from "../write/answer";
-
 export default function MarketAnswerListItemUI(
   props: IMarketAnswerListItemUIProps
 ): JSX.Element {
@@ -48,7 +51,7 @@ export default function MarketAnswerListItemUI(
     }
   };
 
-  const onClickopenEdit = () => {
+  const onClickOpenEdit = () => {
     setIsEdit(true);
   };
   return (
@@ -60,14 +63,14 @@ export default function MarketAnswerListItemUI(
             <div>
               <div>{MessageDate(props.el.createdAt)}</div>
               <div>
-                <img
+                <ADeleteImg
                   src="/delete_icon.png"
                   alt="삭제아이콘"
                   onClick={onClickDeleteAnswer(props.el._id)}
                 />
-                <button onClick={onClickopenEdit}>
+                <AEdit onClick={onClickOpenEdit}>
                   <FontAwesomeIcon icon={faPenToSquare} />
-                </button>
+                </AEdit>
               </div>
             </div>
           </div>

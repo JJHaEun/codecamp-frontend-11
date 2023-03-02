@@ -1,6 +1,7 @@
 // import { gql, useMutation } from "@apollo/client";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
+import { wrapAsyncFile } from "../../../src/commons/libraries/asyncFunc";
 // import type {
 //   IMutation,
 //   IMutationUploadFileArgs,
@@ -21,10 +22,11 @@ export default function ImageUploadPage(): JSX.Element {
   //     Pick<IMutation, "uploadFile">,
   //     IMutationUploadFileArgs
   //   >(UPLOAD_FILE);
-  const wrapFileAsync = (asyncFunc: (event) => Promise<void>) => () => {
-    // 이벤트가 이리 들어와 여기에서 file이 들어가 event가 실행됨.
-    void asyncFunc(event);
-  };
+
+  // const wrapFileAsync = (asyncFunc: (event) => Promise<void>) => () => {
+  //   // 이벤트가 이리 들어와 여기에서 file이 들어가 event가 실행됨.
+  //   void asyncFunc(event);
+  // };
   const onChangeFile = async (
     event?: ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
@@ -59,7 +61,7 @@ export default function ImageUploadPage(): JSX.Element {
   // 이제 이 파일을 업로드를 하면된다.
   return (
     <>
-      <input type="file" onChange={wrapFileAsync(onChangeFile)} />
+      <input type="file" onChange={wrapAsyncFile(onChangeFile)} />
       <img src={imgUrl} />
       {/* <img src={`https://storage.googleapis.com/${imgUrl}`} /> 미리보기가 스토리지로 가서 보여주는 부분  */}
       {/*  스토리지의 해당 주소의 이미지를 불러옴 */}

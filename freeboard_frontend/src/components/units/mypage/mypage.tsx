@@ -29,10 +29,15 @@ export default function MyPageMyInFo(): JSX.Element {
   return (
     <>
       {isOpen && (
-        <Modal open={true} onOk={ToggleModal} onCancel={ToggleModal}>
+        <Modal
+          open={isOpen}
+          onOk={handleSubmit(onClickResetPassword)}
+          onCancel={ToggleModal}
+        >
           <input type="password" {...register("password")} />
           <div>{formState.errors.password?.message}</div>
-          <button onClick={handleSubmit(onClickResetPassword)}>변경</button>
+          <input type="password" {...register("passwordcheck")} />
+          <div>{formState.errors.passwordcheck?.message}</div>
         </Modal>
       )}
       <div>

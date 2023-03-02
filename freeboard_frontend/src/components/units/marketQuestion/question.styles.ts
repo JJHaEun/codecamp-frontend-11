@@ -34,3 +34,7 @@ export const Buttons = styled.button`
   width: 70px;
   padding: 2px;
 `;
+export const ContentsErrM = styled.div`
+  font-size: 10px;
+  color: red;
+`;

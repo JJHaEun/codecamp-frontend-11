@@ -8,4 +8,7 @@ export const schema = yup.object({
       "비밀번호는 영문,숫자, 특수문자를 포함해 최소 8자리이상이어야 합니다"
     )
     .required("비밀번호를 입력해주세요"),
+  passwordcheck: yup
+    .string()
+    .oneOf([yup.ref("password"), undefined], "password 가 달라요"),
 });

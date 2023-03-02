@@ -1,9 +1,11 @@
+import { memo } from "react";
 import MarketDetailUI from "../../../src/components/units/market/detail/fetchUsedItem";
 
-export default function MarketDetailPage(): JSX.Element {
+function MarketDetailPage(): JSX.Element {
   return (
     <>
       <MarketDetailUI />
     </>
   );
 }
+export default memo(MarketDetailPage);

@@ -6,8 +6,10 @@ import { useQueryFetchPointTransactionCountOfLoading } from "../../../../commons
 import { useQueryFetchPointTransactionsOfLoading } from "../../../../commons/hooks/customs/quries/useQueryFetchPointTransactionsOfLoading";
 import * as S from "../point.styles";
 import MyPageMyInFo from "../../mypage";
+import { useQueryFetchUserLoggedIn } from "../../../../commons/hooks/customs/quries/useQueryFetchUserLoggedIn";
 
-export default function MayPageMain(): JSX.Element {
+export default function MyPageMain(): JSX.Element {
+  const { data: User } = useQueryFetchUserLoggedIn();
   const { data } = useQueryFetchPointTransactionCountOfLoading();
   const { data: PointLoadFetch, fetchMore } =
     useQueryFetchPointTransactionsOfLoading();
@@ -45,7 +47,7 @@ export default function MayPageMain(): JSX.Element {
           <S.PTitle>
             <S.PointTitle>포인트 내역</S.PointTitle>
             <h2>
-              {PointLoadFetch?.fetchPointTransactionsOfLoading[0].balance}
+              {User?.fetchUserLoggedIn.userPoint?.amount}
               <BiCopyright />
             </h2>
           </S.PTitle>
@@ -60,20 +62,24 @@ export default function MayPageMain(): JSX.Element {
             hasMore={true}
             useWindow={false}
           >
-            {PointLoadFetch?.fetchPointTransactionsOfLoading.map((el) => (
-              <div key={el._id}>
-                <div>
-                  <span>{el.status}</span>
-                  <span>
-                    {el.amount} <BiCopyright />
-                  </span>
+            {PointLoadFetch !== undefined ? (
+              PointLoadFetch.fetchPointTransactionsOfLoading.map((el) => (
+                <div key={el._id}>
+                  <div>
+                    <span>{el.status}</span>
+                    <span>
+                      {el.amount} <BiCopyright />
+                    </span>
+                  </div>
+                  <div>{MessageDate(el.createdAt)}</div>
+                  <div>
+                    잔액: {el.balance} <BiCopyright />
+                  </div>
                 </div>
-                <div>{MessageDate(el.createdAt)}</div>
-                <div>
-                  잔액: {el.balance} <BiCopyright />
-                </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <></>
+            )}
           </InfiniteScroll>
           <div>
             포인트 충전횟수: {data?.fetchPointTransactionsCountOfLoading}

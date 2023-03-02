@@ -20,7 +20,7 @@ export default function LayoutSideBar(): JSX.Element {
       <h2>최근본 목록</h2>
       <div>
         {todayList
-          .filter((_, i: number) => Number([i]) >= todayList.length - 3)
+          ?.filter((_, i: number) => Number([i]) <= 2)
           .map((el: IUseditem) => (
             <div key={el._id}>
               <h3 onClick={onClickMovePage(`/market/${el._id}`)}>{el.name}</h3>

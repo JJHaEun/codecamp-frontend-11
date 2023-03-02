@@ -1,5 +1,4 @@
 import { Modal } from "antd";
-import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../../commons/stores";
 import type { ISignForm } from "../../../../units/signInUp/signIn/signIn.types";
@@ -12,7 +11,6 @@ interface IUseonclickSignIn {
 export const useOnclickSignIn = (): IUseonclickSignIn => {
   const [, setAccessToken] = useRecoilState(accessTokenState);
   const [loginUser] = useMutationLoginUser();
-  const router = useRouter();
 
   const onClickSignIn = async (data: ISignForm): Promise<void> => {
     try {
@@ -29,7 +27,8 @@ export const useOnclickSignIn = (): IUseonclickSignIn => {
 
       setAccessToken(accessToken);
 
-      void router.push(`/`);
+      const newPageUrl = "/myPage";
+      window.location.href = newPageUrl;
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
