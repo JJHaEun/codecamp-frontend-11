@@ -8,11 +8,12 @@ export default function LayoutSideBar(): JSX.Element {
   const [todayList, setTodayList] = useState([]);
   const { onClickMovePage } = useMovePage();
   useEffect(() => {
-    const TodayLists = localStorage.getItem("TodayLists");
-    const TodayList = JSON.parse(String(TodayLists));
+    const TodayLists = JSON.parse(String(localStorage.getItem("TodayLists")));
 
-    if (TodayList !== "") {
-      setTodayList(TodayList);
+    console.log("T", TodayLists);
+    if (TodayLists !== "") {
+      console.log("aaaa");
+      setTodayList(TodayLists);
     }
   }, []);
   return (

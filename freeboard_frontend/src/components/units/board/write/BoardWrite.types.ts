@@ -3,7 +3,7 @@ import type { Address } from "react-daum-postcode";
 import type { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWrite {
-  isEdit: boolean;
+  isEdit?: boolean;
   data?: Pick<IQuery, "fetchBoard">;
 }
 export interface ImyUpdate {
@@ -30,7 +30,7 @@ export interface IBoardWriteUI {
   onClickEdit: () => void;
   onClickSubmit: () => void;
   isActive: boolean;
-  isEdit: boolean;
+  isEdit?: boolean;
   data?: Pick<IQuery, "fetchBoard">;
   isOpen: boolean;
   onChangeAddress: (data: Address) => void;

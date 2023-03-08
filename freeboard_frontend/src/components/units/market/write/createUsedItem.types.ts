@@ -3,7 +3,7 @@ export interface IUseCreateForm {
   remarks?: string;
   contents?: string;
   price?: number | string;
-  tags?: string[];
+  tags?: string;
   images?: string[];
   useditemAddress: {
     zipcode: string;

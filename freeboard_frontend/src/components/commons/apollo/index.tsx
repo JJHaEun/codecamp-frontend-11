@@ -46,7 +46,8 @@ export default function ApolloSettings(
               operation.setContext({
                 headers: {
                   ...operation.getContext().headers,
-                  Authorization: `Bearer ${String(newAccessToken)}`,
+                  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                  Authorization: `Bearer ${newAccessToken ?? ""}`,
                 },
               });
             })

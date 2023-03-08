@@ -152,6 +152,8 @@ function MarketUI(): JSX.Element {
             </S.ImgGroup>
           </S.Photos>
         </S.AddressPhoto>
+        <input type="text" {...register("tags")} placeholder="#태그 #태그" />
+
         <S.UpLoad>{isEdit ? "수정하기" : "등록하기"}</S.UpLoad>
       </form>
     </S.CreateUpdate>

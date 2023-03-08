@@ -51,7 +51,7 @@ export const useOnclickCreateUsedItem = (): IuseOnclickCreateUsedItem => {
             remarks: String(data.remarks),
             contents: String(data.contents),
             price: Number(data.price),
-            tags: data.tags,
+            tags: data.tags?.split(" "),
             useditemAddress: {
               address: data.useditemAddress.address,
               zipcode: data.useditemAddress.zipcode,
@@ -106,7 +106,7 @@ export const useOnclickCreateUsedItem = (): IuseOnclickCreateUsedItem => {
             name: data.name,
             contents: data.contents,
             remarks: data.remarks,
-            tags: data.tags,
+            tags: data.tags?.split(","),
             price: Number(data.price),
             images: [...imageUrls],
             useditemAddress: {

@@ -168,10 +168,12 @@ export default function BoardWrite(props: IBoardWrite): JSX.Element {
           Modal.info({ content: "요청에 문제가 있습니다." });
           return;
         }
+        const boardId = result.data.createBoard._id;
+
         Modal.success({
           content: "게시물이 등록되었습니다",
           afterClose() {
-            void router.push(`/boards/${String(result.data.createBoard._id)}`);
+            void router.push(`/boards/${boardId}`);
           },
         });
       } catch (error) {

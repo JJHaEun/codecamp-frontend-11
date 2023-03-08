@@ -7,8 +7,8 @@ interface IUseOnChangeAddress {
   onChangeAddress: (
     setValue: UseFormSetValue<IUseCreateForm>
   ) => (data: Address) => void;
-  address?: string;
-  zipcode?: string;
+  // address?: string;
+  // zipcode?: string;
 }
 export const useOnChangeAddress = (): IUseOnChangeAddress => {
   const { ToggleModal } = useToggleModal();

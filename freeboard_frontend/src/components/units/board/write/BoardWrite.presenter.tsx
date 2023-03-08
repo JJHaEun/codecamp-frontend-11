@@ -19,6 +19,7 @@ export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
           <S.Label>작성자</S.Label>
           <S.ErrMassages>{props.writerErr}</S.ErrMassages>
           <S.WritePwInput
+            role="writer-input"
             type="text"
             placeholder="이름을 적어주세요"
             onChange={props.onChangeWriter}
@@ -31,6 +32,7 @@ export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
           <S.ErrMassages>{props.passwordErr}</S.ErrMassages>
           <S.WritePwInput
             type="password"
+            role="password-input"
             placeholder="비밀번호를 입력해주세요"
             onChange={props.onChangePassword}
           />
@@ -41,6 +43,7 @@ export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
         <S.ErrMassages>{props.titleErr}</S.ErrMassages>
         <S.LongInput
           type="text"
+          role="title-input"
           placeholder="제목을 작성해주세요"
           onChange={props.onChangeTitle}
           defaultValue={props.data?.fetchBoard.title}
@@ -50,6 +53,7 @@ export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
         <S.Label>내용</S.Label>
         <S.ErrMassagesContents>{props.contentsErr}</S.ErrMassagesContents>
         <S.ContentArea
+          role="contents-input"
           placeholder="내용을 작성해주세요"
           onChange={props.onChangeContent}
           defaultValue={props.data?.fetchBoard.contents}
@@ -130,6 +134,7 @@ export default function BoardWriteUI(props: IBoardWriteUI): JSX.Element {
         </S.Choice>
       </S.UploadAndSetting>
       <S.Submit
+        role="submit-button"
         onClick={props.isEdit ? props.onClickEdit : props.onClickSubmit}
         isActive={props.isEdit ? true : props.isActive}
       >
