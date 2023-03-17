@@ -32,7 +32,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
       <LayoutNavigation />
       <div style={{ display: "flex" }}>
         <div
-          style={{ height: "500px", width: "30%", backgroundColor: "orange" }}
+          style={{ height: "1900px", width: "30%", backgroundColor: "orange" }}
         >
           사이드바
         </div>
